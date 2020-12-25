@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../partialView/head", { title }); %>
+        <%- include("../partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="position-relative">
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("../navigation/createStackNavigator", { headerTitle: title }) %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <form class="row">
+            <div class="col px-4 pt-2 mt-1">
+                <div class="form-floating pb-2 mb-1">
+                    <input type="text"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="이름" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이름</label>
+                </div>
+                <div class="form-floating pb-2 mb-1">
+                    <input type="email"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="이메일" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이메일</label>
+                </div>
+                <div class="form-floating pb-2 mb-1">
+                    <input type="password"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="비밀번호" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호</label>
+                </div>
+                <div class="form-floating pb-2 mb-1">
+                    <input type="password"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="비밀번호 확인" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호 확인</label>
+                </div>
+                <div class="form-floating pb-2 mb-1">
+                    <input type="tel"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="휴대폰" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">휴대폰</label>
+                </div>
+                <div class="form-floating pb-2 mb-4">
+                    <input type="생년월일"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        placeholder="생년월일" />
+                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">생년월일(YYYYMMDD)</label>
+                </div>
+                <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary">팀에서의 본인 역할을 선택해주세요</small>
+                <h5 class="fs-6 mb-3 fw-bold">역할 선택</h5>
+                <div class="row g-1 btn-group">
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio1">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀감독</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio2">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀대표</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio3">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀미캐닉</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio4">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀매니저</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio5" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio5">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀라이더</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio6" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio6">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">팀서포터</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio7" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio7">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">미디어</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio8" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio8">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">파트너</small>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="d-grid">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio9" autocomplete="off" />
+                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                for="btnradio9">
+                                <small class="text-gray-600 fw-normal lh-base fs-6">스폰서</small>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <h1 class="display-1">&nbsp;</h1>
+        <h1 class="display-1">&nbsp;</h1>
+    </main><!-- /END main -->
+    <!-- .fixed-bottom -->
+    <div class="position-fixed fixed-bottom" style="
+                    background-image: linear-gradient(
+                        0deg,
+                        rgba(255, 255, 255, 1) 0%,
+                        rgba(255, 255, 255, 1) 80%,
+                        rgba(255, 255, 255, 0) 100%
+                    );
+                ">
+        <div class="d-grid p-3">
+            <button type="button" class="btn btn-dark py-2 border-0 rounded-5">
+                <span class="d-flex py-2 justify-content-center fw-600">등록</span>
+            </button>
+        </div>
+    </div><!-- /END .fixed-bottom -->
+    <%- include("../partialView/javascripts") %>
+</body>
+
+</html>

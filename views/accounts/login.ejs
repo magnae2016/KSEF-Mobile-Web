@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../partialView/head", { title }); %>
+        <%- include("../partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="position-relative">
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("../navigation/createNavigationContainer") %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <!-- page-header -->
+        <div class="row">
+            <div class="col px-4">
+                <h1 class="page-header d-flex justify-content-center fw-bold mt-5 pt-2 pb-3 mb-1 lh-sm">
+                    로그인
+                </h1>
+            </div>
+        </div><!-- /END page-header -->
+        <!-- Login Form -->
+        <form class="row">
+            <div class="col px-4">
+                <div class="form-floating pb-2 mb-1">
+                    <input type="email"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        id="floatingInput" placeholder="아이디" />
+                    <label for="floatingInput" class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">아이디</label>
+                </div>
+                <div class="form-floating pb-2 mb-1">
+                    <input type="password"
+                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
+                        id="floatingPassword" placeholder="비밀번호" />
+                    <label for="floatingPassword" class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호</label>
+                </div>
+            </div>
+        </form><!-- /END Login Form -->
+        <!-- Button group -->
+        <div class="row">
+            <div class="col px-4">
+                <div class="pt-2">
+                    <div class="row g-2">
+                        <!-- find_account -->
+                        <div class="col-4">
+                            <div class="d-grid">
+                                <button class="btn bg-gray-100 small rounded-5" type="button">
+                                    <small class="text-secondary fw-normal">아이디 찾기</small>
+                                </button>
+                            </div>
+                        </div><!-- /END find_account -->
+                        <!-- find_password -->
+                        <div class="col-4">
+                            <div class="d-grid">
+                                <button class="btn bg-gray-100 small rounded-5" type="button">
+                                    <small class="text-secondary fw-normal">비밀번호 찾기</small>
+                                </button>
+                            </div>
+                        </div><!-- /END find_password -->
+                        <!-- create_account -->
+                        <div class="col-4">
+                            <div class="d-grid">
+                                <button class="btn bg-gray-100 small rounded-5" type="button"
+                                    onclick="location.href='/accounts/create_account';">
+                                    <small class="text-secondary fw-normal">회원가입</small>
+                                </button>
+                            </div>
+                        </div><!-- /END create_account -->
+                    </div>
+                </div>
+            </div>
+        </div><!-- /END Button group -->
+    </main><!-- /END main -->
+    <!-- .fixed-bottom -->
+    <div class="position-fixed fixed-bottom">
+        <div class="d-grid p-3">
+            <button type="button" class="btn btn-dark py-2 border-0 rounded-5">
+                <span class="d-flex py-2 justify-content-center fw-600">확인</span>
+            </button>
+        </div>
+    </div><!-- /END .fixed-bottom -->
+    <%- include("../partialView/javascripts") %>
+</body>
+
+</html>

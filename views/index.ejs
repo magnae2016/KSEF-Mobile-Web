@@ -1,11 +1,602 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title><%= title %></title>
-        <link rel="stylesheet" href="/stylesheets/style.css" />
-    </head>
-    <body>
-        <h1><%= title %></h1>
-        <p>Welcome to <%= title %></p>
-    </body>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("./partialView/head", { title }); %>
+        <%- include("./partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="position-relative bg-gray-200">
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("./navigation/createNavigationContainer") %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent">
+        <!-- Notification, Ad, post -->
+        <div class="container">
+            <div class="row">
+                <div class="col mx-1 px-3">
+                    <!-- Notification -->
+                    <div class="card shadow rounded-lg border-0 px-3 mb-2 footer">
+                        <div class="card-body px-1 pb-2 mb-1">
+                            <h5 class="card-title small lh-1 fw-bold mb-2">
+                                알림
+                            </h5>
+                            <div class="d-flex flex-row">
+                                <p class="card-text lh-medium ls-xs mb-0 text-secondary fw-normal">
+                                    2021년 모토스타 KSEF 내구페스티발<br />1차
+                                    접수 엔트리를 확인하세요.
+                                </p>
+                            </div>
+                        </div>
+                    </div><!-- /END Notification -->
+                    <!-- Sponsored ad -->
+                    <div class="px-4 pt-2 pb-3 position-relative">
+                        <div class="pt-4">
+                            <h6 class="fw-bold ls-sm mb-0">
+                                2021년 11회 내구페스티발
+                            </h6>
+                            <small class="fw-600 ls-xs">모토스타 코리아와 함께합니다.</small>
+                        </div>
+                        <img src="/images/static/990378514_20200120160950_1727578326.png"
+                            class="position-absolute end-0 bottom-0" height="74.5" />
+                    </div><!-- /END Sponsored ad -->
+                    <!-- Fixed post -->
+                    <div class="card p-4 border-0 pt-3 rounded-lg shadow">
+                        <div class="card-body p-0 pt-1 position-relative">
+                            <small class="card-subtitle mb-2 text-secondary fw-600">
+                                2021년에도 변함없이 열립니다
+                            </small>
+                            <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
+                                2021년 11회 MOTOSTAR KSEF<br />내구페스티발
+                                경기일정
+                            </h5>
+                            <small class="fs-7 fw-normal text-secondary">
+                                7월 31일 - 8월 2일</small>
+                            <h1 class="display-1">&nbsp;</h1>
+                            <img src="/images/static/307613810.png" width="100"
+                                class="position-absolute bottom-0 end-0" />
+                        </div>
+                    </div>
+                    <div class="card p-4 border-0 pt-3 rounded-lg shadow mt-4">
+                        <div class="card-body p-0 pt-1 position-relative">
+                            <small class="card-subtitle mb-2 text-secondary fw-600">
+                                놓치지 마세요. 1차 접수
+                            </small>
+                            <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
+                                2020년 10회 MOTOSTAR KSEF<br />내구페스티발 1차
+                                접수 공지
+                            </h5>
+                            <small class="fs-7 fw-normal text-secondary">1월 31일 오전 11시부터 24시까지</small>
+                            <h1 class="display-1">&nbsp;</h1>
+                            <img src="/images/static/1251221875.png" height="50"
+                                class="position-absolute bottom-0 end-0" />
+                        </div>
+                    </div>
+                    <div class="card p-4 border-0 pt-3 rounded-lg shadow mt-4 mb-2">
+                        <div class="card-body p-0 pt-1 position-relative">
+                            <small class="card-subtitle mb-2 text-secondary fw-600">
+                                체크해주세요!
+                            </small>
+                            <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
+                                2020년 MOTOSTAR KSEF<br />기술 규정
+                            </h5>
+                            <small class="fs-7 fw-normal text-secondary">규정 사항을 반드시 확인해주세요</small>
+                            <h1 class="display-1">&nbsp;</h1>
+                            <img src="/images/static/1590451318.png" height="60"
+                                class="position-absolute bottom-0 end-0" />
+                        </div>
+                    </div><!-- /END Fixed post -->
+                </div>
+            </div>
+        </div><!-- /END Notification, Ad, post -->
+        <!-- calendar -->
+        <div class="container pt-4">
+            <div class="row">
+                <div class="col mx-1 px-3 pt-3">
+                    <h2 class="ls-sm fw-bold lh-sm">
+                        2021년 모토스타 11회<br />KSEF 내구페스티발 일정
+                    </h2>
+                    <p class="pt-2 pb-1 mb-3 text-black">
+                        모토스타와 함께<br />뜨거운 여름을 준비하고 있습니다!
+                    </p>
+                    <div class="d-flex flex-column-reverse position-relative">
+                        <input type="checkbox" class="btn-check btn-link" id="btncheck1" autocomplete="off" />
+                        <label class="btn mt-3 lh-1 h6 py-3 fw-normal text-decoration-underline text-secondary"
+                            for="btncheck1"></label>
+                        <div class="list-group flex-column-reverse rounded-0" style="display: none">
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">경기</h6>
+                                    <small class="lh-1 float-start text-secondary">7월 31일 ~ 8월 2일</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        메첼러 타이어 구매/접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">6월 5일부터</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">연습 접수</h6>
+                                    <small class="lh-1 float-start text-secondary">5월 29일부터</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        ELF 123 슈퍼바이크 내구 2차 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">5월 29일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group flex-column-reverse rounded-0">
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        모토스타 6내구 3차 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">5월 29일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        내구페스티발 3차 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">3월 27일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        내구페스티발 2차 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">2월 28일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-dark"><small class="lh-1 py-1">진행</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        elf 123 슈퍼바이크 내구 참가 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">2월 28일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                            <div
+                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-secondary"><small class="lh-1 py-1">마감</small></span>
+                                <div class="py-1 d-flex flex-column px-1 mx-2">
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        내구페스티발 1차 접수
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">1월 31일 금요일 오전 11시</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /END calendar -->
+        <!-- Timeline -->
+        <div class="container">
+            <div class="row">
+                <div class="col px-0 pt-3 pb-4 mb-2 text-center">
+                    <h5 class="lh-medium ls-xs fw-bold pt-4 pb-3 mt-1 mb-1">
+                        Passion & Energy<br />2021 KSEF 11년간의 히스토리
+                    </h5>
+                    <div class="horizontal-scroll overflow-scroll nowrap">
+                        <div style="
+                                        width: 100000px;
+                                        transform: translateX(0px);
+                                        animation: 50.5s linear 0s infinite normal none
+                                            running marqueeAnimation;
+                                    ">
+                            <div class="ms-0 float-start">
+                                <div class="fs-0">
+                                    <div
+                                        class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/pspark.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ksef-light.png"
+                                                        class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/R1GP.png"
+                                                        class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/sym.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor sponsor-2016 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fs-0">
+                                    <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
+                                        style="
+                                                    width: 2.563rem;
+                                                    background-color: #5d2f87;
+                                                "></div>
+                                    <div
+                                        class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/gears-racing.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/tic-corp.png"
+                                                        class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/motostar.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/motostar-light.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
+                                        style="
+                                                    width: 2.563rem;
+                                                    background-color: #5d2f87;
+                                                "></div>
+                                </div>
+                            </div>
+                            <div class="ms-0 float-start">
+                                <div class="fs-0">
+                                    <div
+                                        class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/pspark.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ksef-light.png"
+                                                        class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/R1GP.png"
+                                                        class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/sym.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor sponsor-2016 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fs-0">
+                                    <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
+                                        style="
+                                                    width: 2.563rem;
+                                                    background-color: #5d2f87;
+                                                "></div>
+                                    <div
+                                        class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/ohlins.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/gears-racing.png"
+                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/tic-corp.png"
+                                                        class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/motostar.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
+                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                            <div
+                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                <div class="w-100 h-40 position-relative lh-1">
+                                                    <img src="./images/sponsors/motostar-light.png"
+                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0" />
+                                                </div>
+                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
+                                        style="
+                                                    width: 2.563rem;
+                                                    background-color: #5d2f87;
+                                                "></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /END Timeline -->
+        <h1 class="display-1">&nbsp;</h1>
+        <!-- blockquote -->
+        <div class="container">
+            <div class="row">
+                <div class="col mx-1 px-3">
+                    <div class="px-4 pt-2 pb-3 position-relative">
+                        <div class="pt-4">
+                            <h6 class="fw-bold ls-sm mb-0">
+                                WE CAN'T NEVER STOP
+                            </h6>
+                            <small class="fw-600 ls-xs">GO TOGETHER!</small>
+                        </div>
+                        <img src="./images/static/1868166136.png" class="position-absolute end-0 bottom-0 pe-3"
+                            height="74.5" />
+                    </div>
+                    <div class="card p-4 border-0 pt-3 rounded-lg shadow bg-black overflow-hidden">
+                        <div class="card-body p-0 pt-1 position-relative">
+                            <small class="card-subtitle mb-2 text-gray-600 fw-600">
+                                KOREA 슈퍼 내구페스티발
+                            </small>
+                            <p class="card-title fw-normal text-black lh-medium ls-xs pt-1 mb-0">
+                                레이스에 관심있는 많은 라이더들에게<br />
+                                대한민국의 기약 없는 레이스 대신에<br />
+                                의심 없이 매해 열리는<br />
+                                희망의 레이스가 되어주길 바라는 마음으로<br />
+                                만든 축제 입니다.
+                            </p>
+                            <span class="card-title fw-bold text-black lh-medium ls-xs pt-1 mb-0 mark">
+                                누구나 쉽게 참가할 수 있고<br />
+                            </span>
+                            <span class="card-title fw-bold text-black lh-medium ls-xs pt-1 mb-0 mark">
+                                다함께 즐기는 페스티발 레이스가 되기를<br />
+                            </span>
+                            <span class="card-title fw-bold text-black lh-medium ls-xs pt-1 mb-0 mark">
+                                진심으로 바랍니다.
+                            </span>
+                            <small class="d-block mt-3 fs-7 fw-bold text-secondary">
+                                KSEF 김준태 대표</small>
+                            <h1 class="display-1">&nbsp;</h1>
+                            <h1 class="display-1">&nbsp;</h1>
+                        </div>
+                        <img src="./images/static/1529373251.png" width="100"
+                            class="position-absolute bottom-0 end-0 pe-3 w-auto h-50 opacity-35" />
+                    </div>
+                </div>
+            </div>
+        </div><!-- /END blockquote -->
+        <h1 class="display-1">&nbsp;</h1>
+        <h1 class="display-1">&nbsp;</h1>
+        <h1 class="display-1">&nbsp;</h1>
+        <!-- User information -->
+        <div
+            class="card position-fixed bottom-0 w-100 border-0 bg-white rounded-0 rounded-top-left-xxl rounded-top-right-xxl shadow-xxl">
+            <div class="card-header py-3 px-4 border-0 rounded-0 bg-transparent">
+                <div class="pt-2 pb-1">
+                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex">
+                        김준태
+                    </h4>
+                    <span class="badge rounded-pill bg-dark d-inline-block align-text-bottom"><small
+                            class="lh-1 py-1">팀라이더</small></span>
+                    <h1 class="mb-1 lh-1 ls-sm fw-bold text-decoration-underline">
+                        KSEF & 모토그레시브
+                    </h1>
+                </div>
+            </div>
+        </div><!-- /END User information -->
+    </main><!-- /END main -->
+    <%- include("./partialView/javascripts") %>
+</body>
+
 </html>
