@@ -9,7 +9,20 @@ var http = require('http');
 var indexRouter = require('./routes/index');
 var accountsRouter = require('./routes/accounts');
 
+var sequelize = require('./models').sequelize;
+
 var app = express();
+
+(async () => {
+    try {
+        await sequelize.sync();
+        console.log('All models were synchronized successfully.');
+        console.log('A successful MySQL connection was made.');
+    } catch (error) {
+        console.log(error);
+        sequelize.close();
+    }
+})();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
