@@ -61,3 +61,7 @@ typings/
 .next
 
 .DS_Store
+
+# Locally stored configuration
+config/config.json
+!config/.gitkeep
