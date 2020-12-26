@@ -14,10 +14,19 @@ exports.requireLogin = async function (req, res, next) {
         email: Joi.string()
             .email({
                 minDomainSegments: 2,
-                tlds: { allow: ['com', 'net'] },
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
             })
             .required(),
-        password: Joi.string().required(),
+        password: Joi.string()
+            .messages({
+                'string.empty': '비밀번호를 입력해주세요.',
+                'any.required': '비밀번호를 입력해주세요.',
+            })
+            .required(),
     });
 
     try {
@@ -32,6 +41,7 @@ exports.requireLogin = async function (req, res, next) {
         res.status(status);
         return res.render('accounts/login', {
             title: '로그인',
+            invalid: true,
             _original: error._original,
             details: error.details,
         });
@@ -70,6 +80,15 @@ exports.requireLogin = async function (req, res, next) {
                 res.status(status);
                 return res.render('accounts/login', {
                     title: '로그인',
+                    invalid: true,
+                    _original: req.body,
+                    details: [
+                        {
+                            message:
+                                '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.',
+                            path: ['password'],
+                        },
+                    ],
                 });
             }
         } else {
@@ -81,6 +100,15 @@ exports.requireLogin = async function (req, res, next) {
             res.status(status);
             return res.render('accounts/login', {
                 title: '로그인',
+                invalid: true,
+                _original: req.body,
+                details: [
+                    {
+                        message:
+                            '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.',
+                        path: ['email'],
+                    },
+                ],
             });
         }
     } catch (error) {
@@ -91,6 +119,7 @@ exports.requireLogin = async function (req, res, next) {
         res.status(status);
         return res.render('accounts/login', {
             title: '로그인',
+            invalid: false,
         });
     }
 };
