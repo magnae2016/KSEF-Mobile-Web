@@ -40,8 +40,6 @@ router.post('/find_password', function (req, res, next) {
 });
 
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)
-router.get('/logout', function (req, res, next) {
-    res.send('respond with a resource');
-});
+router.get('/logout', accountsControllers.requireLogout);
 
 module.exports = router;

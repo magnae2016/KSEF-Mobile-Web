@@ -260,3 +260,8 @@ exports.requireRegister = async function (req, res, next) {
         });
     }
 };
+
+exports.requireLogout = function (req, res, next) {
+    res.clearCookie('access_token');
+    res.redirect('login');
+};
