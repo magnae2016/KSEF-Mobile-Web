@@ -1,15 +1,23 @@
+var http = require('http');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var helmet = require('helmet');
+var session = require('express-session');
+var compression = require('compression');
+var moment = require('moment');
+require('moment-timezone');
+moment.tz.setDefault('Asia/Seoul');
+moment.locale('ko');
 var debug = require('debug')('ksef-mobile-web:server');
-var http = require('http');
 
 var indexRouter = require('./routes/index');
 var accountsRouter = require('./routes/accounts');
 
 var sequelize = require('./models').sequelize;
+var jwtMiddleware = require('./lib/jwtMiddleware');
 
 var app = express();
 
@@ -32,7 +40,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(helmet());
+app.set('trust proxy', 1);
+app.use(
+    session({
+        secret: '8%HIB~.g*`5q4v_',
+        resave: false,
+        saveUninitialized: true,
+        name: 'SessionID',
+    })
+);
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(jwtMiddleware);
 
 app.use('/', indexRouter);
 app.use('/accounts', accountsRouter);

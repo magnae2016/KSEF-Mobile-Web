@@ -3,6 +3,97 @@
 const Joi = require('joi');
 
 const accountsServices = require('../services/accountsServices');
+const { setPassword, generateToken } = require('../modules/util');
+
+exports.requireLogin = async function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    let hasError = false;
+    let status = 200;
+
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({
+                minDomainSegments: 2,
+                tlds: { allow: ['com', 'net'] },
+            })
+            .required(),
+        password: Joi.string().required(),
+    });
+
+    try {
+        await schema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+    } catch (error) {
+        console.error(error);
+        hasError = true;
+        status = 400;
+
+        res.status(status);
+        return res.render('accounts/login', {
+            title: '로그인',
+            _original: error._original,
+            details: error.details,
+        });
+    }
+
+    const { email: user_email, password } = req.body;
+
+    try {
+        // check if the user exists
+        const exists = await accountsServices.findUserByEmail(user_email);
+        if (exists) {
+            // Password verification
+            const hashedPassword = await setPassword({
+                password,
+                salt: exists.user_salt,
+            });
+
+            if (hashedPassword === exists.user_password) {
+                // Authenticated user
+                console.log('Valid User');
+
+                const token = generateToken(exists);
+                res.cookie('access_token', token, {
+                    maxAge: 1000 * 60 * 60 * 24, // 1d
+                    httpOnly: true,
+                });
+
+                res.status(200);
+                res.redirect('/');
+            } else {
+                // Password does not match
+                console.log('Invalid password');
+                hasError = true;
+                status = 401;
+
+                res.status(status);
+                return res.render('accounts/login', {
+                    title: '로그인',
+                });
+            }
+        } else {
+            // ID not signed up
+            console.error('This ID is not registered.');
+            hasError = true;
+            status = 401;
+
+            res.status(status);
+            return res.render('accounts/login', {
+                title: '로그인',
+            });
+        }
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        hasError = true;
+        status = 500;
+
+        res.status(status);
+        return res.render('accounts/login', {
+            title: '로그인',
+        });
+    }
+};
 
 exports.requireRegister = async function (req, res, next) {
     console.log(JSON.stringify(req.body));
@@ -75,7 +166,7 @@ exports.requireRegister = async function (req, res, next) {
             user_birth_date,
         });
 
-        res.redirect('/');
+        res.redirect('login');
     } catch (error) {
         console.log('The server encountered an unexpected condition.', error);
         hasError = true;

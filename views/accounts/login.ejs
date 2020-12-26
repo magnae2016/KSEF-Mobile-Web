@@ -23,16 +23,16 @@
             </div>
         </div><!-- /END page-header -->
         <!-- Login Form -->
-        <form class="row">
+        <form id="loginForm" class="row" method="POST">
             <div class="col px-4">
                 <div class="form-floating pb-2 mb-1">
-                    <input type="email"
+                    <input type="email" name="email"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         id="floatingInput" placeholder="아이디" />
                     <label for="floatingInput" class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">아이디</label>
                 </div>
                 <div class="form-floating pb-2 mb-1">
-                    <input type="password"
+                    <input type="password" name="password"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         id="floatingPassword" placeholder="비밀번호" />
                     <label for="floatingPassword" class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호</label>
@@ -77,7 +77,7 @@
     <!-- .fixed-bottom -->
     <div class="position-fixed fixed-bottom">
         <div class="d-grid p-3">
-            <button type="button" class="btn btn-dark py-2 border-0 rounded-5">
+            <button type="submit" form="loginForm" class="btn btn-dark py-2 border-0 rounded-5">
                 <span class="d-flex py-2 justify-content-center fw-600">확인</span>
             </button>
         </div>

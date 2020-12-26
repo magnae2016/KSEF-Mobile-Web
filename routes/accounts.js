@@ -9,9 +9,7 @@ router.get('/login', function (req, res, next) {
 });
 
 // @RequestMapping(value="/accounts/login", method=RequestMethod.POST)
-router.post('/login', function (req, res, next) {
-    res.render('accounts/login', { title: '로그인' });
-});
+router.post('/login', accountsControllers.requireLogin);
 
 // @RequestMapping(value="/accounts/create_account", method=RequestMethod.GET)
 router.get('/create_account', function (req, res, next) {
