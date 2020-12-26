@@ -19,9 +19,11 @@
                 <li class="nav-item">
                     <a class="nav-link h6 mb-0 px-2 mx-1 text-dark fw-bold" href="#">참가접수</a>
                 </li>
+                <% if (locals.userData && !userData) { %>
                 <li class="nav-item">
                     <a class="nav-link h6 mb-0 px-2 mx-1 text-dark fw-bold" href="/accounts/login">로그인</a>
                 </li>
+                <% } %>
             </ul>
         </div>
     </div>

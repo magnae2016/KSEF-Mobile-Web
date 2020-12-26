@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+const indexControllers = require('../controllers/indexControllers');
+
 // @RequestMapping(value="/", method=RequestMethod.GET)
-router.get(['/', '/home'], function (req, res, next) {
-    res.render('index', { title: '홈' });
-});
+router.get(['/', '/home'], indexControllers.requireHome);
 
 module.exports = router;

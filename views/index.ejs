@@ -4,13 +4,13 @@
 <head>
     <!-- Required meta tags -->
     <%- include("./partialView/head", { title }); %>
-        <%- include("./partialView/stylesheet") %>
+    <%- include("./partialView/stylesheet") %>
 </head>
 
 <body id="mainBody" class="position-relative bg-gray-200">
     <!-- header -->
     <header id="mainHead">
-        <%- include("./navigation/createNavigationContainer") %>
+        <%- include("./navigation/createNavigationContainer", { userData }); %>
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent">
