@@ -16,7 +16,15 @@ if (config.use_env_variable) {
         config.database,
         config.username,
         config.password,
-        config
+        {
+            ...config,
+            logQueryParameters: true,
+            timezone: '+09:00',
+            dialectOptions: {
+                dateStrings: true,
+                typeCast: true,
+            },
+        }
     );
 }
 
