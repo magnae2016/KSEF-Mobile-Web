@@ -210,9 +210,11 @@ exports.requireRegister = async function (req, res, next) {
         email: user_email,
         username: user_name,
         password: user_password,
-        phone: user_phone,
         birth_year: user_birth_date,
     } = req.body;
+
+    let { phone: user_phone } = req.body;
+    user_phone = user_phone.replace(/[^0-9]/g, '');
 
     try {
         // check if user exists
