@@ -153,10 +153,10 @@ exports.requireRegister = async function (req, res, next) {
         password: Joi.string()
             .pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]{3,30}$'))
             .messages({
-                'string.empty':
+                'string.pattern.base':
                     '비밀번호를 입력해주세요.(영문자/숫자/특수문자)',
-                'any.required':
-                    '비밀번호를 입력해주세요.(영문자/숫자/특수문자)',
+                'string.empty': '비밀번호를 입력해주세요.',
+                'any.required': '비밀번호를 입력해주세요.',
             })
             .required(),
         repeat_password: Joi.string()
