@@ -101,19 +101,60 @@ exports.requireRegister = async function (req, res, next) {
     let status = 200;
 
     const schema = Joi.object({
-        username: Joi.string().min(2).max(30).required(),
+        username: Joi.string()
+            .min(2)
+            .max(30)
+            .messages({
+                'string.min': '2~20자의 문자만 사용 가능합니다.',
+                'string.max': '2~20자의 문자만 사용 가능합니다.',
+                'string.empty': '이름을 입력해주세요.',
+                'any.required': '이름을 입력해주세요.',
+            })
+            .required(),
         email: Joi.string()
             .email({
                 minDomainSegments: 2,
-                tlds: { allow: ['com', 'net'] },
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
             })
             .required(),
         password: Joi.string()
             .pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]{3,30}$'))
+            .messages({
+                'string.empty':
+                    '비밀번호를 입력해주세요.(영문자/숫자/특수문자)',
+                'any.required':
+                    '비밀번호를 입력해주세요.(영문자/숫자/특수문자)',
+            })
             .required(),
-        repeat_password: Joi.ref('password'),
-        phone: Joi.string().min(9).max(15).required(),
-        birth_year: Joi.string().length(8).required(),
+        repeat_password: Joi.string()
+            .valid(Joi.ref('password'))
+            .messages({
+                'any.only':
+                    '입력한 비밀번호와 재입력한 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.',
+            })
+            .required(),
+        phone: Joi.string()
+            .min(9)
+            .max(15)
+            .messages({
+                'string.min': '휴대폰 번호를 올바르게 입력해주세요.',
+                'string.max': '휴대폰 번호를 올바르게 입력해주세요.',
+                'string.empty': '휴대폰 번호를 입력해주세요.',
+                'any.required': '휴대폰 번호를 입력해주세요.',
+            })
+            .required(),
+        birth_year: Joi.string()
+            .length(8)
+            .messages({
+                'string.length': '8자리 생년월일을 입력해주세요.',
+                'string.empty': '생년월일을 입력해주세요.',
+                'any.required': '생년월일을 입력해주세요.',
+            })
+            .required(),
     }).with('password', 'repeat_password');
 
     // validates Request Body using Joi
@@ -130,6 +171,7 @@ exports.requireRegister = async function (req, res, next) {
         res.status(status);
         return res.render('accounts/create_account', {
             title: '회원가입',
+            invalid: true,
             _original: error._original,
             details: error.details,
         });
@@ -154,7 +196,14 @@ exports.requireRegister = async function (req, res, next) {
             res.status(status);
             return res.render('accounts/create_account', {
                 title: '회원가입',
+                invalid: true,
                 _original: req.body,
+                details: [
+                    {
+                        message: '이미 사용중이거나 탈퇴한 아이디입니다.',
+                        path: ['email'],
+                    },
+                ],
             });
         }
 
@@ -176,6 +225,7 @@ exports.requireRegister = async function (req, res, next) {
         return res.render('accounts/create_account', {
             title: '회원가입',
             _original: req.body,
+            invalid: false,
         });
     }
 };

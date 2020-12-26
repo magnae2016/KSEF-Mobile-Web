@@ -278,6 +278,37 @@ input.form-control:focus {
 .btn-check:checked + .btn-outline-dark small {
     color: #000000 !important;
     font-weight: bold !important;
+}
+
+/* create_account Screen > Validation */
+.form-control.is-invalid,
+.was-validated .form-control:invalid,
+.form-control.is-valid,
+.was-validated .form-control:valid {
+    background: none;
+}
+
+.form-control.is-invalid {
+    border-bottom-color: #dc3545 !important;
+    border-bottom-width: 2px !important;
+}
+
+.form-control.is-invalid:focus {
+    border-bottom-color: #dc3545 !important;
+}
+
+.form-control:valid.is-invalid:focus {
+    border-bottom-color: #000000 !important;
+    border-bottom-width: 2px !important;
+}
+
+.form-control:valid.is-invalid {
+    border-bottom-color: #e0e0e0 !important;
+    border-bottom-width: 1px !important;
+}
+
+.form-control:valid.is-invalid ~ .invalid-feedback {
+    display: none;
 } /* create_account Screen */
 
 /* index Screen */

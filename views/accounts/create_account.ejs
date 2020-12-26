@@ -4,7 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <%- include("../partialView/head", { title }); %>
-        <%- include("../partialView/stylesheet") %>
+    <%- include("../partialView/stylesheet") %>
 </head>
 
 <body id="mainBody" class="position-relative">
@@ -14,44 +14,51 @@
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent" class="container">
-        <form id="createAccountForm" class="row" method="POST">
+        <form id="createAccountForm" class="row needs-validation <% if (locals.invalid) { %> was-validated <% } %>"
+            method="POST" novalidate>
             <div class="col px-4 pt-2 mt-1">
-                <div class="form-floating pb-2 mb-1">
-                    <input type="text" name="username"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="이름" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이름</label>
-                </div>
-                <div class="form-floating pb-2 mb-1">
-                    <input type="email" name="email"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="이메일" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이메일</label>
-                </div>
-                <div class="form-floating pb-2 mb-1">
-                    <input type="password" name="password"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="비밀번호" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호</label>
-                </div>
-                <div class="form-floating pb-2 mb-1">
-                    <input type="password" name="repeat_password"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="비밀번호 확인" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호 확인</label>
-                </div>
-                <div class="form-floating pb-2 mb-1">
-                    <input type="tel" name="phone"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="휴대폰" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">휴대폰</label>
-                </div>
-                <div class="form-floating pb-2 mb-4">
-                    <input type="생년월일" name="birth_year"
-                        class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
-                        placeholder="생년월일" />
-                    <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">생년월일(YYYYMMDD)</label>
-                </div>
+                <%- include("../components/TextField", {
+                    _items: [
+                        {
+                            mask: "text",
+                            name: "username",
+                            placeholder: "이름",
+                            label: "이름",
+                        },
+                        {
+                            mask: "email",
+                            name: "email",
+                            placeholder: "이메일",
+                            label: "이메일",
+                        },
+                        {
+                            mask: "password",
+                            name: "password",
+                            placeholder: "비밀번호",
+                            label: "비밀번호",
+                        },
+                        {
+                            mask: "password",
+                            name: "repeat_password",
+                            placeholder: "비밀번호 확인",
+                            label: "비밀번호 확인",
+                        },
+                        {
+                            mask: "tel",
+                            name: "phone",
+                            placeholder: "휴대폰",
+                            label: "휴대폰",
+                        },
+                        {
+                            mask: "tel",
+                            name: "birth_year",
+                            placeholder: "생년월일",
+                            label: "생년월일(YYYYMMDD)",
+                            style: ["mb-4"],
+                        },
+                    ],
+                });
+                %>
                 <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary">팀에서의 본인 역할을 선택해주세요</small>
                 <h5 class="fs-6 mb-3 fw-bold">역할 선택</h5>
                 <div class="row g-1 btn-group">
