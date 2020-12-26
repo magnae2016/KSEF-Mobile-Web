@@ -1,4 +1,7 @@
 'use strict';
+
+const { hashPassword } = require('../modules/util');
+
 module.exports = (sequelize, DataTypes) => {
     const Users = sequelize.define(
         'Users',
@@ -29,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             user_salt: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
             },
             user_phone: {
                 type: DataTypes.STRING(15),
@@ -82,5 +85,17 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'user_id',
         });
     };
+
+    Users.beforeCreate(async (user) => {
+        try {
+            const hashedPassword = await hashPassword(user);
+            if (hashedPassword) {
+                console.log('Create hashed salt/password successfully');
+            }
+        } catch (error) {
+            throw new Error(error);
+        }
+    });
+
     return Users;
 };

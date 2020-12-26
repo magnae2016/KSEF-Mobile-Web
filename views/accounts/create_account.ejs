@@ -14,40 +14,40 @@
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent" class="container">
-        <form class="row">
+        <form id="createAccountForm" class="row" method="POST">
             <div class="col px-4 pt-2 mt-1">
                 <div class="form-floating pb-2 mb-1">
-                    <input type="text"
+                    <input type="text" name="username"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="이름" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이름</label>
                 </div>
                 <div class="form-floating pb-2 mb-1">
-                    <input type="email"
+                    <input type="email" name="email"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="이메일" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">이메일</label>
                 </div>
                 <div class="form-floating pb-2 mb-1">
-                    <input type="password"
+                    <input type="password" name="password"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="비밀번호" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호</label>
                 </div>
                 <div class="form-floating pb-2 mb-1">
-                    <input type="password"
+                    <input type="password" name="repeat_password"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="비밀번호 확인" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">비밀번호 확인</label>
                 </div>
                 <div class="form-floating pb-2 mb-1">
-                    <input type="tel"
+                    <input type="tel" name="phone"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="휴대폰" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">휴대폰</label>
                 </div>
                 <div class="form-floating pb-2 mb-4">
-                    <input type="생년월일"
+                    <input type="생년월일" name="birth_year"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200"
                         placeholder="생년월일" />
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">생년월일(YYYYMMDD)</label>
@@ -152,7 +152,7 @@
                     );
                 ">
         <div class="d-grid p-3">
-            <button type="button" class="btn btn-dark py-2 border-0 rounded-5">
+            <button type="submit" form="createAccountForm" class="btn btn-dark py-2 border-0 rounded-5">
                 <span class="d-flex py-2 justify-content-center fw-600">등록</span>
             </button>
         </div>

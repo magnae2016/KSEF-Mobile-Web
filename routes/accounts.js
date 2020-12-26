@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const accountsControllers = require('../controllers/accountsControllers');
+
 // @RequestMapping(value="/accounts/login", method=RequestMethod.GET)
 router.get('/login', function (req, res, next) {
     res.render('accounts/login', { title: '로그인' });
@@ -17,9 +19,7 @@ router.get('/create_account', function (req, res, next) {
 });
 
 // @RequestMapping(value="/accounts/create_account", method=RequestMethod.POST)
-router.post('/create_account', function (req, res, next) {
-    res.render('accounts/create_account', { title: '회원가입' });
-});
+router.post('/create_account', accountsControllers.requireRegister);
 
 // @RequestMapping(value="/accounts/find_account", method=RequestMethod.GET)
 router.get('/find_account', function (req, res, next) {

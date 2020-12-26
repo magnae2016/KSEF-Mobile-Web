@@ -64,4 +64,5 @@ typings/
 
 # Locally stored configuration
 config/config.json
+config/jsonwebtoken.json
 !config/.gitkeep

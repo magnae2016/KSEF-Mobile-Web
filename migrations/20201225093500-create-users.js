@@ -28,7 +28,7 @@ module.exports = {
             },
             user_salt: {
                 type: Sequelize.STRING,
-                allowNull: false,
+                allowNull: true,
             },
             user_phone: {
                 type: Sequelize.STRING(15),
