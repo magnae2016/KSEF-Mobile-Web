@@ -10,7 +10,7 @@
 <body id="mainBody" class="position-relative bg-gray-200">
     <!-- header -->
     <header id="mainHead">
-        <%- include("./navigation/createNavigationContainer", { userData }); %>
+        <%- include("./navigation/createNavigationContainer", { security }); %>
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent">
@@ -577,6 +577,8 @@
             </div>
         </div><!-- /END blockquote -->
         <h1 class="display-1">&nbsp;</h1>
+        <%# Logged in User %>
+        <% if (locals.security && locals.security.hasOwnProperty('uuid')) { %>
         <h1 class="display-1">&nbsp;</h1>
         <h1 class="display-1">&nbsp;</h1>
         <!-- User information -->
@@ -584,19 +586,30 @@
             class="card position-fixed bottom-0 w-100 border-0 bg-white rounded-0 rounded-top-left-xxl rounded-top-right-xxl shadow-xxl">
             <div class="card-header py-3 px-4 border-0 rounded-0 bg-transparent">
                 <div class="pt-2 pb-1">
-                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex">
-                        김준태
-                    </h4>
+                    <%# nicknames for users in the team, otherwise names %>
+                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex"><%= context.team ? context.team.participant_alias : security.name %></h4>
+                    <%# roles only if you are in team %>
+                    <% if (context.team) { %>
                     <span class="badge rounded-pill bg-dark d-inline-block align-text-bottom"><small
-                            class="lh-1 py-1">팀라이더</small></span>
+                            class="lh-1 py-1"><%= context.team.role_name %></small></span>
+                    <% } %>
                     <a href="/accounts/logout" class="badge rounded-pill bg-gray-200 text-dark d-inline-block align-text-bottom text-decoration-none"><small
                             class="lh-1 py-1">로그아웃</small></a>
+                    <%# not on the team %>
+                    <% if (!context.team) { %>
+                    <a class="h1 d-block mb-1 lh-1 ls-sm text-black fw-bold text-decoration-underline">
+                        팀을 선택하세요.
+                    </a>
+                    <%# in the team %>
+                    <% } else { %>
                     <h1 class="mb-1 lh-1 ls-sm fw-bold text-decoration-underline">
-                        KSEF & 모토그레시브
+                        <%= context.team.team_name %>
                     </h1>
+                    <% } %>
                 </div>
             </div>
         </div><!-- /END User information -->
+        <% } %>
     </main><!-- /END main -->
     <%- include("./partialView/javascripts") %>
 </body>
