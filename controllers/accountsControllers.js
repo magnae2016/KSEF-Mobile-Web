@@ -140,6 +140,16 @@ exports.requireRegister = async function (req, res, next) {
                 'any.required': '이름을 입력해주세요.',
             })
             .required(),
+        alias: Joi.string()
+            .min(2)
+            .max(30)
+            .messages({
+                'string.min': '2~20자의 문자만 사용 가능합니다.',
+                'string.max': '2~20자의 문자만 사용 가능합니다.',
+                'string.empty': '별명을 입력해주세요.',
+                'any.required': '별명을 입력해주세요.',
+            })
+            .required(),
         email: Joi.string()
             .email({
                 minDomainSegments: 2,
@@ -209,6 +219,7 @@ exports.requireRegister = async function (req, res, next) {
     const {
         email: user_email,
         username: user_name,
+        alias: user_alias,
         password: user_password,
         birth_year: user_birth_date,
     } = req.body;
@@ -241,6 +252,7 @@ exports.requireRegister = async function (req, res, next) {
         await accountsServices.createUser({
             user_email,
             user_name,
+            user_alias,
             user_password,
             user_phone,
             user_birth_date,

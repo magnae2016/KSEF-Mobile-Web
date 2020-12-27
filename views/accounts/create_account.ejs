@@ -23,7 +23,13 @@
                             mask: "text",
                             name: "username",
                             placeholder: "이름",
-                            label: "이름",
+                            label: "이름(실명)",
+                        },
+                        {
+                            mask: "text",
+                            name: "alias",
+                            placeholder: "별명",
+                            label: "별명",
                         },
                         {
                             mask: "email",
@@ -59,6 +65,7 @@
                     ],
                 });
                 %>
+                <%#
                 <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary">팀에서의 본인 역할을 선택해주세요</small>
                 <h5 class="fs-6 mb-3 fw-bold">역할 선택</h5>
                 <div class="row g-1 btn-group">
@@ -144,6 +151,7 @@
                         </div>
                     </div>
                 </div>
+                %>
             </div>
         </form>
         <h1 class="display-1">&nbsp;</h1>
