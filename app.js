@@ -15,6 +15,7 @@ var debug = require('debug')('ksef-mobile-web:server');
 
 var indexRouter = require('./routes/index');
 var accountsRouter = require('./routes/accounts');
+var noticesRouter = require('./routes/notices');
 
 var sequelize = require('./models').sequelize;
 var jwtMiddleware = require('./lib/jwtMiddleware');
@@ -56,6 +57,7 @@ app.use(jwtMiddleware);
 
 app.use('/', indexRouter);
 app.use('/accounts', accountsRouter);
+app.use('/notices', noticesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
