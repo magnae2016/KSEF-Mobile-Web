@@ -28,9 +28,9 @@ module.exports = {
                 allowNull: false,
             },
             team_created_at: {
-                type: Sequelize.DATE,
+                type: 'TIMESTAMP',
                 allowNull: false,
-                defaultValue: Sequelize.NOW,
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             },
             is_deleted: {
                 type: Sequelize.INTEGER,
