@@ -84,6 +84,11 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Participants',
             foreignKey: 'user_id',
         });
+
+        models.Users.hasMany(models.Notices, {
+            foreignKey: 'user_id',
+            sourceKey: 'user_id',
+        });
     };
 
     Users.beforeCreate(async (user) => {
