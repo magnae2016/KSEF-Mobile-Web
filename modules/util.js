@@ -45,6 +45,7 @@ const generateToken = (user) => {
             uuid: user.user_uuid,
             email: user.user_email,
             name: user.user_name,
+            alias: user.user_alias,
         },
         config.secretOrPrivateKey,
         {

@@ -587,7 +587,7 @@
             <div class="card-header py-3 px-4 border-0 rounded-0 bg-transparent">
                 <div class="pt-2 pb-1">
                     <%# nicknames for users in the team, otherwise names %>
-                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex"><%= context.team ? context.team.participant_alias : security.name %></h4>
+                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex"><%= context.team ? context.team.participant_alias : security.alias %></h4>
                     <%# roles only if you are in team %>
                     <% if (context.team) { %>
                     <span class="badge rounded-pill bg-dark d-inline-block align-text-bottom"><small
