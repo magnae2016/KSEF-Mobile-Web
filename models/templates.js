@@ -1,4 +1,7 @@
 'use strict';
+
+const { simpleDateFormat } = require('../modules/util');
+
 module.exports = (sequelize, DataTypes) => {
     const Templates = sequelize.define(
         'Templates',
@@ -59,5 +62,14 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'template_id',
         });
     };
+
+    Templates.beforeCreate((instance) => {
+        try {
+            instance.template_file = `${simpleDateFormat()}-create-template`;
+        } catch (error) {
+            throw new Error(error);
+        }
+    });
+
     return Templates;
 };

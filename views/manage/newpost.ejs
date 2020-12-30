@@ -1,0 +1,277 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= title %></title>
+    <script type="text/javascript" src="/plugins/SmartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+    <style>
+        p, dl, dt, input, fieldset {
+            margin: 0;
+            padding: 0;
+        }
+
+        .se2_apply_character {
+            clear: both;
+            position: relative;
+            padding: 0 0 0 11px;
+        }
+
+        .se2_apply_character label {
+            margin: 0 3px 0 0;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: -1px;
+        }
+
+        .se2_apply_character .input_ty1 {
+            width: 283px;
+            height: 17px;
+            margin: -1px 5px 1px 0;
+            padding: 4px 0 0 5px;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 0;
+            vertical-align: middle;
+        }
+
+        .input_ty1 {
+            height: 14px;
+            margin: 0;
+            padding: 4px 2px 0 4px;
+            border: 1px solid #c7c7c7;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .se2_pre_color {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #c7c7c7;
+            margin: -1px 5px 1px 0;
+            font-size: 12px;
+            color: #666;
+            letter-spacing: 0;
+            vertical-align: middle;
+        }
+
+        .se2_apply_character .se2_confirm {
+            width: 41px;
+            height: 24px;
+            margin-right: 3px;
+            background: url(/plugins/SmartEditor2/img/ko_KR/btn_set.png?160622) no-repeat;
+            vertical-align: middle;
+        }
+
+        .se2_text_tool button,
+        .se2_multy .se2_icon {
+            width: 21px;
+            height: 21px;
+            background: url(/plugins/SmartEditor2/img/ko_KR/text_tool_set.png?140317) no-repeat;
+            vertical-align: top;
+        }
+
+        button {
+            border: 0;
+            background: none;
+            font-size: 11px;
+            vertical-align: top;
+            cursor: pointer;
+        }
+
+        button span,
+        button em {
+            visibility: hidden;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .se2_apply_character .se2_cancel {
+            width: 39px;
+            height: 24px;
+            background: url(/plugins/SmartEditor2/img/ko_KR/btn_set.png?160622) -41px 0 no-repeat;
+            vertical-align: middle;
+        }
+
+        .se2_apply_character .se2_submit {
+            width: 54px;
+            height: 23px;
+            background: url(/plugins/SmartEditor2/img/ko_KR/btn_set.png?160622) -180px -72px no-repeat;
+            vertical-align: middle;
+        }
+
+        fieldset {
+            border: 0;
+        }
+
+        legend, .blind {
+            visibility: hidden;
+            overflow: hidden;
+            position: absolute;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            line-height: 0;
+        }
+
+        .se2_t_proper2 {
+            float: left;
+            position: relative;
+            z-index: 50;
+            width: 166px;
+            margin: 2px 0 0 0;
+        }
+
+        .se2_t_proper2 dt {
+            float: left;
+            width: 84px;
+            margin: 4px 0 0 0;
+        }
+
+        input {
+                font-family: '돋움',Dotum,Helvetica,sans-serif;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .se2_t_proper2 dt input {
+            width: 15px;
+            height: 15px;
+            margin: -1px 3px 1px 0;
+            _margin: -2px 3px 2px 0;
+            vertical-align: middle;
+        }
+
+        .se2_t_proper2 dt label {
+            font-weight: bold;
+            font-size: 11px;
+            color: #666;
+            letter-spacing: -1px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        <p class="se2_apply_character">
+            <label for="notice_title">공지사항 제목</label> <input type="text" name="title" id="notice_title" value=""
+                class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
+                class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
+        </p>
+        <p class="se2_apply_character">
+            <label for="notice_subtitle">공지사항 부제</label> <input type="text" name="subtitle" id="notice_subtitle" value=""
+                class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
+                class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
+        </p>
+        <p class="se2_apply_character">
+            <label for="template_brand_color">헤더영역 색깔</label> <input type="color" name="color" id="template_brand_color" value=""
+                class="se2_pre_color" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
+                class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
+        </p>
+        <p class="se2_apply_character">
+            <label for="template_brand_thumbnail">대표 이미지</label> <input type="text" name="thumbnail" id="template_brand_thumbnail" value=""
+                class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
+                class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
+        </p>
+        <div class="se2_apply_character">
+            <fieldset>
+                <legend>공지</legend>
+                <dl class="se2_t_proper2">
+                    <dt><input type="radio" id="se2_tbp1" name="category" value="1"><label for="se2_tbp1">공지</label></dt>
+
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>접수</legend>
+                <dl class="se2_t_proper2">
+                    <dt><input type="radio" id="se2_tbp2" name="category" value="2"><label for="se2_tbp2">접수</label></dt>
+
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>이벤트</legend>
+                <dl class="se2_t_proper2">
+                    <dt><input type="radio" id="se2_tbp3" name="category" value="3"><label for="se2_tbp3">이벤트</label></dt>
+
+                </dl>
+            </fieldset>
+        </div>
+        <p>&nbsp;</p>
+        <textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
+        <p>&nbsp;</p>
+        <p class="se2_apply_character">
+            <button type="button" onclick="submitContents(this);" class="se2_submit"><span>확인</span></button>
+        </p>
+        <p>
+            <input type="button" onclick="pasteHTML();" value="본문에 내용 넣기" />
+            <input type="button" onclick="showHTML();" value="본문 내용 가져오기" />
+            <input type="button" onclick="submitContents(this);" value="서버로 내용 전송" />
+            <input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
+        </p>
+    </form>
+
+    <script type="text/javascript">
+        var oEditors = [];
+
+        var sLang = "ko_KR";
+
+        // 추가 글꼴 목록
+        //var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
+
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "ir1",
+            sSkinURI: "/plugins/SmartEditor2/SmartEditor2Skin.html",
+            htParams: {
+                bUseToolbar: true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+                bUseVerticalResizer: true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+                bUseModeChanger: true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+                //bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+                //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+                fOnBeforeUnload: function () {
+                    //alert("완료!");
+                },
+                I18N_LOCALE: sLang
+            }, //boolean
+            fOnAppLoad: function () {
+                //예제 코드
+                //oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+            },
+            fCreator: "createSEditor2"
+        });
+
+        function pasteHTML() {
+            var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
+            oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+        }
+
+        function showHTML() {
+            var sHTML = oEditors.getById["ir1"].getIR();
+            alert(sHTML);
+        }
+
+        function submitContents(elClickedObj) {
+            oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+
+            // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("ir1").value를 이용해서 처리하면 됩니다.
+
+            try {
+                elClickedObj.form.submit();
+            } catch (e) { }
+        }
+
+        function setDefaultFont() {
+            var sDefaultFont = '궁서';
+            var nFontSize = 24;
+            oEditors.getById["ir1"].setDefaultFont(sDefaultFont, nFontSize);
+        }
+    </script>
+
+</body>
+
+</html>

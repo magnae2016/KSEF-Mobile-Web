@@ -55,3 +55,16 @@ const generateToken = (user) => {
     return token;
 };
 module.exports.generateToken = generateToken;
+
+const simpleDateFormat = () => {
+    const timezoneOffset = new Date().getTimezoneOffset() * 60000;
+    const timezoneDate = new Date(Date.now() - timezoneOffset);
+    const yyyyMMddHHmmss = timezoneDate
+        .toISOString()
+        .slice(-24)
+        .replace(/\D/g, '')
+        .slice(0, 14);
+
+    return yyyyMMddHHmmss;
+};
+module.exports.simpleDateFormat = simpleDateFormat;
