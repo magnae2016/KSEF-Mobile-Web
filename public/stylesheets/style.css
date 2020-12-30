@@ -576,7 +576,7 @@ input.form-control:focus {
 } /* notice Screen */
 
 /* notice/view Screen */
-.jumbotron .btn-close {
+.jumbotron-fluid .btn-close {
     width: 2rem;
     height: 2rem;
     font-size: 11px;
