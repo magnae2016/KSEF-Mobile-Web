@@ -1,6 +1,6 @@
 const { Categories, Notices } = require('../models');
 
-exports.findCategories = async function (req, res, next) {
+exports.findCategories = async function () {
     try {
         const categories = await Categories.findAll();
 
@@ -10,7 +10,7 @@ exports.findCategories = async function (req, res, next) {
     }
 };
 
-exports.findAllNotices = async function (req, res, next) {
+exports.findAllNotices = async function () {
     try {
         const notices = await Notices.findAll({
             where: {
