@@ -59,6 +59,10 @@ exports.requireItemContents = async function (req, res, next) {
 
         context.template = template.get({ plain: true });
         context.category = category.get({ plain: true });
+
+        // add the number of views
+        notice.notice_views = ++notice.notice_views;
+        notice.save();
     } else {
         // post not exist
         return res.redirect('/notices/category');
