@@ -7,8 +7,6 @@ const noticesControllers = require('../controllers/noticesControllers');
 router.get('/category/:category_name?', noticesControllers.requireCategoryList);
 
 // @RequestMapping(value="/notices/:notice_id", method=RequestMethod.GET)
-router.get('/:notice_id', function (req, res, next) {
-    res.render('notices/template', { title: '공지사항' });
-});
+router.get('/:notice_id', noticesControllers.requireItemContents);
 
 module.exports = router;

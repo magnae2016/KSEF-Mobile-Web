@@ -39,3 +39,32 @@ exports.requireCategoryList = async function (req, res, next) {
         context,
     });
 };
+
+exports.requireItemContents = async function (req, res, next) {
+    const { notice_id = undefined } = req.params;
+    const context = {
+        notice: undefined,
+        template: undefined,
+        category: undefined,
+    };
+
+    if (!notice_id) {
+        res.redirect('/notices/category');
+    }
+
+    const notice = await noticesServices.findNotice(notice_id);
+    if (notice) {
+        const template = await notice.getTemplate();
+        const category = await notice.getCategory();
+
+        context.template = template.get({ plain: true });
+        context.category = category.get({ plain: true });
+    } else {
+        // post not exist
+        return res.redirect('/notices/category');
+    }
+
+    context.notice = notice.get({ plain: true });
+
+    res.render('notices/template', { title: '공지사항', context });
+};

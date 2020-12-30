@@ -1,5 +1,8 @@
-<% _items.forEach(element => { %>
-<div class="card mb-0 border-0 border-bottom border-1 border-light rounded-0 bg-transparent">
+<% 
+    const path = '/notices';
+    _items.forEach(element => { 
+%>
+<a href="<%= `${path}/${element.notice_id}` %>" class="card mb-0 border-0 border-bottom border-1 border-light rounded-0 bg-transparent text-decoration-none">
     <div class="row g-0 py-2 my-1">
         <div class="col-2">
             <div class="d-flex py-2 pe-2">
@@ -22,5 +25,5 @@
             </div>
         </div>
     </div>
-</div>
+</a>
 <% }); %>

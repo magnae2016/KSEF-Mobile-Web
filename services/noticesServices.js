@@ -1,4 +1,4 @@
-const { Categories, Notices } = require('../models');
+const { Categories, Notices, Templates } = require('../models');
 
 exports.findCategories = async function () {
     try {
@@ -21,6 +21,22 @@ exports.findAllNotices = async function () {
         });
 
         return notices;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findNotice = async function (notice_id) {
+    try {
+        const notice = await Notices.findOne({
+            where: {
+                notice_id,
+                is_published: 1,
+                is_deleted: 0,
+            },
+        });
+
+        return notice;
     } catch (error) {
         throw new Error(error);
     }
