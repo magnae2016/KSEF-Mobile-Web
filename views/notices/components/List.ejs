@@ -1,0 +1,26 @@
+<% _items.forEach(element => { %>
+<div class="card mb-0 border-0 border-bottom border-1 border-light rounded-0 bg-transparent">
+    <div class="row g-0 py-2 my-1">
+        <div class="col-2">
+            <div class="d-flex py-2 pe-2">
+                <%
+                    const notice_id = String(element.notice_id).padStart(2, '0');
+                    [...notice_id].forEach(c => {
+                %>
+                <span class="label-number num<%= c %>">c</span>
+                <%  }); %>
+            </div>
+        </div>
+        <div class="col-10">
+            <div class="card-body px-0 py-2">
+                <h5 class="card-title mb-2 text-black text-keep"><%= element.notice_title %></h5>
+                <p class="card-text small lh-medium text-gray-600 d-flex">
+                    <span class="lh-1 float-start"><%= element.notice_created_at %></span>
+                    <span class="lh-1 float-start d-inline-block rounded-circle align-middle mx-2 divider"></span>
+                    <span class="lh-1 float-start">조회수 <%= element.notice_views %></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<% }); %>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+    
+    <head>
+        <!-- Required meta tags -->
+        <%- include("../partialView/head", { title }); %>
+        <%- include("../partialView/stylesheet") %>    
+    </head>
+
+    <body id="mainBody" class="main">
+        <!-- header -->
+        <header id="mainHead">
+            <%- include("../navigation/createStackNavigator", { headerTitle: title }) %>
+            <%
+                const path = "/notices/category";
+                const defaultHeaderText = "전체";
+                let _items = [];
+                _items.push({
+                    headerText: defaultHeaderText,
+                    link: `${path}/${defaultHeaderText}`,
+                    key: `key0`,
+                });
+                context.categories.forEach((element, index) => {
+                    _items.push({
+                        headerText: element,
+                        link: `${path}/${element}`,
+                        key: `key${index + 1}`
+                    });
+                });
+            %>
+            <%- include("../navigation/createPivotTabNavigator", {
+                _items,
+                selectedKey: `key${locals.selectedKey}`
+            }) %>
+        </header><!-- /END header -->
+        <!-- main -->
+        <main id="mainContent" class="container">
+            <!-- page-header -->
+            <div class="row">
+                <div class="col px-4">
+                    <h4 class="page-header pt-4 pb-1 mt-1 mb-2 fw-bold"><%= locals.selectedKey %></h4>
+                </div>
+            </div><!-- /END page-header -->
+            <div class="row">
+                <div class="col px-4">
+                    <div class="card-group">
+                        <%- include("./components/List", { _items: context.notices }) %>
+                    </div>
+                </div>
+            </div>
+        </main><!-- /END main -->
+        <%- include("../partialView/javascripts") %>
+    </body>
+</html>

@@ -566,6 +566,13 @@ input.form-control:focus {
 .small.dash {
     line-height: 9px;
     text-indent: initial;
+}
+
+.card-text .divider {
+    width: 3px;
+    height: 3px;
+    margin-top: 0.3125rem;
+    background: #939393;
 } /* notice Screen */
 
 /* notice/view Screen */
