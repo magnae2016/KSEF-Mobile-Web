@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            notice_subtitle: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
             template_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

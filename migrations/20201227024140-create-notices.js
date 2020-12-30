@@ -34,6 +34,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
+            notice_subtitle: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             template_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
