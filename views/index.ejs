@@ -44,51 +44,24 @@
                             class="position-absolute end-0 bottom-0" height="74.5" />
                     </div><!-- /END Sponsored ad -->
                     <!-- Fixed post -->
-                    <div class="card p-4 border-0 pt-3 rounded-lg shadow">
+                    <% context.notices.forEach((element, index) => { %>
+                    <div class="card p-4 border-0 pt-3 rounded-lg shadow 
+                        <%= (index !== 0) ? "mt-4" : "" %> 
+                        <%= (index + 1 === context.notices.length ? "mb-2" : "") %>">
                         <div class="card-body p-0 pt-1 position-relative">
                             <small class="card-subtitle mb-2 text-secondary fw-600">
-                                2021년에도 변함없이 열립니다
-                            </small>
+                                <%= element.notice_subtitle %></small>
                             <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
-                                2021년 11회 MOTOSTAR KSEF<br />내구페스티발
-                                경기일정
-                            </h5>
+                                <%= element.notice_title %></h5>
                             <small class="fs-7 fw-normal text-secondary">
-                                7월 31일 - 8월 2일</small>
+                                <%= element.notice_created_at %></small>
                             <h1 class="display-1">&nbsp;</h1>
-                            <img src="/images/static/307613810.png" width="100"
+                            <img src="/images/static/<%= element.template_brand_thumbnail %>" width="100"
                                 class="position-absolute bottom-0 end-0" />
                         </div>
                     </div>
-                    <div class="card p-4 border-0 pt-3 rounded-lg shadow mt-4">
-                        <div class="card-body p-0 pt-1 position-relative">
-                            <small class="card-subtitle mb-2 text-secondary fw-600">
-                                놓치지 마세요. 1차 접수
-                            </small>
-                            <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
-                                2020년 10회 MOTOSTAR KSEF<br />내구페스티발 1차
-                                접수 공지
-                            </h5>
-                            <small class="fs-7 fw-normal text-secondary">1월 31일 오전 11시부터 24시까지</small>
-                            <h1 class="display-1">&nbsp;</h1>
-                            <img src="/images/static/1251221875.png" height="50"
-                                class="position-absolute bottom-0 end-0" />
-                        </div>
-                    </div>
-                    <div class="card p-4 border-0 pt-3 rounded-lg shadow mt-4 mb-2">
-                        <div class="card-body p-0 pt-1 position-relative">
-                            <small class="card-subtitle mb-2 text-secondary fw-600">
-                                체크해주세요!
-                            </small>
-                            <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
-                                2020년 MOTOSTAR KSEF<br />기술 규정
-                            </h5>
-                            <small class="fs-7 fw-normal text-secondary">규정 사항을 반드시 확인해주세요</small>
-                            <h1 class="display-1">&nbsp;</h1>
-                            <img src="/images/static/1590451318.png" height="60"
-                                class="position-absolute bottom-0 end-0" />
-                        </div>
-                    </div><!-- /END Fixed post -->
+                    <% }); %>
+                    <!-- /END Fixed post -->
                 </div>
             </div>
         </div><!-- /END Notification, Ad, post -->

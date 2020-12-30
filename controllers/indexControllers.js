@@ -5,6 +5,7 @@ const indexServices = require('../services/indexServices');
 exports.requireHome = async function (req, res, next) {
     const context = {
         team: undefined,
+        notices: undefined,
     };
 
     // User not logged in
@@ -15,8 +16,11 @@ exports.requireHome = async function (req, res, next) {
     const { id: user_id } = req.user;
 
     try {
-        // Query team information
-        const team = await indexServices.findParticipatingTeam(user_id);
+        // Query team, Fixed notices information(Promise.all)
+        const [team, notices] = await Promise.all([
+            indexServices.findParticipatingTeam(user_id),
+            indexServices.findFixedNotices(),
+        ]);
         // User in the team
         if (team) {
             const { Participants } = team;
@@ -28,6 +32,7 @@ exports.requireHome = async function (req, res, next) {
                 role_name: role.role_name,
             };
         }
+        if (notices) context.notices = notices;
 
         res.render('index', {
             title: '홈',
