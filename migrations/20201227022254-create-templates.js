@@ -14,7 +14,7 @@ module.exports = {
                 defaultValue: Sequelize.UUIDV4,
                 allowNull: false,
             },
-            template_summary: {
+            template_file: {
                 type: Sequelize.STRING,
                 allowNull: true,
             },
@@ -38,6 +38,11 @@ module.exports = {
             shortcut_link: {
                 type: Sequelize.STRING,
                 allowNull: true,
+            },
+            template_created_at: {
+                type: 'TIMESTAMP',
+                allowNull: false,
+                defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
             },
         });
     },

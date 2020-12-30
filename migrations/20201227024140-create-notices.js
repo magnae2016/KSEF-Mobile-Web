@@ -57,6 +57,11 @@ module.exports = {
                 allowNull: false,
                 defaultValue: 0,
             },
+            is_published: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
             is_deleted: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

@@ -58,6 +58,11 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 defaultValue: 0,
             },
+            is_published: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+            },
             is_deleted: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

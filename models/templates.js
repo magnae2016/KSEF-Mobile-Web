@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 allowNull: false,
             },
-            template_summary: {
+            template_file: {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
             shortcut_link: {
                 type: DataTypes.STRING,
                 allowNull: true,
+            },
+            template_created_at: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW,
             },
         },
         {
