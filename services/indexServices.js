@@ -4,6 +4,7 @@ const { Users, Notices, Templates, Sequelize } = require('../models');
 require('dotenv').config();
 
 exports.findParticipatingTeam = async function (user_id) {
+    if (!user_id) return undefined;
     let user = {};
     try {
         user = await Users.findOne({

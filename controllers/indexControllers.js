@@ -8,12 +8,7 @@ exports.requireHome = async function (req, res, next) {
         notices: undefined,
     };
 
-    // User not logged in
-    if (!req.user) {
-        return res.render('index', { title: '홈', security: req.user || {} });
-    }
-
-    const { id: user_id } = req.user;
+    const { id: user_id = undefined } = req.user || {};
 
     try {
         // Query team, Fixed notices information(Promise.all)
@@ -36,7 +31,7 @@ exports.requireHome = async function (req, res, next) {
 
         res.render('index', {
             title: '홈',
-            security: req.user,
+            security: req.user || {},
             context,
         });
     } catch (error) {
