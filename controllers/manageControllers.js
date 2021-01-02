@@ -48,3 +48,23 @@ exports.requireAddNewPost = async function (req, res, next) {
         res.sendStatus(500);
     }
 };
+
+exports.requirePhotoUploader = async function (req, res, next) {
+    try {
+        let sFileInfo = '';
+
+        const filename = req.file.filename;
+        const newPath = req.file.path.substr(6);
+
+        sFileInfo += '&bNewLine=true';
+        sFileInfo += '&sFileName=' + filename;
+        sFileInfo += '&sFileURL=' + newPath;
+
+        res.status(200);
+        res.send(sFileInfo);
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.status(404);
+        res.send(`NOTALLOW_${req.headers['file-name']}`);
+    }
+};
