@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css" />
+</head>
+
+<body>
+
+    <div id="grid" style="width: 100%; height: 400px;"></div>
+    <br>
+    <button class="w2ui-btn" onclick="showChanged()">Get Changed</button>
+
+    <script type="text/javascript">
+        var categories = [
+            { id: 1, text: '공지' },
+            { id: 2, text: '접수' },
+            { id: 3, text: '이벤트' },
+        ];
+
+        $(function () {
+            $('#grid').w2grid({
+                name: 'grid',
+                method: 'GET',
+                show: {
+                    toolbar: true,
+                    footer: true,
+                    toolbarSave: true
+                },
+                columns: [
+                    { field: 'notice_id', text: 'ID', size: '50px', sortable: true, resizable: true },
+                    {
+                        field: 'Category', text: 'category', size: '120px', sortable: true, resizable: true,
+                        editable: { type: 'list', items: categories, showAll: true },
+                        render: function (record, index, col_index) {
+                            var html = this.getCellValue(index, col_index);
+                            return html || '';
+                        }
+                    },
+                    { field: 'user_name', text: 'writer', size: '120px', sortable: true, resizable: true },
+                    {
+                        field: 'notice_title', text: 'title', size: '120px', sortable: true, resizable: true,
+                        editable: { type: 'text' }
+                    },
+                    {
+                        field: 'notice_subtitle', text: 'subtitle', size: '120px', sortable: true, resizable: true,
+                        editable: { type: 'text' }
+                    },
+                    { field: 'notice_views', text: 'views', size: '50px', sortable: true, resizable: true },
+                    { field: 'notice_created_at', text: 'created_at', size: '120px', sortable: true, resizable: true },
+                    {
+                        field: 'is_fixed', text: 'is_fixed', size: '60px', sortable: true, resizable: true, style: 'text-align: center',
+                        editable: { type: 'checkbox', style: 'text-align: center' }
+                    },
+                    {
+                        field: 'is_published', text: 'is_published', size: '60px', sortable: true, resizable: true, style: 'text-align: center',
+                        editable: { type: 'checkbox', style: 'text-align: center' }
+                    },
+                    {
+                        field: 'is_deleted', text: 'is_deleted', size: '60px', sortable: true, resizable: true, style: 'text-align: center',
+                        editable: { type: 'checkbox', style: 'text-align: center' }
+                    },
+                    { field: 'deleted_time', text: 'deleted_time', size: '120px', sortable: true, resizable: true },
+                ],
+                toolbar: {
+                    items: [
+                        { id: 'add', type: 'button', text: 'Add Record', icon: 'w2ui-icon-plus' }
+                    ],
+                    onClick: function (event) {
+                        if (event.target == 'add') {
+                            w2ui.grid.add({ recid: w2ui.grid.records.length + 1 });
+                        }
+                    }
+                },
+            });
+
+            w2ui['grid'].load('/api/manage/posts');
+
+            w2ui['grid'].on('save', function (event) {
+                const { changes } = event;
+                console.log(changes);
+            });
+        });
+
+
+        function showChanged() {
+            console.log(w2ui['grid'].getChanges());
+            w2alert('Changed records are displayed in the console');
+        }
+    </script>
+
+</body>
+
+</html
