@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><%= title %></title>
+    <title><%= context.notice ? `'${context.notice.notice_title}' ` : '' %><%= title %></title>
     <script type="text/javascript" src="/plugins/SmartEditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
     <style>
         p, dl, dt, input, fieldset {
@@ -159,22 +159,22 @@
 <body>
     <form method="post">
         <p class="se2_apply_character">
-            <label for="notice_title">공지사항 제목</label> <input type="text" name="title" id="notice_title" value=""
+            <label for="notice_title">공지사항 제목</label> <input type="text" name="title" id="notice_title" value="<%= context.notice && context.notice.notice_title %>"
                 class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
                 class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
         </p>
         <p class="se2_apply_character">
-            <label for="notice_subtitle">공지사항 부제</label> <input type="text" name="subtitle" id="notice_subtitle" value=""
+            <label for="notice_subtitle">공지사항 부제</label> <input type="text" name="subtitle" id="notice_subtitle" value="<%= context.notice && context.notice.notice_subtitle %>"
                 class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
                 class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
         </p>
         <p class="se2_apply_character">
-            <label for="template_brand_color">헤더영역 색깔</label> <input type="color" name="color" id="template_brand_color" value=""
+            <label for="template_brand_color">헤더영역 색깔</label> <input type="color" name="color" id="template_brand_color" value="<%= context.template && context.template.template_brand_color %>"
                 class="se2_pre_color" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
                 class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
         </p>
         <p class="se2_apply_character">
-            <label for="template_brand_thumbnail">대표 이미지</label> <input type="text" name="thumbnail" id="template_brand_thumbnail" value=""
+            <label for="template_brand_thumbnail">대표 이미지</label> <input type="text" name="thumbnail" id="template_brand_thumbnail" value="<%= context.notice && context.notice.template_brand_thumbnail %>"
                 class="input_ty1" autocomplete="off"><button type="button" class="se2_confirm"><span>적용</span></button><button type="button"
                 class="se2_cancel husky_se2m_sCharacter_close"><span>취소</span></button>
         </p>
@@ -182,27 +182,29 @@
             <fieldset>
                 <legend>공지</legend>
                 <dl class="se2_t_proper2">
-                    <dt><input type="radio" id="se2_tbp1" name="category" value="1"><label for="se2_tbp1">공지</label></dt>
+                    <dt><input type="radio" id="se2_tbp1" name="category" value="1" <%= context.notice && context.notice.category_id === 1 ? "checked" : "" %>><label for="se2_tbp1">공지</label></dt>
 
                 </dl>
             </fieldset>
             <fieldset>
                 <legend>접수</legend>
                 <dl class="se2_t_proper2">
-                    <dt><input type="radio" id="se2_tbp2" name="category" value="2"><label for="se2_tbp2">접수</label></dt>
+                    <dt><input type="radio" id="se2_tbp2" name="category" value="2" <%= context.notice && context.notice.category_id === 2 ? "checked" : "" %>><label for="se2_tbp2">접수</label></dt>
 
                 </dl>
             </fieldset>
             <fieldset>
                 <legend>이벤트</legend>
                 <dl class="se2_t_proper2">
-                    <dt><input type="radio" id="se2_tbp3" name="category" value="3"><label for="se2_tbp3">이벤트</label></dt>
+                    <dt><input type="radio" id="se2_tbp3" name="category" value="3" <%= context.notice && context.notice.category_id === 3 ? "checked" : "" %>><label for="se2_tbp3">이벤트</label></dt>
 
                 </dl>
             </fieldset>
         </div>
         <p>&nbsp;</p>
         <textarea name="ir1" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea>
+        <input type="hidden" id="notice_id" name="notice_id" value="<%= context.notice && context.notice.notice_id %>"/>
+        <input type="hidden" id="template_id" name="template_id" value="<%= context.template && context.template.template_id %>"/>
         <p>&nbsp;</p>
         <p class="se2_apply_character">
             <button type="button" onclick="submitContents(this);" class="se2_submit"><span>확인</span></button>
@@ -213,6 +215,11 @@
             <input type="button" onclick="submitContents(this);" value="서버로 내용 전송" />
             <input type="button" onclick="setDefaultFont();" value="기본 폰트 지정하기 (궁서_24)" />
         </p>
+        <% if (context.template && context.template.template_file) { %>
+        <div id="ir2" rows="10" cols="100" style="width:0px; height:0px; display:none;">
+            <%- include(`../notices/templates/${context.template.template_file}`) %>
+        </div>
+        <% } %>
     </form>
 
     <script type="text/javascript">
@@ -240,7 +247,9 @@
             }, //boolean
             fOnAppLoad: function () {
                 //예제 코드
-                //oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+                if (document.getElementById("ir2")) {
+                    oEditors.getById["ir1"].exec("PASTE_HTML", [ir2.innerHTML]);
+                }
             },
             fCreator: "createSEditor2"
         });

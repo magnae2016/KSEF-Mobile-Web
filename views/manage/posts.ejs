@@ -14,7 +14,6 @@
 
     <div id="grid" style="width: 100%; height: 400px;"></div>
     <br>
-    <button class="w2ui-btn" onclick="showChanged()">Get Changed</button>
 
     <script type="text/javascript">
         var categories = [
@@ -30,7 +29,9 @@
                 show: {
                     toolbar: true,
                     footer: true,
-                    toolbarSave: true
+                    toolbarAdd: true,
+                    toolbarSave: true,
+                    toolbarEdit: true
                 },
                 columns: [
                     { field: 'notice_id', text: 'ID', size: '50px', sortable: true, resizable: true },
@@ -61,30 +62,41 @@
                         field: 'is_published', text: 'is_published', size: '60px', sortable: true, resizable: true, style: 'text-align: center',
                         editable: { type: 'checkbox', style: 'text-align: center' }
                     },
-                    {
-                        field: 'is_deleted', text: 'is_deleted', size: '60px', sortable: true, resizable: true, style: 'text-align: center',
-                        editable: { type: 'checkbox', style: 'text-align: center' }
-                    },
-                    { field: 'deleted_time', text: 'deleted_time', size: '120px', sortable: true, resizable: true },
                 ],
-                toolbar: {
-                    items: [
-                        { id: 'add', type: 'button', text: 'Add Record', icon: 'w2ui-icon-plus' }
-                    ],
-                    onClick: function (event) {
-                        if (event.target == "add") {
-                            location.href="/manage/newpost";
-                        }
-                    }
+                onAdd: function (event) {
+                    location.href="/manage/newpost";
+                },
+                onEdit: function (event) {
+                    const {recid} = event;
+                    const record = w2ui.grid.get(recid);
+                    const { notice_id } = record;
+                    location.href=`/manage/newpost/${notice_id}`;
+                },
+                onSave: function (event) {
+                    let { changes } = event;
+                    let formData = [];
+                    changes.forEach((element) => {
+                        const { recid } = element;
+                        let record = w2ui.grid.get(recid);
+                        const {notice_id} = record;
+                        
+                        formData.push({
+                            ...record,
+                            ...element,
+                        });
+                    });
+
+                    $.ajax({
+                        url: "/api/manage/posts",
+                        data: { records: JSON.stringify(formData) },
+                        type: "POST",
+                        success: function (data, textStatus, xhr) { w2alert('변경사항이 반영되었습니다.'); },
+                        error: function (jqXHR, textStatus, errorThrown) { console.error(textStatus); }
+                    });
                 },
             });
 
             w2ui['grid'].load('/api/manage/posts');
-
-            w2ui['grid'].on('save', function (event) {
-                const { changes } = event;
-                console.log(changes);
-            });
         });
 
 

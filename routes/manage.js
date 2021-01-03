@@ -36,12 +36,10 @@ router.get('/posts', function (req, res, next) {
 });
 
 // @RequestMapping(value="/manage/newpost", method=RequestMethod.GET)
-router.get('/newpost', function (req, res, next) {
-    res.render('manage/newpost', { title: '새로운 글쓰기' });
-});
+router.get('/newpost/:notice_id?', manageControllers.requireLoadingPost);
 
 // @RequestMapping(value="/manage/newpost", method=RequestMethod.POST)
-router.post('/newpost', manageControllers.requireAddNewPost);
+router.post('/newpost/:notice_id?', manageControllers.requireAddNewPost);
 
 // @RequestMapping(value="/manage/file_uploader_html5", method=RequestMethod.POST)
 router.post(
