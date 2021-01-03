@@ -26,6 +26,7 @@
             $('#grid').w2grid({
                 name: 'grid',
                 method: 'GET',
+                multiSelect: false,
                 show: {
                     toolbar: true,
                     footer: true,
@@ -33,6 +34,7 @@
                     toolbarSave: true,
                     toolbarEdit: true,
                     toolbarDelete: true,
+                    lineNumbers: true,
                 },
                 columns: [
                     { field: 'notice_id', text: 'ID', size: '50px', sortable: true, resizable: true },
@@ -107,6 +109,23 @@
                             success: function (data, textStatus, xhr) { w2alert('변경사항이 반영되었습니다.'); },
                             error: function (jqXHR, textStatus, errorThrown) { console.error(textStatus); }
                         });
+                    }
+                },
+                toolbar: {
+                    items: [
+                        { type: 'break' },
+                        { id: 'show', type: 'button', text: 'show', img: 'icon-page' }
+                    ],
+                    onClick: function (event) {
+                        if (event.target == "show") {
+                            const selection = w2ui["grid"].getSelection();
+                            if (selection.length > 0) {
+                                const recid = w2ui["grid"].getSelection().pop();
+                                const record = w2ui.grid.get(recid);
+                                const { notice_id } = record;
+                                window.open("about:blank").location.href = `/manage/posts/${notice_id}`;
+                            }
+                        }
                     }
                 },
             });

@@ -3,6 +3,39 @@
 const fs = require('fs');
 const manageServices = require('../services/manageServices');
 
+exports.requirePreviewPost = async function (req, res, next) {
+    const { notice_id = undefined } = req.params;
+    const context = {
+        notice: undefined,
+        template: undefined,
+        category: undefined,
+    };
+
+    if (!notice_id) {
+        res.redirect('/manage/posts');
+    }
+
+    const notice = await manageServices.findNotice(notice_id);
+    const { notice_title } = notice;
+    if (notice) {
+        const template = await notice.getTemplate();
+        const category = await notice.getCategory();
+
+        context.template = template.get({ plain: true });
+        context.category = category.get({ plain: true });
+    } else {
+        // post not exist
+        return res.redirect('/manage/posts');
+    }
+
+    context.notice = notice.get({ plain: true });
+
+    res.render('notices/template', {
+        title: `'${notice_title}' 미리보기`,
+        context,
+    });
+};
+
 exports.requireLoadingPost = async function (req, res, next) {
     const { notice_id = undefined } = req.params;
     const context = {

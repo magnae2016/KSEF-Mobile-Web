@@ -35,6 +35,9 @@ router.get('/posts', function (req, res, next) {
     res.render('manage/posts', { title: '글 관리' });
 });
 
+// @RequestMapping(value="/manage/posts/:notice_id", method=RequestMethod.GET)
+router.get('/posts/:notice_id', manageControllers.requirePreviewPost);
+
 // @RequestMapping(value="/manage/newpost", method=RequestMethod.GET)
 router.get('/newpost/:notice_id?', manageControllers.requireLoadingPost);
 
