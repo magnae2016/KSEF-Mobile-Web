@@ -85,4 +85,25 @@ router.post('/posts', async function (req, res, next) {
     }
 });
 
+router.delete('/posts/:notice_id', async function (req, res, next) {
+    const { notice_id = undefined } = req.params;
+    if (!notice_id) {
+        return res.sendStatus(404);
+    }
+
+    const notice = await Notices.findOne({
+        where: {
+            notice_id,
+        },
+    });
+
+    notice.set({
+        is_deleted: 1,
+        deleted_time: new Date().toISOString(),
+    });
+    notice.save();
+
+    res.sendStatus(200);
+});
+
 module.exports = router;
