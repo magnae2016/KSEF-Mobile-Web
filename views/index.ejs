@@ -47,7 +47,8 @@
                     <% context.notices.forEach((element, index) => { %>
                     <div class="card p-4 border-0 pt-3 rounded-lg shadow 
                         <%= (index !== 0) ? "mt-4" : "" %> 
-                        <%= (index + 1 === context.notices.length ? "mb-2" : "") %>">
+                        <%= (index + 1 === context.notices.length ? "mb-2" : "") %>" 
+                        onclick="location.href=`/notices/<%= element.notice_id %>`">
                         <div class="card-body p-0 pt-1 position-relative">
                             <small class="card-subtitle mb-2 text-secondary fw-600">
                                 <%= element.notice_subtitle %></small>
