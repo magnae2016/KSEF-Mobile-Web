@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { checkLoggedIn, checkIsAdmin } = require('../lib');
 const multer = require('multer');
 
 var storage = multer.diskStorage({
@@ -29,6 +30,8 @@ var fileFilter = (req, file, cb) => {
 var upload = multer({ storage, fileFilter });
 
 const manageControllers = require('../controllers/manageControllers');
+
+router.use(checkLoggedIn, checkIsAdmin);
 
 // @RequestMapping(value="/manage/posts", method=RequestMethod.GET)
 router.get('/posts', function (req, res, next) {
