@@ -72,8 +72,8 @@
                         { id: 'add', type: 'button', text: 'Add Record', icon: 'w2ui-icon-plus' }
                     ],
                     onClick: function (event) {
-                        if (event.target == 'add') {
-                            w2ui.grid.add({ recid: w2ui.grid.records.length + 1 });
+                        if (event.target == "add") {
+                            location.href="/manage/newpost";
                         }
                     }
                 },
