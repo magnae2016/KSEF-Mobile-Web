@@ -8,7 +8,32 @@
             href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Round"
             rel="stylesheet"
         />
-        <%- include("../partialView/stylesheet") %>    
+        <%- include("../partialView/stylesheet") %>
+        <style>
+            p:has(> img) {
+                background-color: red;
+            }
+            
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            p {
+                line-height: 1.7;
+                padding-top: 0;
+                padding-right: 1.5rem;
+                padding-left: 1.5rem;
+                margin-top: 0;
+                margin-bottom: 0;
+                word-break: keep-all;
+            }
+
+            a {
+                word-break: break-all;
+                white-space: normal;
+            }
+        </style>
     </head>
 
     <body id="mainBody" class="main bg-white position-fixed">
@@ -63,7 +88,7 @@
                     <!-- main -->
                     <main id="mainContent" class="d-flex flex-column flex-grow-1">
                         <div class="bg-white">
-                            <div class="mt-4 px-4">
+                            <div class="my-4">
                                 <%- include(`./templates/${context.template.template_file}`) %>
                             </div>
                         </div>
@@ -72,5 +97,12 @@
             </div>
         </div>
         <%- include("../partialView/javascripts") %>
+        <script>
+            // img margin adjustment
+            const img = mainContent.getElementsByTagName("img");
+            for (let item of img) {
+                item.parentNode.classList.add("px-0");
+            }
+        </script>
     </body>
 </html>
