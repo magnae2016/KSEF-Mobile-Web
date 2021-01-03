@@ -56,8 +56,10 @@
                             <small class="fs-7 fw-normal text-secondary">
                                 <%= element.notice_created_at %></small>
                             <h1 class="display-1">&nbsp;</h1>
+                            <% if (element.template_brand_thumbnail) { %>
                             <img src="/images/static/<%= element.template_brand_thumbnail %>" width="100"
                                 class="position-absolute bottom-0 end-0" />
+                            <% } %>
                         </div>
                     </div>
                     <% }); %>
