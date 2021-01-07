@@ -9,7 +9,7 @@ const {
     Sequelize,
 } = require('../../models');
 
-// @RequestMapping(value="/api/settings/alerts", method=RequestMethod.POST)
+// @RequestMapping(value="/api/manage/settings/alerts", method=RequestMethod.POST)
 router.post('/settings/alerts', async function (req, res, next) {
     const { message: alert_message } = req.body;
     try {
@@ -20,7 +20,9 @@ router.post('/settings/alerts', async function (req, res, next) {
             { isNewRecord: true }
         );
 
-        res.sendStatus(200);
+        return res.render('redirect', {
+            message: '정상적으로 등록되었습니다.',
+        });
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
         res.sendStatus(500);
