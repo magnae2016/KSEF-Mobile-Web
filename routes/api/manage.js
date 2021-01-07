@@ -1,7 +1,31 @@
 var express = require('express');
 var router = express.Router();
 
-const { Notices, Categories, Users, Sequelize } = require('../../models');
+const {
+    Notices,
+    Categories,
+    Users,
+    Alerts,
+    Sequelize,
+} = require('../../models');
+
+// @RequestMapping(value="/api/settings/alerts", method=RequestMethod.POST)
+router.post('/settings/alerts', async function (req, res, next) {
+    const { message: alert_message } = req.body;
+    try {
+        const alert = await Alerts.create(
+            {
+                alert_message,
+            },
+            { isNewRecord: true }
+        );
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+});
 
 // @RequestMapping(value="/api/manage/posts", method=RequestMethod.GET)
 router.get('/posts', async function (req, res, next) {

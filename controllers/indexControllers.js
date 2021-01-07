@@ -6,15 +6,17 @@ exports.requireHome = async function (req, res, next) {
     const context = {
         team: undefined,
         notices: undefined,
+        alert: undefined,
     };
 
     const { id: user_id = undefined } = req.user || {};
 
     try {
-        // Query team, Fixed notices information(Promise.all)
-        const [team, notices] = await Promise.all([
+        // Query team, Fixed notices, alert information(Promise.all)
+        const [team, notices, alert] = await Promise.all([
             indexServices.findParticipatingTeam(user_id),
             indexServices.findFixedNotices(),
+            indexServices.findLatestAlert(),
         ]);
         // User in the team
         if (team) {
@@ -28,6 +30,8 @@ exports.requireHome = async function (req, res, next) {
             };
         }
         if (notices) context.notices = notices;
+
+        if (alert) context.alert = alert;
 
         res.render('index', {
             title: '홈',

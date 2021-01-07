@@ -1,6 +1,6 @@
 'use strict';
 
-const { Users, Notices, Templates, Sequelize } = require('../models');
+const { Users, Notices, Templates, Alerts, Sequelize } = require('../models');
 require('dotenv').config();
 
 exports.findParticipatingTeam = async function (user_id) {
@@ -51,6 +51,20 @@ exports.findFixedNotices = async function () {
         });
 
         return notices;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findLatestAlert = async function () {
+    let alert = undefined;
+    try {
+        alert = await Alerts.findOne({
+            limit: 1,
+            order: [['alert_id', 'DESC']],
+        });
+
+        return alert;
     } catch (error) {
         throw new Error(error);
     }

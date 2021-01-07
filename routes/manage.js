@@ -33,6 +33,11 @@ const manageControllers = require('../controllers/manageControllers');
 
 router.use(checkLoggedIn, checkIsAdmin);
 
+// @RequestMapping(value="/manage/settings", method=RequestMethod.GET)
+router.get('/settings', function (req, res, next) {
+    res.render('manage/settings', { title: '설정' });
+});
+
 // @RequestMapping(value="/manage/posts", method=RequestMethod.GET)
 router.get('/posts', function (req, res, next) {
     res.render('manage/posts', { title: '글 관리' });
