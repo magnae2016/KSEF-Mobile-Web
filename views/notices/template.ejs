@@ -65,14 +65,11 @@
             }
 
             var header = document.getElementById('lnb');
-            var title = document.getElementById('title');
             function scrollFunc() {
                 if (pageYOffset >= 50) {
                     header.classList.add("position-fixed", "top-0", "shadow-sm");
-                    title.style.visibility = 'visible';
                 } else {
                     header.classList.remove("position-fixed", "top-0", "shadow-sm");
-                    title.style.visibility = 'hidden';
                 }
             }
             if (header)
