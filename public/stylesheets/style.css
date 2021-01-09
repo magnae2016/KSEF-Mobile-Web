@@ -1,7 +1,6 @@
 html,
 body {
     width: 100%;
-    height: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
@@ -109,6 +108,10 @@ input.form-control:focus {
     word-break: keep-all;
 }
 
+.text-ellipsis {
+    text-overflow: ellipsis;
+}
+
 /* Colors */
 .text-black {
     color: #000000 !important;
@@ -209,6 +212,11 @@ input.form-control:focus {
 /* Shadows */
 .shadow-xxl {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.675) !important;
+}
+
+/* Z-index */
+.zindex-fixed {
+    z-index: 1030;
 }
 
 /* Navigation */

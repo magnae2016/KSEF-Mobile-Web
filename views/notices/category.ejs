@@ -29,6 +29,7 @@
                 });
             %>
             <%- include("../navigation/createPivotTabNavigator", {
+                id: 'lnb',
                 _items,
                 selectedKey: `key${locals.selectedKey}`
             }) %>
@@ -50,5 +51,16 @@
             </div>
         </main><!-- /END main -->
         <%- include("../partialView/javascripts") %>
+        <script>
+            var header = document.getElementById('lnb');
+            function scrollFunc() {
+                if (pageYOffset >= 90) {
+                    header.classList.add("position-fixed", "top-0", "shadow-sm");
+                } else {
+                    header.classList.remove("position-fixed", "top-0", "shadow-sm");
+                }
+            }
+            window.addEventListener("scroll", scrollFunc);
+        </script>
     </body>
 </html>

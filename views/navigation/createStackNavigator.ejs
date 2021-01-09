@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light flex-row py-0 position-relative overflow-hidden">
+<nav id="<%= locals.id && locals.id %>" class="navbar navbar-expand-lg navbar-light flex-row py-0 position-relative overflow-hidden w-100 bg-white <%= locals.isFixed && locals.isFixed ? 'zindex-fixed' : ''%>">
     <div class="container-fluid flex-row px-0">
         <button id="HeaderBackButton" type="button"
             class="btn btn-link px-1 lh-1 border-start-0 border-end-0 position-absolute top-0 start-0"
@@ -10,10 +10,10 @@
                     d="M14.71 6.71c-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z" />
             </svg>
         </button>
-        <div id="navbarSupportedContent" class="d-flex mx-auto py-2">
-            <ul class="navbar-nav d-flex flex-row align-items-center my-auto ms-auto mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link btn btn-link h6 mb-0 px-2 mx-1 text-dark fw-bolder lh-1" href="#">
+        <div id="navbarSupportedContent" class="d-flex w-100 py-2">
+            <ul class="navbar-nav d-flex flex-row align-items-center my-auto mb-lg-0 w-100">
+                <li class="nav-item w-75 mx-auto">
+                    <a id="title" class="nav-link btn btn-link h6 mb-0 px-2 mx-1 text-dark fw-bolder lh-1 overflow-hidden nowrap text-ellipsis" href="#" style="visibility: visible;">
                         <%- headerTitle %>
                     </a>
                 </li>
