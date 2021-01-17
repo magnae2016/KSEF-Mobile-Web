@@ -16,6 +16,7 @@ var debug = require('debug')('ksef-mobile-web:server');
 var indexRouter = require('./routes/index');
 var accountsRouter = require('./routes/accounts');
 var noticesRouter = require('./routes/notices');
+var registrationRouter = require('./routes/registration');
 var manageRouter = require('./routes/manage');
 var apiRouter = require('./routes/api');
 
@@ -60,6 +61,7 @@ app.use(jwtMiddleware);
 app.use('/', indexRouter);
 app.use('/accounts', accountsRouter);
 app.use('/notices', noticesRouter);
+app.use('/registration', registrationRouter);
 app.use('/manage', manageRouter);
 app.use('/api', apiRouter);
 
