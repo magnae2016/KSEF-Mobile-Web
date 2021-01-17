@@ -45,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
         models.Forms.hasOne(models.Registrations, {
             foreignKey: 'form_id',
         });
+
+        models.Forms.hasMany(models.FormFields, {
+            foreignKey: 'form_id',
+            sourceKey: 'form_id',
+        });
     };
     return Form;
 };

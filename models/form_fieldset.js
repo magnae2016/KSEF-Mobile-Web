@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     );
     form_fieldset.associate = function (models) {
         // associations can be defined here
+        models.FormFieldset.hasMany(models.FormFields, {
+            foreignKey: 'fieldset_id',
+            sourceKey: 'fieldset_id',
+        });
     };
     return form_fieldset;
 };

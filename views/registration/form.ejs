@@ -25,7 +25,7 @@
                         _items: [
                             {
                                 mask: "text",
-                                name: "model",
+                                name: "model_name",
                                 placeholder: "참가기종",
                                 label: "참가기종(모델명)",
                                 isRequired: true,
@@ -39,7 +39,7 @@
                     <div class="row g-1 btn-group">
                         <div class="col-6">
                             <div class="d-grid">
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" />
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio1" autocomplete="off" value="FIRST"/>
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio1">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">FIRST</small>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-6">
                             <div class="d-grid">
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" />
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio2" autocomplete="off" value="ADVANCED" />
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio2">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">ADVANCED</small>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-6">
                             <div class="d-grid">
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" />
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio3" autocomplete="off" value="PRO" />
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio3">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">PRO</small>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-6">
                             <div class="d-grid">
-                                <input type="radio" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off" />
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio4" autocomplete="off" value="NEWTRO" />
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio4">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">NEWTRO</small>
@@ -83,7 +83,7 @@
                     <div class="row g-1 btn-group d-flex">
                         <div class="col-12">
                             <div class="d-grid">
-                                <input type="checkbox" class="btn-check" name="" id="btnradio5" autocomplete="off" />
+                                <input type="checkbox" class="btn-check" name="is_zontes" id="btnradio5" autocomplete="off" />
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio5">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">네, 존테스 바이크로 참가합니다.</small>
@@ -102,7 +102,7 @@
                         _items: [
                             {
                                 mask: "text",
-                                name: "teamName",
+                                name: "team_name",
                                 placeholder: "소속팀명",
                                 label: "소속팀명",
                                 isRequired: true,
@@ -116,7 +116,7 @@
                                 _items: [
                                     {
                                         mask: "text",
-                                        name: "teamCaptain",
+                                        name: "team_leader_name",
                                         placeholder: "팀 대표 성명",
                                         label: "팀 대표 성명",
                                         isRequired: true,
@@ -130,7 +130,7 @@
                                 _items: [
                                     {
                                         mask: "tel",
-                                        name: "teamContact",
+                                        name: "team_leader_contact",
                                         placeholder: "팀 대표 연락처",
                                         label: "팀 대표 연락처",
                                         isRequired: true,
@@ -144,7 +144,7 @@
                         _items: [
                             {
                                 mask: "text",
-                                name: "address",
+                                name: "delivery_address",
                                 placeholder: "택배수령 주소",
                                 label: "택배수령 주소",
                                 isRequired: true,
@@ -168,7 +168,7 @@
                                 _items: [
                                     {
                                         mask: "text",
-                                        name: "bank",
+                                        name: "refund_bank",
                                         placeholder: "은행명",
                                         label: "은행명",
                                         isRequired: true,
@@ -182,7 +182,7 @@
                                 _items: [
                                     {
                                         mask: "text",
-                                        name: "holder",
+                                        name: "refund_holder",
                                         placeholder: "예금주",
                                         label: "예금주",
                                         isRequired: true,
@@ -196,7 +196,7 @@
                         _items: [
                             {
                                 mask: "text",
-                                name: "account",
+                                name: "refund_account",
                                 placeholder: "계좌번호",
                                 label: "계좌번호",
                                 isRequired: true,
@@ -222,7 +222,7 @@
                                     _items: [
                                         {
                                             mask: "text",
-                                            name: "riderName",
+                                            name: "rider1_name",
                                             placeholder: "성명",
                                             label: "성명",
                                             isRequired: true,
@@ -236,7 +236,7 @@
                                     _items: [
                                         {
                                             mask: "tel",
-                                            name: "riderPhone",
+                                            name: "rider1_phone",
                                             placeholder: "연락처",
                                             label: "연락처",
                                             isRequired: true,
@@ -250,7 +250,7 @@
                             _items: [
                                 {
                                     mask: "text",
-                                    name: "RRN",
+                                    name: "rider1_RRN",
                                     placeholder: "주민번호",
                                     label: "주민번호",
                                     isRequired: true,
@@ -263,7 +263,7 @@
                             <div class="row g-1 btn-group w-100">
                                 <div class="col-6">
                                     <div class="d-grid">
-                                        <input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off">
+                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio6" autocomplete="off" value="Y">
                                         <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio6">
                                             <small class="text-gray-600 fw-normal lh-base fs-6">소지 함</small>
                                         </label>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="d-grid">
-                                        <input type="radio" class="btn-check" name="btnradio2" id="btnradio7" autocomplete="off">
+                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio7" autocomplete="off" value="N">
                                         <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio7">
                                             <small class="text-gray-600 fw-normal lh-base fs-6">소지하지 않음</small>
                                         </label>
@@ -281,7 +281,7 @@
                         </div>
                         <div class="pb-2 mb-1">
                             <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">경기이력과 순위 (선택)</h5>
-                            <textarea class="form-control bg-transparent rounded-0 border-1 p-2 fs-6 mb-0 border-gray-200" style="height: 100px"></textarea>
+                            <textarea name="rider1_history" class="form-control bg-transparent rounded-0 border-1 p-2 fs-6 mb-0 border-gray-200" style="height: 100px"></textarea>
                         </div>
                     </div>
                     <button class="btn bg-gray-100 small rounded-5 w-100" type="button">
