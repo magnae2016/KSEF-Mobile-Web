@@ -46,6 +46,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'user_id',
             targetKey: 'user_id',
         });
+
+        models.Formdata.hasMany(models.TeamRegistration, {
+            foreignKey: 'formdata_id',
+            sourceKey: 'formdata_id',
+        });
     };
     return formdata;
 };

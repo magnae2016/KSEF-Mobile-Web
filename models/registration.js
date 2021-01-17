@@ -58,6 +58,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'form_id',
             targetKey: 'form_id',
         });
+
+        models.Registrations.belongsToMany(models.Teams, {
+            through: 'TeamRegistration',
+            foreignKey: 'regist_id',
+        });
     };
     return registration;
 };
