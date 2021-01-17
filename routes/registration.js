@@ -9,6 +9,11 @@ router.get('/', function (req, res, next) {
     res.render('registration/index', { title: '참가접수' });
 });
 
+// @RequestMapping(value="/registration/view", method=RequestMethod.GET)
+router.get('/view', function (req, res, next) {
+    res.render('registration/content', { title: '참가접수' });
+});
+
 // @RequestMapping(value="/registration/form", method=RequestMethod.GET)
 router.get('/form', function (req, res, next) {
     res.render('registration/form', { title: '참가접수' });
