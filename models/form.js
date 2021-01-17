@@ -42,6 +42,9 @@ module.exports = (sequelize, DataTypes) => {
     );
     Form.associate = function (models) {
         // associations can be defined here
+        models.Forms.hasOne(models.Registrations, {
+            foreignKey: 'form_id',
+        });
     };
     return Form;
 };

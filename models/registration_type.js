@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     );
     registration_type.associate = function (models) {
         // associations can be defined here
+        models.RegistrationType.hasMany(models.Registrations, {
+            foreignKey: 'type_id',
+            sourceKey: 'type_id',
+        });
     };
     return registration_type;
 };
