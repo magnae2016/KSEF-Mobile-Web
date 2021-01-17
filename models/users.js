@@ -93,6 +93,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'user_id',
             sourceKey: 'user_id',
         });
+
+        models.Users.hasMany(models.Formdata, {
+            foreignKey: 'user_id',
+            sourceKey: 'user_id',
+        });
     };
 
     Users.beforeCreate(async (user) => {
