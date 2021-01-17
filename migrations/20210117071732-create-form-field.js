@@ -11,7 +11,6 @@ module.exports = {
             },
             form_id: {
                 type: Sequelize.INTEGER,
-                primaryKey: true,
                 allowNull: false,
                 references: {
                     model: 'FORMS',
