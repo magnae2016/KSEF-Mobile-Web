@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     );
     Progress.associate = function (models) {
         // associations can be defined here
+        models.Progress.hasMany(models.Calendar, {
+            foreignKey: 'prog_id',
+            sourceKey: 'prog_id',
+        });
     };
     return Progress;
 };
