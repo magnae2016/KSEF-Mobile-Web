@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
                 unique: true,
             },
             formdata_values: {
-                type: DataTypes.STRING,
+                type: DataTypes.TEXT,
                 allowNull: false,
             },
             is_completed: {
@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
             targetKey: 'user_id',
         });
 
-        models.Formdata.hasMany(models.TeamRegistration, {
+        models.Formdata.hasOne(models.TeamRegistration, {
             foreignKey: 'formdata_id',
             sourceKey: 'formdata_id',
         });

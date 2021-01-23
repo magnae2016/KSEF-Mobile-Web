@@ -14,7 +14,7 @@
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent" class="container">
-        <form>
+        <form id="createRegistrationForm" method="POST">
             <div class="row">
                 <!-- 참가 정보 -->
                 <div class="col px-4 pt-2 mt-1">
@@ -83,7 +83,7 @@
                     <div class="row g-1 btn-group d-flex">
                         <div class="col-12">
                             <div class="d-grid">
-                                <input type="checkbox" class="btn-check" name="is_zontes" id="btnradio5" autocomplete="off" />
+                                <input type="checkbox" class="btn-check" name="is_zontes" id="btnradio5" value="Y" />
                                 <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                     for="btnradio5">
                                     <small class="text-gray-600 fw-normal lh-base fs-6">네, 존테스 바이크로 참가합니다.</small>
@@ -304,7 +304,7 @@
                     );
                 ">
         <div class="d-grid p-3">
-            <button type="submit" form="createAccountForm" class="btn btn-dark py-2 border-0 rounded-5">
+            <button type="submit" form="createRegistrationForm" class="btn btn-dark py-2 border-0 rounded-5">
                 <span class="d-flex py-2 justify-content-center fw-600">등록</span>
             </button>
         </div>

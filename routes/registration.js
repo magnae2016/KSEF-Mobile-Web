@@ -7,14 +7,21 @@ const { checkLoggedIn } = require('../lib');
 // @RequestMapping(value="/registration/", method=RequestMethod.GET)
 router.get('/', registrationControllers.requireRegistrationList);
 
-// @RequestMapping(value="/registration/view", method=RequestMethod.GET)
-router.get('/view', function (req, res, next) {
-    res.render('registration/content', { title: '참가접수' });
-});
+// @RequestMapping(value="/registration/view/:type_id", method=RequestMethod.GET)
+router.get(
+    '/view/:type_id',
+    registrationControllers.requireRegistrationContent
+);
 
-// @RequestMapping(value="/registration/form", method=RequestMethod.GET)
-router.get('/form', function (req, res, next) {
+// @RequestMapping(value="/registration/form/:type_id", method=RequestMethod.GET)
+router.get('/form/:type_id', function (req, res, next) {
     res.render('registration/form', { title: '참가접수' });
 });
+
+// @RequestMapping(value="/registration/form/:type_id", method=RequestMethod.POST)
+router.post(
+    '/form/:type_id',
+    registrationControllers.requireUpdateRegistration
+);
 
 module.exports = router;

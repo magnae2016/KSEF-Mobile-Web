@@ -10,7 +10,7 @@ module.exports = {
                 unique: true,
             },
             formdata_values: {
-                type: Sequelize.STRING,
+                type: Sequelize.TEXT,
                 allowNull: false,
             },
             is_completed: {
