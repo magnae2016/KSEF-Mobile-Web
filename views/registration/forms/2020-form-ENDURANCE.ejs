@@ -11,6 +11,16 @@
     <%
         const formdata = JSON.parse(locals.context.formdata);
         const participation_class = formdata.participation_class;
+        const keys = Object.keys(formdata);
+        let riders = [];
+        keys.forEach((element) => {
+            const rider = element.split('_')[0].includes('rider');
+            if (rider) {
+                const id = element.substring(5, 6);
+                riders.push(Number(id));
+            }
+        });
+        riders = Array.from(new Set(riders)); // deduplication
     %>
     <!-- header -->
     <header id="mainHead">
@@ -226,80 +236,89 @@
                     <p class="fs-7 pt-2 pb-1 mb-3 text-secondary text-keep">
                         아래의 버튼을 클릭하여, 라이더를 추가해주세요.
                     </p>
-                    <div class="mb-3">
-                        <h5 class="fs-6 mb-3 fw-600 pt-3">라이더 1</h5>
-                        <div class="row g-2 my-0">
-                            <div class="col-5 m-0">
-                                <%- include("../../components/TextField", {
-                                    _items: [
-                                        {
-                                            mask: "text",
-                                            name: "rider1_name",
-                                            placeholder: "성명",
-                                            label: "성명",
-                                            isRequired: true,
-                                            value: "조성빈"
-                                        },
-                                    ],
-                                });
-                                %>
-                            </div>
-                            <div class="col-7 m-0">
-                                <%- include("../../components/TextField", {
-                                    _items: [
-                                        {
-                                            mask: "tel",
-                                            name: "rider1_phone",
-                                            placeholder: "연락처",
-                                            label: "연락처",
-                                            isRequired: true,
-                                            value: "010-2742-9429"
-                                        },
-                                    ]
-                                });
-                                %>
-                            </div>
-                        </div>
-                        <%- include("../../components/TextField", {
-                            _items: [
-                                {
-                                    mask: "text",
-                                    name: "rider1_RRN",
-                                    placeholder: "주민번호",
-                                    label: "주민번호",
-                                    isRequired: true,
-                                    value: "890117-1894611"
-                                },
-                            ],
-                        });
+                    <div id="Riders">
+                        <% riders.forEach(element => { 
+                            const id = element;
                         %>
-                        <div class="pb-2 mb-1">
-                            <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">KIC 라이선스 유무 (필수)</h5>
-                            <div class="row g-1 btn-group w-100">
-                                <div class="col-6">
-                                    <div class="d-grid">
-                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio6" autocomplete="off" value="Y" <%= (formdata.rider1_has_KIC === "Y") ? "checked" : "" %> required>
-                                        <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio6">
-                                            <small class="text-gray-600 fw-normal lh-base fs-6">소지 함</small>
-                                        </label>
-                                    </div>
+                        <div class="Rider mb-3 position-relative" data-id="<%= id %>">
+                            <h5 class="fs-6 mb-3 fw-600 pt-3 number">라이더 </h5>
+                            <button type="button" 
+                                class="btn mb-0 pt-3 px-0 lh-1 h6 fw-normal text-decoration-underline text-gray-600 position-absolute top-0 end-0"
+                                onclick="removeRider(this)">삭제하기</button>
+                            <div class="row g-2 my-0">
+                                <div class="col-5 m-0">
+                                    <%- include("../../components/TextField", {
+                                        _items: [
+                                            {
+                                                mask: "text",
+                                                name: `rider${id}_name`,
+                                                placeholder: "성명",
+                                                label: "성명",
+                                                isRequired: true,
+                                                value: formdata[`rider${id}_name`]
+                                            },
+                                        ],
+                                    });
+                                    %>
                                 </div>
-                                <div class="col-6">
-                                    <div class="d-grid">
-                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio7" autocomplete="off" value="N" <%= (formdata.rider1_has_KIC === "N") ? "checked" : "" %>>
-                                        <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio7">
-                                            <small class="text-gray-600 fw-normal lh-base fs-6">소지하지 않음</small>
-                                        </label>
+                                <div class="col-7 m-0">
+                                    <%- include("../../components/TextField", {
+                                        _items: [
+                                            {
+                                                mask: "tel",
+                                                name: `rider${id}_phone`,
+                                                placeholder: "연락처",
+                                                label: "연락처",
+                                                isRequired: true,
+                                                value: formdata[`rider${id}_phone`]
+                                            },
+                                        ]
+                                    });
+                                    %>
+                                </div>
+                            </div>
+                            <%- include("../../components/TextField", {
+                                _items: [
+                                    {
+                                        mask: "text",
+                                        name: `rider${id}_RRN`,
+                                        placeholder: "주민번호",
+                                        label: "주민번호",
+                                        isRequired: true,
+                                        value: formdata[`rider${id}_RRN`]
+                                    },
+                                ],
+                            });
+                            %>
+                            <div class="pb-2 mb-1">
+                                <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">KIC 라이선스 유무 (필수)</h5>
+                                <div class="row g-1 btn-group w-100">
+                                    <div class="col-6">
+                                        <div class="d-grid">
+                                            <input type="radio" class="btn-check" name="rider<%= id %>_has_KIC" id="btnradio<%= id * 10 %>" autocomplete="off" value="Y" <%= (formdata[`rider${id}_has_KIC`] === "Y") ? "checked" : "" %> required>
+                                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio<%= id * 10 %>">
+                                                <small class="text-gray-600 fw-normal lh-base fs-6">소지 함</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="d-grid">
+                                            <input type="radio" class="btn-check" name="rider<%= id %>_has_KIC" id="btnradio<%= id * 10 + 1 %>" autocomplete="off" value="N" <%= (formdata[`rider${id}_has_KIC`] === "N") ? "checked" : "" %>>
+                                            <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio<%= id * 10 + 1 %>">
+                                                <small class="text-gray-600 fw-normal lh-base fs-6">소지하지 않음</small>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="pb-2 mb-1">
+                                <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">경기이력과 순위 (선택)</h5>
+                                <textarea name="rider<%= id %>_history" class="form-control bg-transparent rounded-0 border-1 p-2 fs-6 mb-0 border-gray-200" style="height: 100px"><%= formdata[`rider${id}_history`] %></textarea>
+                            </div>
                         </div>
-                        <div class="pb-2 mb-1">
-                            <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">경기이력과 순위 (선택)</h5>
-                            <textarea name="rider1_history" class="form-control bg-transparent rounded-0 border-1 p-2 fs-6 mb-0 border-gray-200" style="height: 100px">내구레이스 다수 참여</textarea>
-                        </div>
+                        <% }); %>
                     </div>
-                    <button class="btn bg-gray-100 small rounded-5 w-100" type="button">
+                    <button id="AddItem" class="btn bg-gray-100 small rounded-5 w-100" type="button">
                         <small class="text-secondary fw-normal">라이더 추가하기</small>
                     </button>
                 </div>
@@ -325,6 +344,8 @@
         </div>
     </div><!-- /END .fixed-bottom -->
     <%- include("../../partialView/javascripts") %>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/javascripts/registration/form.js"></script>
 </body>
 
 </html>

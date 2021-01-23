@@ -10,6 +10,16 @@
 <body id="mainBody" class="position-relative">
     <%
         const formdata = JSON.parse(locals.context.formdata);
+        const keys = Object.keys(formdata);
+        let riders = [];
+        keys.forEach((element) => {
+            const rider = element.split('_')[0].includes('rider');
+            if (rider) {
+                const id = element.substring(5, 6);
+                riders.push(Number(id));
+            }
+        });
+        riders = Array.from(new Set(riders)); // deduplication
     %>
     <!-- header -->
     <header id="mainHead">
@@ -95,70 +105,42 @@
             </div>
         </div>
         <div class="row mt-5">
+            <% riders.forEach(element => { 
+                const id = element;
+            %>
             <div class="col px-4 pt-2 mt-1">
                 <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
-                    <span>라이더1 정보</span>
+                    <span>라이더<%= id %> 정보</span>
                 </p>
                 <ul class="list-group list-group-flush">
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">성명</span>
-                        <span class="fs-6 text-dark text-keep text-end">조성빈</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata[`rider${id}_name`] %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">연락처</span>
-                        <span class="fs-6 text-dark text-keep text-end">010-2742-9429</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata[`rider${id}_phone`] %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">주민번호</span>
-                        <span class="fs-6 text-dark text-keep text-end">890117-1894611</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata[`rider${id}_RRN`] %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">KIC 라이선스 유무</span>
-                        <span class="fs-6 text-dark text-keep text-end">소지</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata[`rider${id}_has_KIC`] === "Y" ? "소지 함" : "미소지" %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">경기이력과 순위</span>
-                        <span class="fs-6 text-dark text-keep text-end">내구레이스 다수 참여</span>
+                        <div class="fs-6 text-dark text-keep text-end border-0 pre-wrap"><%- formdata[`rider${id}_history`] %></div>
                     </li>
                 </ul>
             </div>
-            <div class="col px-4 pt-2 mt-1">
-                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
-                    <span>라이더1 정보</span>
-                </p>
-                <ul class="list-group list-group-flush">
-                    <li
-                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600 nowrap">성명</span>
-                        <span class="fs-6 text-dark text-keep text-end">조성빈</span>
-                    </li>
-                    <li
-                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600 nowrap">연락처</span>
-                        <span class="fs-6 text-dark text-keep text-end">010-2742-9429</span>
-                    </li>
-                    <li
-                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600 nowrap">주민번호</span>
-                        <span class="fs-6 text-dark text-keep text-end">890117-1894611</span>
-                    </li>
-                    <li
-                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600 nowrap">KIC 라이선스 유무</span>
-                        <span class="fs-6 text-dark text-keep text-end">소지</span>
-                    </li>
-                    <li
-                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600 nowrap">경기이력과 순위</span>
-                        <span class="fs-6 text-dark text-keep text-end">내구레이스 다수 참여</span>
-                    </li>
-                </ul>
-            </div>
+            <% }); %>
         </div>
         <h1 class="display-1">&nbsp;</h1>
         <h1 class="display-1">&nbsp;</h1>

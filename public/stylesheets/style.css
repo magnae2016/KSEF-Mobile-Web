@@ -108,6 +108,9 @@ input.form-control:focus {
 .nowrap {
     white-space: nowrap;
 }
+.pre-wrap {
+    white-space: pre-wrap;
+}
 
 .text-keep {
     word-break: keep-all;
@@ -608,6 +611,29 @@ input.form-control:focus {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.1);
 } /* notice/view Screen */
+
+/* registration/form Screen */
+.Rider .number::after {
+    font-weight: 600;
+    font-size: 1rem !important;
+    line-height: 1.2;
+}
+
+.Rider:nth-child(1) .number::after {
+    content: '1';
+}
+
+.Rider:nth-child(2) .number::after {
+    content: '2';
+}
+
+.Rider:nth-child(3) .number::after {
+    content: '3';
+}
+
+.Rider:nth-child(4) .number::after {
+    content: '4';
+} /* registration/form Screen */
 
 @media screen and (min-width: 414px) {
     html {

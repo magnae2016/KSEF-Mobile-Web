@@ -81,6 +81,7 @@ exports.requireUpdateRegistration = async function (req, res, next) {
     const { type_id = undefined } = req.params;
     const { id: user_id } = req.user;
     const year = process.env.YEAR;
+    let values = { ...req.body };
 
     if (!type_id) {
         return res.render('redirect', {
@@ -100,9 +101,39 @@ exports.requireUpdateRegistration = async function (req, res, next) {
         year
     );
 
-    // req.body Data correction
-    const { is_zontes = 'N' } = req.body;
-    req.body.is_zontes = is_zontes;
+    // is_zontes data correction
+    const { is_zontes = 'N' } = values;
+    values.is_zontes = is_zontes;
+    // rider*_ data correction
+    const keys = Object.keys(values);
+    let riders = [];
+    keys.forEach((element) => {
+        const rider = element.split('_')[0].includes('rider');
+        if (rider) {
+            const id = element.substring(5, 6);
+            riders.push(Number(id));
+        }
+    });
+    riders = Array.from(new Set(riders)); // deduplication
+
+    const temp = {};
+    riders.forEach((element, index) => {
+        temp[`rider${index + 1}_name`] = values[`rider${element}_name`];
+        temp[`rider${index + 1}_phone`] = values[`rider${element}_phone`];
+        temp[`rider${index + 1}_RRN`] = values[`rider${element}_RRN`];
+        temp[`rider${index + 1}_has_KIC`] = values[`rider${element}_has_KIC`];
+        if (values.hasOwnProperty(`rider${element}_history`)) {
+            temp[`rider${index + 1}_history`] =
+                values[`rider${element}_history`];
+            delete values[`rider${element}_history`];
+        }
+
+        delete values[`rider${element}_name`];
+        delete values[`rider${element}_phone`];
+        delete values[`rider${element}_RRN`];
+        delete values[`rider${element}_has_KIC`];
+    });
+    values = { ...values, ...temp };
 
     const form = await registration.getForm();
     const requiredFields = await form.getFormFields({
@@ -111,13 +142,13 @@ exports.requireUpdateRegistration = async function (req, res, next) {
     });
 
     const required = requiredFields.map((x) => x.field_name);
-    const input = Object.keys(req.body);
+    const input = Object.keys(values);
 
     let difference = required.filter((x) => !input.includes(x));
 
     // create formdata
     const is_completed = difference.length > 0 ? 0 : 1;
-    const formdata_values = JSON.stringify(req.body);
+    const formdata_values = JSON.stringify(values);
     const formdata = await registrationServices.createFormdata(user_id, {
         formdata_values,
         is_completed,
