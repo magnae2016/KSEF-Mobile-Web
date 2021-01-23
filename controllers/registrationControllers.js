@@ -70,7 +70,11 @@ exports.requireRegistrationContent = async function (req, res, next) {
     context.content_file = content_file;
     context.form_file = form_file;
 
-    res.render('registration/content', { title: '참가접수', context });
+    const originalUrl = req.originalUrl;
+    const fileFolder = originalUrl.includes('view') ? 'contents' : 'forms';
+    const fileName = originalUrl.includes('view') ? content_file : form_file;
+    const view = `registration/${fileFolder}/${fileName}`;
+    res.render(view, { title: '참가접수', context });
 };
 
 exports.requireUpdateRegistration = async function (req, res, next) {

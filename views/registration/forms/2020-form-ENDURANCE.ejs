@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../../partialView/head", { title }); %>
+    <%- include("../../partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="position-relative">
+    <%
+        const formdata = JSON.parse(locals.context.formdata);
+        const participation_class = formdata.participation_class;
+    %>
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("../../navigation/createStackNavigator", { headerTitle: title }) %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <form id="createRegistrationForm" method="POST">
+            <div class="row">
+                <!-- 참가 정보 -->
+                <div class="col px-4 pt-2 mt-1">
+                    <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                        <span class="mark position-relative">참가 정보</span></p>
+                    <!-- 참가 기종 -->
+                    <%- include("../../components/TextField", {
+                        _items: [
+                            {
+                                mask: "text",
+                                name: "model_name",
+                                placeholder: "참가기종",
+                                label: "참가기종(모델명)",
+                                isRequired: true,
+                                value: formdata.model_name && formdata.model_name
+                            },
+                        ],
+                    });
+                    %><!-- /END 참가 기종 -->
+                    <!-- 클래스 선택 -->
+                    <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary mt-4">클래스를 선택해주세요</small>
+                    <h5 class="fs-6 mb-3 fw-600">클래스 선택 (필수)</h5>
+                    <div class="row g-1 btn-group">
+                        <div class="col-6">
+                            <div class="d-grid">
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio1" autocomplete="off" value="FIRST" <%= (participation_class === "FIRST") ? "checked" : "" %> required/>
+                                <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                    for="btnradio1">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6">FIRST</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-grid">
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio2" autocomplete="off" value="ADVANCED" <%= (participation_class === "ADVANCED") ? "checked" : "" %> />
+                                <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                    for="btnradio2">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6">ADVANCED</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-grid">
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio3" autocomplete="off" value="PRO" <%= (participation_class === "PRO") ? "checked" : "" %> />
+                                <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                    for="btnradio3">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6">PRO</small>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="d-grid">
+                                <input type="radio" class="btn-check" name="participation_class" id="btnradio4" autocomplete="off" value="NEWTRO" <%= (participation_class === "NEWTRO") ? "checked" : "" %> />
+                                <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                    for="btnradio4">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6">NEWTRO</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div><!-- /END 클래스 선택 -->
+                    <!-- 존테스 체크 -->
+                    <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary mt-4">ZONTES</small>
+                    <h5 class="fs-6 mb-0 fw-600">존테스 바이크로 내구에 참가하시나요? (선택)</h5>
+                    <p class="fs-7 pt-2 pb-1 mb-3 text-secondary text-keep">
+                        존테스 바이크로 내구에 참가 시, 중복 시상이 가능<br /> 존테스 모터사이클(ZONTES 310X 레이스베이스) 2021년 신규 구매 시 KSEF 참가비/연습비/트랙데이 100% 지원(160만원 상당)
+                    </p>
+                    <div class="row g-1 btn-group d-flex">
+                        <div class="col-12">
+                            <div class="d-grid">
+                                <input type="checkbox" class="btn-check" name="is_zontes" id="btnradio5" value="Y" <%= (formdata.is_zontes === "Y") ? "checked" : "" %> />
+                                <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                    for="btnradio5">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6">네, 존테스 바이크로 참가합니다.</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div><!-- /END 존테스 체크 -->
+                </div><!-- /END 참가 정보 -->
+            </div>
+            <div class="row">
+                <!-- 팀 정보 -->
+                <div class="col px-4 pt-2 mt-1">
+                    <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                        <span class="mark position-relative">팀 정보</span></p>
+                    <%- include("../../components/TextField", {
+                        _items: [
+                            {
+                                mask: "text",
+                                name: "team_name",
+                                placeholder: "소속팀명",
+                                label: "소속팀명",
+                                isRequired: true,
+                                value: formdata.team_name && formdata.team_name
+                            },
+                        ],
+                    });
+                    %>
+                    <div class="row g-2 my-0">
+                        <div class="col-5 m-0">
+                            <%- include("../../components/TextField", {
+                                _items: [
+                                    {
+                                        mask: "text",
+                                        name: "team_leader_name",
+                                        placeholder: "팀 대표 성명",
+                                        label: "팀 대표 성명",
+                                        isRequired: true,
+                                        value: formdata.team_leader_name && formdata.team_leader_name
+                                    },
+                                ],
+                            });
+                            %>
+                        </div>
+                        <div class="col-7 m-0">
+                            <%- include("../../components/TextField", {
+                                _items: [
+                                    {
+                                        mask: "tel",
+                                        name: "team_leader_contact",
+                                        placeholder: "팀 대표 연락처",
+                                        label: "팀 대표 연락처",
+                                        isRequired: true,
+                                        value: formdata.team_leader_contact && formdata.team_leader_contact
+                                    },
+                                ],
+                            });
+                            %>
+                        </div>
+                    </div>
+                    <%- include("../../components/TextField", {
+                        _items: [
+                            {
+                                mask: "text",
+                                name: "delivery_address",
+                                placeholder: "택배수령 주소",
+                                label: "택배수령 주소",
+                                isRequired: true,
+                                value: formdata.delivery_address && formdata.delivery_address
+                            },
+                        ],
+                    });
+                    %>
+                </div><!-- /END 팀 정보 -->
+            </div>
+            <div class="row">
+                <!-- 환불 정보 입력 -->
+                <div class="col px-4 pt-2 mt-1">
+                    <p class="fw-bold fs-6 mb-0 py-2 lh-sm ls-medium">
+                        <span class="mark position-relative">환불정보 입력</span></p>
+                    <p class="fs-7 pt-2 pb-1 mb-2 text-secondary text-keep">
+                        엔트리 초과시에만 환불되며, 참가접수 이후 환불/양도 불가능합니다.
+                    </p>
+                    <div class="row g-2 my-0">
+                        <div class="col m-0">
+                            <%- include("../../components/TextField", {
+                                _items: [
+                                    {
+                                        mask: "text",
+                                        name: "refund_bank",
+                                        placeholder: "은행명",
+                                        label: "은행명",
+                                        isRequired: true,
+                                        value: formdata.refund_bank && formdata.refund_bank
+                                    },
+                                ],
+                            });
+                            %>
+                        </div>
+                        <div class="col m-0">
+                            <%- include("../../components/TextField", {
+                                _items: [
+                                    {
+                                        mask: "text",
+                                        name: "refund_holder",
+                                        placeholder: "예금주",
+                                        label: "예금주",
+                                        isRequired: true,
+                                        value: formdata.refund_holder && formdata.refund_holder
+                                    },
+                                ]
+                            });
+                            %>
+                        </div>
+                    </div>
+                    <%- include("../../components/TextField", {
+                        _items: [
+                            {
+                                mask: "text",
+                                name: "refund_account",
+                                placeholder: "계좌번호",
+                                label: "계좌번호",
+                                isRequired: true,
+                                value: formdata.refund_account && formdata.refund_account
+                            },
+                        ],
+                    });
+                    %>
+                </div><!-- /END 환불 정보 입력 -->
+            </div>
+            <div class="row">
+                <!-- 라이더 정보 입력 -->
+                <div class="col px-4 pt-2 mt-1">
+                    <p class="fw-bold fs-6 mb-0 py-2 lh-sm ls-medium">
+                        <span class="mark position-relative">라이더 정보</span></p>
+                    <p class="fs-7 pt-2 pb-1 mb-3 text-secondary text-keep">
+                        아래의 버튼을 클릭하여, 라이더를 추가해주세요.
+                    </p>
+                    <div class="mb-3">
+                        <h5 class="fs-6 mb-3 fw-600 pt-3">라이더 1</h5>
+                        <div class="row g-2 my-0">
+                            <div class="col-5 m-0">
+                                <%- include("../../components/TextField", {
+                                    _items: [
+                                        {
+                                            mask: "text",
+                                            name: "rider1_name",
+                                            placeholder: "성명",
+                                            label: "성명",
+                                            isRequired: true,
+                                            value: "조성빈"
+                                        },
+                                    ],
+                                });
+                                %>
+                            </div>
+                            <div class="col-7 m-0">
+                                <%- include("../../components/TextField", {
+                                    _items: [
+                                        {
+                                            mask: "tel",
+                                            name: "rider1_phone",
+                                            placeholder: "연락처",
+                                            label: "연락처",
+                                            isRequired: true,
+                                            value: "010-2742-9429"
+                                        },
+                                    ]
+                                });
+                                %>
+                            </div>
+                        </div>
+                        <%- include("../../components/TextField", {
+                            _items: [
+                                {
+                                    mask: "text",
+                                    name: "rider1_RRN",
+                                    placeholder: "주민번호",
+                                    label: "주민번호",
+                                    isRequired: true,
+                                    value: "890117-1894611"
+                                },
+                            ],
+                        });
+                        %>
+                        <div class="pb-2 mb-1">
+                            <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">KIC 라이선스 유무 (필수)</h5>
+                            <div class="row g-1 btn-group w-100">
+                                <div class="col-6">
+                                    <div class="d-grid">
+                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio6" autocomplete="off" value="Y" <%= (formdata.rider1_has_KIC === "Y") ? "checked" : "" %> required>
+                                        <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio6">
+                                            <small class="text-gray-600 fw-normal lh-base fs-6">소지 함</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-grid">
+                                        <input type="radio" class="btn-check" name="rider1_has_KIC" id="btnradio7" autocomplete="off" value="N" <%= (formdata.rider1_has_KIC === "N") ? "checked" : "" %>>
+                                        <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100" for="btnradio7">
+                                            <small class="text-gray-600 fw-normal lh-base fs-6">소지하지 않음</small>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pb-2 mb-1">
+                            <h5 class="fs-6 pt-2 mt-1 mb-3 fw-600 text-gray-300">경기이력과 순위 (선택)</h5>
+                            <textarea name="rider1_history" class="form-control bg-transparent rounded-0 border-1 p-2 fs-6 mb-0 border-gray-200" style="height: 100px">내구레이스 다수 참여</textarea>
+                        </div>
+                    </div>
+                    <button class="btn bg-gray-100 small rounded-5 w-100" type="button">
+                        <small class="text-secondary fw-normal">라이더 추가하기</small>
+                    </button>
+                </div>
+                <!-- /END 라이더 정보 입력 -->
+            </div>
+        </form>
+        <h1 class="display-1">&nbsp;</h1>
+        <h1 class="display-1">&nbsp;</h1>
+    </main>
+    <!-- .fixed-bottom -->
+    <div class="position-fixed fixed-bottom" style="
+                    background-image: linear-gradient(
+                        0deg,
+                        rgba(255, 255, 255, 1) 0%,
+                        rgba(255, 255, 255, 1) 80%,
+                        rgba(255, 255, 255, 0) 100%
+                    );
+                ">
+        <div class="d-grid p-3">
+            <button type="submit" form="createRegistrationForm" class="btn btn-dark py-2 border-0 rounded-5">
+                <span class="d-flex py-2 justify-content-center fw-600">등록</span>
+            </button>
+        </div>
+    </div><!-- /END .fixed-bottom -->
+    <%- include("../../partialView/javascripts") %>
+</body>
+
+</html>
