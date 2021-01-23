@@ -19,6 +19,7 @@ exports.requireRegistrationContent = async function (req, res, next) {
     const { id: user_id } = req.user;
     const year = process.env.YEAR;
     const context = {
+        type_id: type_id,
         formdata: undefined,
         content_file: undefined,
         form_file: undefined,
