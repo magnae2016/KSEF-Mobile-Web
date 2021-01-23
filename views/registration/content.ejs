@@ -8,6 +8,9 @@
 </head>
 
 <body id="mainBody" class="position-relative">
+    <%
+        const formdata = JSON.parse(locals.context.formdata);
+    %>
     <!-- header -->
     <header id="mainHead">
         <%- include("../navigation/createStackNavigator", { headerTitle: title }) %>
@@ -23,16 +26,16 @@
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600">참가 기종</span>
-                        <span class="fs-6 text-dark text-keep text-end">야하마 YZF-R25</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.model_name && formdata.model_name %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600">클래스</span>
-                        <span class="fs-6 text-dark text-keep text-end">ADVANCED</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- formdata.participation_class || "<span class=\"text-gray-600\">선택하지 않음</span>" %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600">존테스 바이크 참가 여부</span>
+                        <span class="lh-xlarge text-gray-600"><%= formdata.is_zontes && formdata.is_zontes %></span>
                         <span class="fs-6 text-dark text-keep text-end">Y</span>
                     </li>
                 </ul>
@@ -47,22 +50,22 @@
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">소속팀명</span>
-                        <span class="fs-6 text-dark text-keep text-end">리페어바이크 A</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.team_name && formdata.team_name %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">팀 대표 성명</span>
-                        <span class="fs-6 text-dark text-keep text-end">조성빈</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.team_leader_name && formdata.team_leader_name %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">팀 대표 연락처</span>
-                        <span class="fs-6 text-dark text-keep text-end">010-2742-9429</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.team_leader_contact && formdata.team_leader_contact %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">택배수령 주소</span>
-                        <span class="fs-6 text-dark text-keep text-end">경남창원시 성산구 외동반림로 20 반지하</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.delivery_address && formdata.delivery_address %></span>
                     </li>
                 </ul>
             </div>
@@ -76,17 +79,17 @@
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">은행명</span>
-                        <span class="fs-6 text-dark text-keep text-end">경남은행</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.refund_bank && formdata.refund_bank %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">예금주</span>
-                        <span class="fs-6 text-dark text-keep text-end">조성빈</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.refund_holder && formdata.refund_holder %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">계좌번호</span>
-                        <span class="fs-6 text-dark text-keep text-end">571-22-0240757</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%= formdata.refund_account && formdata.refund_account %></span>
                     </li>
                 </ul>
             </div>
@@ -94,7 +97,39 @@
         <div class="row mt-5">
             <div class="col px-4 pt-2 mt-1">
                 <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
-                    <span>라이더 정보</span>
+                    <span>라이더1 정보</span>
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">성명</span>
+                        <span class="fs-6 text-dark text-keep text-end">조성빈</span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">연락처</span>
+                        <span class="fs-6 text-dark text-keep text-end">010-2742-9429</span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">주민번호</span>
+                        <span class="fs-6 text-dark text-keep text-end">890117-1894611</span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">KIC 라이선스 유무</span>
+                        <span class="fs-6 text-dark text-keep text-end">소지</span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">경기이력과 순위</span>
+                        <span class="fs-6 text-dark text-keep text-end">내구레이스 다수 참여</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col px-4 pt-2 mt-1">
+                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                    <span>라이더1 정보</span>
                 </p>
                 <ul class="list-group list-group-flush">
                     <li

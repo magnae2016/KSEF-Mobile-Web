@@ -9,7 +9,7 @@ router.get('/', registrationControllers.requireRegistrationList);
 
 // @RequestMapping(value="/registration/view/:type_id", method=RequestMethod.GET)
 router.get(
-    '/view/:type_id',
+    '/view/:type_id?',
     registrationControllers.requireRegistrationContent
 );
 

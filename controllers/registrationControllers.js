@@ -15,14 +15,67 @@ exports.requireRegistrationList = async function (req, res, next) {
 };
 
 exports.requireRegistrationContent = async function (req, res, next) {
-    res.render('registration/content', { title: '참가접수' });
+    const { type_id = undefined } = req.params;
+    const { id: user_id } = req.user;
+    const year = process.env.YEAR;
+    const context = {
+        formdata: undefined,
+        content_file: undefined,
+        form_file: undefined,
+    };
+
+    if (!type_id) {
+        return res.render('redirect', {
+            message: '올바르지 않은 URL 입니다.',
+        });
+    }
+
+    // query team
+    const team = await registrationServices.findparticipatingTeam(
+        user_id,
+        year
+    );
+
+    const registrations = await team.getRegistrations({
+        where: {
+            type_id,
+            regist_year: year,
+        },
+        through: {
+            attributes: ['formdata_id'],
+            where: {
+                is_deleted: 0,
+            },
+        },
+    });
+
+    if (!registrations.length) {
+        return res.render('redirect', {
+            message: '해당 접수 일정이 없습니다.',
+        });
+    }
+
+    const registration = registrations.pop();
+    const { TeamRegistration } = registration;
+    const formdata = await TeamRegistration.getFormdatum({
+        raw: true,
+    });
+    const form = await registration.getForm({
+        raw: true,
+    });
+
+    const { content_file, form_file } = form;
+    context.formdata = formdata.formdata_values;
+    context.content_file = content_file;
+    context.form_file = form_file;
+
+    res.render('registration/content', { title: '참가접수', context });
 };
 
 exports.requireUpdateRegistration = async function (req, res, next) {
     const { type_id = undefined } = req.params;
     const { id: user_id } = req.user;
     const year = process.env.YEAR;
-    const {} = req.body;
 
     if (!type_id) {
         return res.render('redirect', {
