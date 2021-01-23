@@ -5,9 +5,7 @@ const registrationControllers = require('../controllers/registrationControllers'
 const { checkLoggedIn } = require('../lib');
 
 // @RequestMapping(value="/registration/", method=RequestMethod.GET)
-router.get('/', function (req, res, next) {
-    res.render('registration/index', { title: '참가접수' });
-});
+router.get('/', registrationControllers.requireRegistrationList);
 
 // @RequestMapping(value="/registration/view", method=RequestMethod.GET)
 router.get('/view', function (req, res, next) {
