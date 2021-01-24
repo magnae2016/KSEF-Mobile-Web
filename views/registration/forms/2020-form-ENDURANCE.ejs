@@ -9,7 +9,7 @@
 
 <body id="mainBody" class="position-relative">
     <%
-        const formdata = JSON.parse(locals.context.formdata);
+        const formdata = locals.context.formdata || {};
         const participation_class = formdata.participation_class;
         const keys = Object.keys(formdata);
         let riders = [];

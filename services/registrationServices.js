@@ -56,6 +56,21 @@ exports.findRegistration = async function (type_id, regist_year) {
     }
 };
 
+exports.findTeamRegistration = async function (regist_id, team_id) {
+    try {
+        const teamRegistration = await TeamRegistration.findOne({
+            where: {
+                regist_id,
+                team_id,
+            },
+        });
+
+        return teamRegistration;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 exports.upsertTeamRegistration = async function (
     regist_id,
     team_id,

@@ -37,36 +37,30 @@ exports.requireRegistrationContent = async function (req, res, next) {
         year
     );
 
-    const registrations = await team.getRegistrations({
-        where: {
-            type_id,
-            regist_year: year,
-        },
-        through: {
-            attributes: ['formdata_id'],
-            where: {
-                is_deleted: 0,
-            },
-        },
-    });
+    const registration = await registrationServices.findRegistration(
+        type_id,
+        year
+    );
 
-    if (!registrations.length) {
-        return res.render('redirect', {
-            message: '해당 접수 일정이 없습니다.',
+    const { regist_id } = registration;
+    const { team_id } = team;
+    const TeamRegistration = await registrationServices.findTeamRegistration(
+        regist_id,
+        team_id
+    );
+
+    let formdata = undefined;
+    if (TeamRegistration) {
+        formdata = await TeamRegistration.getFormdatum({
+            raw: true,
         });
     }
-
-    const registration = registrations.pop();
-    const { TeamRegistration } = registration;
-    const formdata = await TeamRegistration.getFormdatum({
-        raw: true,
-    });
     const form = await registration.getForm({
         raw: true,
     });
 
     const { content_file, form_file } = form;
-    context.formdata = formdata.formdata_values;
+    context.formdata = formdata && JSON.parse(formdata.formdata_values);
     context.content_file = content_file;
     context.form_file = form_file;
 
