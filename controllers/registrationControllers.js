@@ -158,5 +158,5 @@ exports.requireUpdateRegistration = async function (req, res, next) {
         formdata_id
     );
 
-    res.redirect(`/registration/view/${type_id}`);
+    res.redirect(`/registration`);
 };
