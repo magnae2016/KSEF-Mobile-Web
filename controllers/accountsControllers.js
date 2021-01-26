@@ -277,3 +277,19 @@ exports.requireLogout = function (req, res, next) {
     res.clearCookie('access_token');
     res.redirect('login');
 };
+
+exports.requireTeamList = async function (req, res, next) {
+    try {
+        const context = {
+            teams: undefined,
+        };
+
+        const teams = await accountsServices.findTeams();
+        context.teams = teams;
+
+        res.render('accounts/register_team', { title: '팀 등록', context });
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+};

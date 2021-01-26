@@ -510,12 +510,23 @@ input.form-control:focus {
     background-size: 300px 460px;
 }
 
+.label-number.medium {
+    width: 14px;
+    height: 20px;
+    background-image: url(/images/static/170628.png);
+    background-size: 187px 288px;
+}
+
 .num0 {
     background-position: -195px 0px;
 }
 
 .small.num0 {
     background-position: -240px -1px;
+}
+
+.medium.num0 {
+    background-position: -163px 0px;
 }
 
 .num1 {
@@ -526,12 +537,20 @@ input.form-control:focus {
     background-position: -240px -20px;
 }
 
+.medium.num1 {
+    background-position: -163px -25px;
+}
+
 .num2 {
     background-position: -195px -60px;
 }
 
 .small.num2 {
     background-position: -240px -39px;
+}
+
+.medium.num2 {
+    background-position: -163px -50px;
 }
 
 .num3 {
@@ -542,12 +561,20 @@ input.form-control:focus {
     background-position: -240px -58px;
 }
 
+.medium.num3 {
+    background-position: -163px -75px;
+}
+
 .num4 {
     background-position: -195px -120px;
 }
 
 .small.num4 {
     background-position: -240px -77px;
+}
+
+.medium.num4 {
+    background-position: -163px -100px;
 }
 
 .num5 {
@@ -558,12 +585,20 @@ input.form-control:focus {
     background-position: -240px -96px;
 }
 
+.medium.num5 {
+    background-position: -163px -125px;
+}
+
 .num6 {
     background-position: -195px -180px;
 }
 
 .small.num6 {
     background-position: -240px -115px;
+}
+
+.medium.num6 {
+    background-position: -163px -150px;
 }
 
 .num7 {
@@ -574,6 +609,10 @@ input.form-control:focus {
     background-position: -240px -134px;
 }
 
+.medium.num7 {
+    background-position: -163px -175px;
+}
+
 .num8 {
     background-position: -195px -240px;
 }
@@ -582,12 +621,20 @@ input.form-control:focus {
     background-position: -240px -153px;
 }
 
+.medium.num8 {
+    background-position: -163px -200px;
+}
+
 .num9 {
     background-position: -195px -270px;
 }
 
 .small.num9 {
     background-position: -240px -172px;
+}
+
+.medium.num9 {
+    background-position: -163px -225px;
 }
 
 .small.dash {

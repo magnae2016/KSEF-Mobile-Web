@@ -1,4 +1,5 @@
-const { Users } = require('../models');
+const { Users, Teams } = require('../models');
+require('dotenv').config();
 
 exports.findUserByEmail = async function (user_email) {
     let user = {};
@@ -18,6 +19,21 @@ exports.findUserByEmail = async function (user_email) {
 exports.createUser = async function (user) {
     try {
         await Users.create(user, { isNewRecord: true });
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findTeams = async function () {
+    let teams = {};
+    try {
+        const teams = await Teams.findAll({
+            where: {
+                team_year: process.env.YEAR,
+                is_deleted: 0,
+            },
+        });
+        return teams;
     } catch (error) {
         throw new Error(error);
     }

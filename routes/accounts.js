@@ -42,4 +42,7 @@ router.post('/find_password', function (req, res, next) {
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)
 router.get('/logout', accountsControllers.requireLogout);
 
+// @RequestMapping(value="/accounts/register_team", method=RequestMethod.GET)
+router.get('/register_team', accountsControllers.requireTeamList);
+
 module.exports = router;

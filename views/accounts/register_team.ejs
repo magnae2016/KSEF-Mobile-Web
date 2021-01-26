@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../partialView/head", { title }); %>
+    <%- include("../partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="main">
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("../navigation/createStackNavigator", { headerTitle: title }) %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <form id="createRegisterTeam" method="POST">
+            <div class="row">
+                <div class="col px-4 pt-2 mt-1">
+                    <div id="users">
+                        <%- include("../components/TextField", {
+                            _items: [
+                                {
+                                    mask: "text",
+                                    name: "team_name",
+                                    placeholder: "엔트리 번호, 팀명으로 검색",
+                                    label: "엔트리 번호, 팀명으로 검색",
+                                    isRequired: false,
+                                    style: "search",
+                                },
+                            ],
+                        }); %>
+                        <!-- 팀 목록 -->
+                        <ul class="list row ps-0 g-1 btn-group d-block list-unstyled">
+                            <%
+                                context.teams.forEach((element, index) => { 
+                                    const team_entry = String(element.team_entry).padStart(2, '0');
+                            %>
+                            <li class="col-12">
+                                <div class="d-flex flex-row">
+                                    <div class="d-flex py-2 pe-3 born">
+                                        <% [...team_entry].forEach(c => { %>
+                                        <span class="label-number medium num<%= c %> my-auto"><%= team_entry %></span>
+                                        <%  }); %>
+                                    </div>
+                                    <input type="radio" class="btn-check" name="participation_class" id="btnradio<%= index %>" autocomplete="off" value="<%= element.team_id %>" required/>
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100 text-start flex-fill"
+                                        for="btnradio<%= index %>">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6 name"><%= element.team_name %></small>
+                                    </label>
+                                </div>
+                            </li>
+                            <% }); %>
+                        </ul><!-- 팀 목록 -->
+                        <h1 class="display-1">&nbsp;</h1>
+                        <small class="d-flex fs-7 fw-600 lh-1 mb-2 text-secondary">팀에서의 본인 역할을 선택해주세요</small>
+                        <h5 class="fs-6 mb-3 fw-bold">역할 선택</h5>
+                        <div class="row g-1 btn-group">
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="1" id="btnradio501" autocomplete="off" required />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio501">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀감독</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="2" id="btnradio502" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio502">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀대표</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="3" id="btnradio503" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio503">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀미캐닉</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="4" id="btnradio504" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio504">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀매니저</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="5" id="btnradio505" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio505">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀라이더</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="6" id="btnradio506" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio506">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">팀서포터</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="7" id="btnradio507" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio507">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">미디어</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="8" id="btnradio508" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio508">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">파트너</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="d-grid">
+                                    <input type="radio" class="btn-check" name="btnradio" value="9" id="btnradio509" autocomplete="off" />
+                                    <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
+                                        for="btnradio509">
+                                        <small class="text-gray-600 fw-normal lh-base fs-6">스폰서</small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="display-1">&nbsp;</h1>
+                        <h1 class="display-1">&nbsp;</h1>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </main><!-- main -->
+    <!-- .fixed-bottom -->
+    <div class="position-fixed fixed-bottom" style="
+                    background-image: linear-gradient(
+                        0deg,
+                        rgba(255, 255, 255, 1) 0%,
+                        rgba(255, 255, 255, 1) 80%,
+                        rgba(255, 255, 255, 0) 100%
+                    );
+                ">
+        <div class="d-grid p-3">
+            <button type="submit" form="createRegisterTeam" class="btn btn-dark py-2 border-0 rounded-5">
+                <span class="d-flex py-2 justify-content-center fw-600">등록</span>
+            </button>
+        </div>
+    </div><!-- /END .fixed-bottom -->
+    <%- include("../partialView/javascripts") %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'born']
+        };
+
+        var userList = new List('users', options);
+    </script>
+</body>
+
+</html>
