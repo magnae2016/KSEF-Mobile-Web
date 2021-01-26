@@ -43,7 +43,7 @@
                                         <span class="label-number medium num<%= c %> my-auto"><%= team_entry %></span>
                                         <%  }); %>
                                     </div>
-                                    <input type="radio" class="btn-check" name="participation_class" id="btnradio<%= index %>" autocomplete="off" value="<%= element.team_id %>" required/>
+                                    <input type="radio" class="btn-check" name="team_id" id="btnradio<%= index %>" autocomplete="off" value="<%= element.team_id %>" <%= index === 0 ? "required" : "" %> />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100 text-start flex-fill"
                                         for="btnradio<%= index %>">
                                         <small class="text-gray-600 fw-normal lh-base fs-6 name"><%= element.team_name %></small>
@@ -58,7 +58,7 @@
                         <div class="row g-1 btn-group">
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="1" id="btnradio501" autocomplete="off" required />
+                                    <input type="radio" class="btn-check" name="role_id" value="1" id="btnradio501" autocomplete="off" required />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio501">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀감독</small>
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="2" id="btnradio502" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="2" id="btnradio502" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio502">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀대표</small>
@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="3" id="btnradio503" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="3" id="btnradio503" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio503">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀미캐닉</small>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="4" id="btnradio504" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="4" id="btnradio504" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio504">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀매니저</small>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="5" id="btnradio505" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="5" id="btnradio505" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio505">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀라이더</small>
@@ -103,7 +103,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="6" id="btnradio506" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="6" id="btnradio506" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio506">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">팀서포터</small>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="7" id="btnradio507" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="7" id="btnradio507" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio507">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">미디어</small>
@@ -121,7 +121,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="8" id="btnradio508" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="8" id="btnradio508" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio508">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">파트너</small>
@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-4">
                                 <div class="d-grid">
-                                    <input type="radio" class="btn-check" name="btnradio" value="9" id="btnradio509" autocomplete="off" />
+                                    <input type="radio" class="btn-check" name="role_id" value="9" id="btnradio509" autocomplete="off" />
                                     <label class="btn btn-outline-dark btn-lg rounded-0 position-relative border-gray-100"
                                         for="btnradio509">
                                         <small class="text-gray-600 fw-normal lh-base fs-6">스폰서</small>

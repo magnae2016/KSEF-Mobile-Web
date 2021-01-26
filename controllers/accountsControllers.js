@@ -293,3 +293,29 @@ exports.requireTeamList = async function (req, res, next) {
         res.sendStatus(500);
     }
 };
+
+exports.requireRegisterTeam = async function (req, res, next) {
+    try {
+        const { team_id, role_id } = req.body;
+        const { id: user_id, alias: participant_alias } = req.user;
+
+        const participant = await accountsServices.upsertParticipant({
+            user_id,
+            team_id,
+            participant_alias,
+            role_id,
+        });
+
+        if (participant) {
+            res.redirect('/');
+        } else {
+            return res.render('redirect', {
+                message:
+                    '일시적으로 에러가 발생하였습니다. 잠시 후에 다시 시도하세요.',
+            });
+        }
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+};

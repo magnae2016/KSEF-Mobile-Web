@@ -45,4 +45,7 @@ router.get('/logout', accountsControllers.requireLogout);
 // @RequestMapping(value="/accounts/register_team", method=RequestMethod.GET)
 router.get('/register_team', accountsControllers.requireTeamList);
 
+// @RequestMapping(value="/accounts/register_team", method=RequestMethod.POST)
+router.post('/register_team', accountsControllers.requireRegisterTeam);
+
 module.exports = router;
