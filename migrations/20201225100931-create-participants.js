@@ -13,6 +13,10 @@ module.exports = {
                 defaultValue: Sequelize.UUIDV4,
                 allowNull: false,
             },
+            participation_year: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
             user_id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -24,7 +28,6 @@ module.exports = {
             },
             team_id: {
                 type: Sequelize.INTEGER,
-                primaryKey: true,
                 allowNull: false,
                 references: {
                     model: 'TEAMS',

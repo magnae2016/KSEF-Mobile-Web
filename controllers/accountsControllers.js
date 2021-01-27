@@ -1,6 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
+require('dotenv').config();
 
 const accountsServices = require('../services/accountsServices');
 const { setPassword, generateToken } = require('../modules/util');
@@ -298,22 +299,17 @@ exports.requireRegisterTeam = async function (req, res, next) {
     try {
         const { team_id, role_id } = req.body;
         const { id: user_id, alias: participant_alias } = req.user;
+        const participation_year = process.env.YEAR;
 
         const participant = await accountsServices.upsertParticipant({
+            participation_year,
             user_id,
             team_id,
             participant_alias,
             role_id,
         });
 
-        if (participant) {
-            res.redirect('/');
-        } else {
-            return res.render('redirect', {
-                message:
-                    '일시적으로 에러가 발생하였습니다. 잠시 후에 다시 시도하세요.',
-            });
-        }
+        res.redirect('/');
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
         res.sendStatus(500);

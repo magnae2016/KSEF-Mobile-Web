@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 allowNull: false,
             },
+            participation_year: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
             user_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -25,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
             },
             team_id: {
                 type: DataTypes.INTEGER,
-                primaryKey: true,
                 allowNull: false,
                 references: {
                     model: 'TEAMS',
