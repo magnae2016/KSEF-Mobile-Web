@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: DataTypes.UUIDV4,
                 allowNull: false,
             },
+            cal_year: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
             cal_seq: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
