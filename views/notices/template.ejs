@@ -56,6 +56,23 @@
                 </div>
             </main><!-- /END main -->
         </div>
+        <% if (context.template.has_shortcut) { %>
+        <!-- .fixed-bottom -->
+        <div class="position-fixed fixed-bottom" style="
+                        background-image: linear-gradient(
+                            0deg,
+                            rgba(255, 255, 255, 1) 0%,
+                            rgba(255, 255, 255, 1) 80%,
+                            rgba(255, 255, 255, 0) 100%
+                        );
+                    ">
+            <div class="d-grid p-3">
+                <button class="btn btn-dark py-2 border-0 rounded-5" onclick="location.href=`<%= context.template.shortcut_link %>`">
+                    <span class="d-flex py-2 justify-content-center fw-600"><%= context.template.shortcut_title %></span>
+                </button>
+            </div>
+        </div><!-- /END .fixed-bottom -->
+        <% } %>
         <%- include("../partialView/javascripts") %>
         <script>
             // img margin adjustment
