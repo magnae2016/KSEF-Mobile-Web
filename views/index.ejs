@@ -57,8 +57,8 @@
                                 <%= element.notice_created_at %></small>
                             <h1 class="display-1">&nbsp;</h1>
                             <% if (element.template_brand_thumbnail) { %>
-                            <img src="/images/static/<%= element.template_brand_thumbnail %>" width="100"
-                                class="position-absolute bottom-0 end-0" />
+                            <span role="image" aria-label="<%= element.template_brand_thumbnail %>" class="display-lg position-absolute bottom-0 end-0"
+                                style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', NotoColorEmoji, 'Noto Color Emoji', 'Segoe UI Symbol', 'Android Emoji', EmojiSymbols; line-height: 1em;"><%= element.template_brand_thumbnail %></span>
                             <% } %>
                         </div>
                     </div>

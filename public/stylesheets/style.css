@@ -31,6 +31,10 @@ input.form-control:focus {
     font-size: 1.25rem !important;
 }
 
+.display-lg {
+    font-size: 4rem;
+}
+
 .mark {
     background: linear-gradient(
         180deg,
