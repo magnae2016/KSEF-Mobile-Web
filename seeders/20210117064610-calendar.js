@@ -42,7 +42,7 @@ module.exports = {
                 {
                     cal_uuid: v4(),
                     cal_year: process.env.YEAR,
-                    cal_seq: 4,
+                    cal_seq: 5,
                     cal_name: '경기',
                     cal_date: '8월 8일 일요일',
                     prog_id: 1,

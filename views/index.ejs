@@ -81,57 +81,36 @@
                         <input type="checkbox" class="btn-check btn-link" id="btncheck1" autocomplete="off" />
                         <label class="btn mt-3 lh-1 h6 py-3 fw-normal text-decoration-underline text-secondary"
                             for="btncheck1"></label>
+                        <%
+                            const show = context.calendar.slice(1);
+                            const hide = context.calendar.slice(0, 1);
+                        %>
                         <div class="list-group flex-column-reverse rounded-0" style="display: none">
-                            <div
-                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                            <% hide.forEach((element) => { %>
+                            <div class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge bg-gray-200 text-dark">
+                                    <small class="lh-1 py-1"><%= element.prog_name %></small>
+                                </span>
                                 <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600">경기</h6>
-                                    <small class="lh-1 float-start text-secondary">8월 8일 일요일</small>
+                                    <h6 class="mb-2 lh-1 fw-600"><%= element.cal_name %></h6>
+                                    <small class="lh-1 float-start text-secondary">
+                                        <%= element.cal_date %>
+                                    </small>
                                 </div>
                             </div>
+                            <% }); %>
                         </div>
                         <div class="list-group flex-column-reverse rounded-0">
+                            <% show.forEach((element) => { %>
                             <div
                                 class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
+                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1"><%= element.prog_name %></small></span>
                                 <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600">
-                                        연습 경기
-                                    </h6>
-                                    <small class="lh-1 float-start text-secondary">8월 7일 토요일</small>
+                                    <h6 class="mb-2 lh-1 fw-600"><%= element.cal_name %></h6>
+                                    <small class="lh-1 float-start text-secondary"><%= element.cal_date %></small>
                                 </div>
                             </div>
-                            <div
-                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
-                                <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600">
-                                        내구페스티발 3차 접수
-                                    </h6>
-                                    <small class="lh-1 float-start text-secondary">3월 26일 금요일 오전 11시</small>
-                                </div>
-                            </div>
-                            <div
-                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
-                                <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600">
-                                        내구페스티발 2차 접수
-                                    </h6>
-                                    <small class="lh-1 float-start text-secondary">2월 26일 금요일 오전 11시</small>
-                                </div>
-                            </div>
-                            <div
-                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge bg-gray-200 text-dark"><small class="lh-1 py-1">예정</small></span>
-                                <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600">
-                                        내구페스티발 1차 접수
-                                    </h6>
-                                    <small class="lh-1 float-start text-secondary">1월 29일 금요일 오전 11시</small>
-                                </div>
-                            </div>
+                            <% }); %>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,14 @@
 'use strict';
 
-const { Users, Notices, Templates, Alerts, Sequelize } = require('../models');
+const {
+    Users,
+    Notices,
+    Templates,
+    Alerts,
+    Calendar,
+    Progress,
+    Sequelize,
+} = require('../models');
 require('dotenv').config();
 
 exports.findParticipatingTeam = async function (user_id) {
@@ -65,6 +73,30 @@ exports.findLatestAlert = async function () {
         });
 
         return alert;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findCalendar = async function () {
+    try {
+        const calendar = await Calendar.findAll({
+            raw: true,
+            attributes: {
+                include: [[Sequelize.col('Progress.prog_name'), 'prog_name']],
+            },
+            where: {
+                cal_year: process.env.YEAR,
+            },
+            includeIgnoreAttributes: false,
+            include: {
+                model: Progress,
+                attributes: ['prog_name'],
+            },
+            order: [['cal_seq', 'DESC']],
+        });
+
+        return calendar;
     } catch (error) {
         throw new Error(error);
     }
