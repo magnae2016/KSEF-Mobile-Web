@@ -14,6 +14,7 @@ module.exports = {
                 allowNull: false,
             },
             participation_year: {
+                primaryKey: true,
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },

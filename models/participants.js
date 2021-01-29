@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             participation_year: {
+                primaryKey: true,
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
