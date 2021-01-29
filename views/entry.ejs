@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("./partialView/head", { title }); %>
+    <%- include("./partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="main">
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("./navigation/createStackNavigator", { headerTitle: title }) %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <div class="row">
+            <div class="col px-4 pt-2 mt-1">
+                <div id="users">
+                    <%- include("./components/TextField", {
+                        _items: [
+                            {
+                                mask: "text",
+                                name: "team_name",
+                                placeholder: "엔트리 번호, 팀명으로 검색",
+                                label: "엔트리 번호, 팀명으로 검색",
+                                isRequired: false,
+                                style: "search",
+                            },
+                        ],
+                    }); %>
+                    <!-- 팀 목록 -->
+                    <ul class="list row ps-0 g-1 btn-group d-block list-unstyled">
+                        <%
+                            context.teams.forEach((element, index) => { 
+                                const team_entry = String(element.team_entry).padStart(2, '0');
+                        %>
+                        <li class="col-12">
+                            <div class="d-flex flex-row">
+                                <div class="d-flex py-2 pe-3 born">
+                                    <% [...team_entry].forEach(c => { %>
+                                    <span class="label-number medium num<%= c %> my-auto"><%= team_entry %></span>
+                                    <%  }); %>
+                                </div>
+                                <label class="btn btn-lg rounded-0 position-relative text-start flex-fill">
+                                    <small class="text-gray-600 fw-normal lh-base fs-6 name"><%= element.team_name %></small>
+                                </label>
+                            </div>
+                        </li>
+                        <% }); %>
+                    </ul><!-- 팀 목록 -->
+                    <h1 class="display-1">&nbsp;</h1>
+                </div>
+            </div>
+        </div>
+    </main><!-- main -->
+    <%- include("./partialView/javascripts") %>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script>
+        var options = {
+            valueNames: ['name', 'born']
+        };
+
+        var userList = new List('users', options);
+    </script>
+</body>
+
+</html>

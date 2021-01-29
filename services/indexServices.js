@@ -7,6 +7,7 @@ const {
     Alerts,
     Calendar,
     Progress,
+    Teams,
     Sequelize,
 } = require('../models');
 require('dotenv').config();
@@ -97,6 +98,20 @@ exports.findCalendar = async function () {
         });
 
         return calendar;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findTeams = async function () {
+    try {
+        const teams = await Teams.findAll({
+            where: {
+                team_year: process.env.YEAR,
+                is_deleted: 0,
+            },
+        });
+        return teams;
     } catch (error) {
         throw new Error(error);
     }

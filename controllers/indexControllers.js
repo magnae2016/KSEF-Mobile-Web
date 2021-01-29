@@ -1,6 +1,7 @@
 'use strict';
 
 const indexServices = require('../services/indexServices');
+require('dotenv').config();
 
 exports.requireHome = async function (req, res, next) {
     const context = {
@@ -42,6 +43,22 @@ exports.requireHome = async function (req, res, next) {
             security: req.user || {},
             context,
         });
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+};
+
+exports.requireEntry = async function (req, res, next) {
+    try {
+        const context = {
+            teams: undefined,
+        };
+
+        const teams = await indexServices.findTeams();
+        context.teams = teams;
+
+        res.render('entry', { title: `${process.env.YEAR} 엔트리`, context });
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
         res.sendStatus(500);
