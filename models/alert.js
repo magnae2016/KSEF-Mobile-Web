@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            alert_link: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
             alert_created_at: {
                 type: DataTypes.DATE,
                 allowNull: false,

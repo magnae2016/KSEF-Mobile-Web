@@ -12,10 +12,13 @@ const {
 // @RequestMapping(value="/api/manage/settings/alerts", method=RequestMethod.POST)
 router.post('/settings/alerts', async function (req, res, next) {
     const { message: alert_message } = req.body;
+    let { link: alert_link } = req.body;
+    if (alert_link === '') alert_link = null;
     try {
         const alert = await Alerts.create(
             {
                 alert_message,
+                alert_link,
             },
             { isNewRecord: true }
         );

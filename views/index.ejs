@@ -20,16 +20,16 @@
                 <div class="col mx-1 px-3">
                     <!-- Alert -->
                     <% if (context.alert) { %>
-                    <div class="card shadow rounded-lg border-0 px-3 mb-2 footer">
+                    <a href="<%= context.alert.alert_link ? context.alert.alert_link : '#' %>" class="card shadow rounded-lg border-0 px-3 mb-2 footer text-decoration-none">
                         <div class="card-body px-1 pb-2 mb-1">
-                            <h5 class="card-title small lh-1 fw-bold mb-2">
+                            <h5 class="card-title small lh-1 fw-bold mb-2 text-black">
                                 알림
                             </h5>
                             <div class="d-flex flex-row">
                                 <p class="card-text lh-medium ls-xs mb-0 text-secondary fw-normal"><%- context.alert.alert_message %></p>
                             </div>
                         </div>
-                    </div><!-- /END Alert -->
+                    </a><!-- /END Alert -->
                     <% } %>
                     <!-- Sponsored ad -->
                     <div class="px-4 pt-2 pb-3 mb-2 position-relative">
