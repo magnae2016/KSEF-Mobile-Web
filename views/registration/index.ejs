@@ -50,6 +50,38 @@
                 <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0 mt-3 pt-1">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
                         <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2021년 11회 MOTOSTAR</small>
+                        <h5 class="card-title fw-bolder text-black mb-0">
+                            KSEF 내구페스티발 참가 팀 선택
+                        </h5>
+                        <h6 class="fw-normal lh-1 mt-2 text-black">
+                            <span class="position-relative">참가팀명은 입금자명과 동일합니다.</span>
+                        </h6>
+                        <div class="pt-3">
+                            <div class="position-relative">
+                                <p class="card-text text-black ls-xs mb-0">
+                                    참가팀
+                                </p>
+                                <p class="d-flex align-items-end mb-0">
+                                    <span class="d-flex fs-3 ls-medium fw-bold">
+                                        <%= context.team ? context.team.team_name : "미선택" %>
+                                    </span>
+                                </p>
+                                <% if (context.team) { %>
+                                    <a href="#"
+                                        class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-100 rounded-5"><span
+                                            class="d-flex py-1 fw-600 text-secondary">선택 완료</span></a>
+                                <% } else { %>
+                                    <a href="/accounts/register_team"
+                                        class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
+                                            class="d-flex py-1 fw-600">팀 선택</span></a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0 mt-3 pt-1">
+                    <div class="card-body px-0 py-3 d-flex flex-column mb-2">
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2021년 11회 MOTOSTAR</small>
                         <h5 class="card-title fw-bolder text-black">
                             KSEF 내구페스티발 참가 신청서
                         </h5>

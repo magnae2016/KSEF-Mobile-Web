@@ -4,12 +4,27 @@ const registrationServices = require('../services/registrationServices');
 require('dotenv').config();
 
 exports.requireRegistrationList = async function (req, res, next) {
+    const { id: user_id } = req.user;
+    const year = process.env.YEAR;
     const context = {
         types: undefined,
+        team: undefined,
     };
 
     const types = await registrationServices.findAllTypes();
     context.types = types;
+
+    if (user_id) {
+        // query team
+        const team = await registrationServices.findparticipatingTeam(
+            user_id,
+            year
+        );
+
+        if (team) {
+            context.team = team.get({ plain: true });
+        }
+    }
 
     res.render('registration/index', { title: '참가접수', context });
 };
