@@ -99,4 +99,18 @@ $(function () {
         const template = createTemplate(next);
         $Riders.append(template);
     });
+
+    $('#createRegistrationForm').submit(function (event) {
+        event.preventDefault();
+
+        var $form = $(this),
+            term = $form.serialize(),
+            url = '';
+
+        var posting = $.post(url, term);
+
+        posting.done(function (data) {
+            window.history.go(-2);
+        });
+    });
 });
