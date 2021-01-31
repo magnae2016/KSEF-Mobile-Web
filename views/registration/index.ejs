@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0 mt-3 pt-1">
+                <div class="card bg-transparent border-0 rounded-0 mt-3 pt-1">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
                         <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2021년 11회 MOTOSTAR</small>
                         <h5 class="card-title fw-bolder text-black">
@@ -91,12 +91,25 @@
                         <div class="pt-3">
                             <div class="position-relative">
                                 <p class="card-text lh-large mb-0 text-black">
-                                    입금 후 엔트리가 확정되면<br />
-                                    신청서를 작성하실 수 있습니다.
+                                    <br />
+                                    <br />
                                 </p>
-                                <a href="registration/view/<%= context.types.find(element => element.type_keyword === 'ENDURANCE').type_id %>"
+                                <%
+                                    const { type_id } = context.types.find(
+                                        (element) => element.type_keyword === "ENDURANCE"
+                                    );
+                                    const { participation_id } = context.registration.find(
+                                        (element) => element.type_keyword === "ENDURANCE"
+                                    );
+                                    let href = '';
+                                    if (participation_id) {
+                                        href = `registration/view/${type_id}`;
+                                    } else href = `registration/form/${type_id}`;
+
+                                %>
+                                <a href="<%= href %>"
                                     class="btn btn-primary position-absolute end-0 top-0 px-4 py-2 border-0 bg-info rounded-5"><span
-                                        class="d-flex py-1 fw-600">작성하기</span></a>
+                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a>
                             </div>
                         </div>
                     </div>

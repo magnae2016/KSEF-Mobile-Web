@@ -3,12 +3,44 @@
 const registrationServices = require('../services/registrationServices');
 require('dotenv').config();
 
+async function getTeamRegistration(params) {
+    return new Promise(async function (resolve, reject) {
+        try {
+            const { type, year, team_id } = params;
+            const { type_id, type_keyword } = type;
+            const registration = await registrationServices.findRegistration(
+                type_id,
+                year
+            );
+
+            const { regist_id } = registration;
+            const TeamRegistration = await registrationServices.findTeamRegistration(
+                regist_id,
+                team_id
+            );
+
+            let callback = { type_keyword };
+            if (TeamRegistration) {
+                callback = {
+                    ...callback,
+                    ...TeamRegistration.get({ plain: true }),
+                };
+            }
+
+            resolve(callback);
+        } catch (error) {
+            reject(new Error(error));
+        }
+    });
+}
+
 exports.requireRegistrationList = async function (req, res, next) {
     const { id: user_id } = req.user || {};
     const year = process.env.YEAR;
     const context = {
         types: undefined,
         team: undefined,
+        registration: undefined,
     };
 
     const types = await registrationServices.findAllTypes();
@@ -22,7 +54,20 @@ exports.requireRegistrationList = async function (req, res, next) {
         );
 
         if (team) {
-            context.team = team.get({ plain: true });
+            context.team = team;
+
+            const promises = [];
+            types.forEach((element) => {
+                promises.push(
+                    getTeamRegistration({
+                        type: element,
+                        year,
+                        team_id: team.team_id,
+                    })
+                );
+            });
+            const registration = await Promise.all(promises);
+            context.registration = registration;
         }
     }
 
