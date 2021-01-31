@@ -309,7 +309,7 @@ exports.requireRegisterTeam = async function (req, res, next) {
             role_id,
         });
 
-        res.redirect('/');
+        res.sendStatus(200);
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
         res.sendStatus(500);
