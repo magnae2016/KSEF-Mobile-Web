@@ -52,6 +52,12 @@ exports.requireRegistrationContent = async function (req, res, next) {
         year
     );
 
+    if (!team) {
+        return res.render('redirect', {
+            message: '먼저 참가 팀을 선택해주세요.',
+        });
+    }
+
     const registration = await registrationServices.findRegistration(
         type_id,
         year
