@@ -11,12 +11,14 @@ router.get('/', registrationControllers.requireRegistrationList);
 // @RequestMapping(value="/registration/form/:type_id", method=RequestMethod.GET)
 router.get(
     ['/view/:type_id?', '/form/:type_id?'],
+    checkLoggedIn,
     registrationControllers.requireRegistrationContent
 );
 
 // @RequestMapping(value="/registration/form/:type_id", method=RequestMethod.POST)
 router.post(
     '/form/:type_id',
+    checkLoggedIn,
     registrationControllers.requireUpdateRegistration
 );
 
