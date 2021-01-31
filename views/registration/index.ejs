@@ -98,9 +98,12 @@
                                     const { type_id } = context.types.find(
                                         (element) => element.type_keyword === "ENDURANCE"
                                     );
-                                    const { participation_id } = context.registration.find(
-                                        (element) => element.type_keyword === "ENDURANCE"
-                                    );
+                                    let participation_id = undefined;
+                                    if (context.registration) {
+                                        participation_id = context.registration.find(
+                                            (element) => element.type_keyword === "ENDURANCE"
+                                        ).participation_id;
+                                    }
                                     let href = '';
                                     if (participation_id) {
                                         href = `registration/view/${type_id}`;
