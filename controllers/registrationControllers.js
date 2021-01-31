@@ -4,7 +4,7 @@ const registrationServices = require('../services/registrationServices');
 require('dotenv').config();
 
 exports.requireRegistrationList = async function (req, res, next) {
-    const { id: user_id } = req.user;
+    const { id: user_id } = req.user || {};
     const year = process.env.YEAR;
     const context = {
         types: undefined,
