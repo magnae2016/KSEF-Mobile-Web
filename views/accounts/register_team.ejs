@@ -5,6 +5,11 @@
     <!-- Required meta tags -->
     <%- include("../partialView/head", { title }); %>
     <%- include("../partialView/stylesheet") %>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 
 <body id="mainBody" class="main">
@@ -162,6 +167,7 @@
     </div><!-- /END .fixed-bottom -->
     <%- include("../partialView/javascripts") %>
     <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script src="/javascripts/accounts/register_team.js"></script>
     <script>
         var options = {
             valueNames: ['name', 'born']

@@ -39,6 +39,20 @@ exports.findTeams = async function () {
     }
 };
 
+exports.findParticipant = async function (user_id) {
+    try {
+        const participant = await Participants.findOne({
+            where: {
+                participation_year: process.env.YEAR,
+                user_id,
+            },
+        });
+        return participant;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 exports.upsertParticipant = async function (values) {
     try {
         const participant = await Participants.upsert(values, {

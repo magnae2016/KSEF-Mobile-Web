@@ -280,6 +280,7 @@
                             <%- include("../../components/TextField", {
                                 _items: [
                                     {
+                                        id: `rider${id}_RRN`,
                                         mask: "text",
                                         name: `rider${id}_RRN`,
                                         placeholder: "주민번호",
@@ -344,7 +345,6 @@
         </div>
     </div><!-- /END .fixed-bottom -->
     <%- include("../../partialView/javascripts") %>
-    <script src="https://code.jquery.com/jquery.js"></script>
     <script src="/javascripts/registration/form.js"></script>
 </body>
 

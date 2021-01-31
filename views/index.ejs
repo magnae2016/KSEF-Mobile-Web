@@ -537,7 +537,7 @@
                     </a>
                     <%# in the team %>
                     <% } else { %>
-                    <h1 class="mb-1 lh-1 ls-sm fw-bold d-inline-block mark">
+                    <h1 class="mb-1 lh-1 ls-sm fw-bold">
                         <%= context.team.team_name %>
                     </h1>
                     <% } %>
@@ -547,6 +547,9 @@
         <% } %>
     </main><!-- /END main -->
     <%- include("./partialView/javascripts") %>
+    <script>
+        history.pushState(null, null, location.href);
+    </script>
 </body>
 
 </html>

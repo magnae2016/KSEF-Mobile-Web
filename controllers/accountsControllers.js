@@ -281,9 +281,18 @@ exports.requireLogout = function (req, res, next) {
 
 exports.requireTeamList = async function (req, res, next) {
     try {
+        const { id: user_id } = req.user;
         const context = {
             teams: undefined,
         };
+
+        // check exist
+        const exists = await accountsServices.findParticipant(user_id);
+        if (exists) {
+            return res.render('redirect', {
+                message: '이미 참가 팀을 설정하셨습니다.',
+            });
+        }
 
         const teams = await accountsServices.findTeams();
         context.teams = teams;
@@ -309,7 +318,7 @@ exports.requireRegisterTeam = async function (req, res, next) {
             role_id,
         });
 
-        res.redirect('/');
+        res.sendStatus(200);
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
         res.sendStatus(500);

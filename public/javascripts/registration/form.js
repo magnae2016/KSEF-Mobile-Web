@@ -4,6 +4,29 @@ function removeRider(element) {
     element.parentNode.remove();
 }
 
+function insertDashes(str) {
+    str = str.replace(/[^0-9]/g, '');
+    var tmp = '';
+    if (str.length < 7) {
+        return str;
+    } else {
+        tmp += str.substr(0, 6);
+        tmp += '-';
+        tmp += str.substr(6, 7);
+        return tmp;
+    }
+}
+
+function addKeyupEvent(element) {
+    if (element) {
+        element.onkeyup = function (event) {
+            event = event || window.event;
+            var _val = this.value.trim();
+            this.value = insertDashes(_val);
+        };
+    }
+}
+
 $(function () {
     const $Riders = $('#Riders');
     const $AddItem = $('#AddItem');
@@ -35,7 +58,7 @@ $(function () {
                     </div>
                 </div>
                 <div class="form-floating pb-2 mb-1 ">
-                    <input type="text" name="rider${id}_RRN"
+                    <input id="rider${id}_RRN" type="text" name="rider${id}_RRN"
                         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200 "
                         placeholder="주민번호" autocomplete="off" required="">
                     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300">주민번호</label>
@@ -98,5 +121,26 @@ $(function () {
         const next = Math.min.apply(null, difference);
         const template = createTemplate(next);
         $Riders.append(template);
+        const RRN_input = document.getElementById(`rider${next}_RRN`);
+        addKeyupEvent(RRN_input);
+    });
+
+    $('#createRegistrationForm').submit(function (event) {
+        event.preventDefault();
+
+        var $form = $(this),
+            term = $form.serialize(),
+            url = '';
+
+        var posting = $.post(url, term);
+
+        posting.done(function (data) {
+            window.history.go(-2);
+        });
+    });
+
+    [1, 2, 3, 4].forEach((element) => {
+        const RRN_input = document.getElementById(`rider${element}_RRN`);
+        addKeyupEvent(RRN_input);
     });
 });

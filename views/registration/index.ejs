@@ -13,7 +13,7 @@
 <body id="mainBody" class="position-relative">
     <!-- header -->
     <header id="mainHead">
-        <%- include("../navigation/createModalStackNavigator", { headerTitle: title }) %>
+        <%- include("../navigation/createModalStackNavigator", { headerTitle: title, referrer: '/' }) %>
     </header><!-- /END header -->
     <!-- main -->
     <main id="mainContent" class="container">
@@ -39,6 +39,9 @@
                                     </span>
                                     <span class="h5 ps-1 lh-1">만원</span>
                                 </p>
+                                <a href="/entry"
+                                    class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
+                                        class="d-flex py-1 fw-600">엔트리 확인</span></a>
                             </div>
                         </div>
                         <div class="alert alert-secondary px-4 py-2 lh-xlarge small ls-xs border-transparent bg-gray-100 text-dark fw-normal mb-0"
@@ -50,18 +53,66 @@
                 <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0 mt-3 pt-1">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
                         <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2021년 11회 MOTOSTAR</small>
+                        <h5 class="card-title fw-bolder text-black mb-0">
+                            KSEF 내구페스티발 참가 팀 선택
+                        </h5>
+                        <h6 class="fw-normal lh-1 mt-2 text-black">
+                            <span class="position-relative">참가팀명은 입금자명과 동일합니다.</span>
+                        </h6>
+                        <div class="pt-3">
+                            <div class="position-relative">
+                                <p class="card-text text-black ls-xs mb-0">
+                                    참가팀
+                                </p>
+                                <p class="d-flex align-items-end mb-0">
+                                    <span class="d-flex fs-3 ls-medium fw-bold">
+                                        <%= context.team ? context.team.team_name : "미선택" %>
+                                    </span>
+                                </p>
+                                <% if (context.team) { %>
+                                    <a href="#"
+                                        class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-100 rounded-5"><span
+                                            class="d-flex py-1 fw-600 text-secondary">선택 완료</span></a>
+                                <% } else { %>
+                                    <a href="/accounts/register_team"
+                                        class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
+                                            class="d-flex py-1 fw-600">팀 선택</span></a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-transparent border-0 rounded-0 mt-3 pt-1">
+                    <div class="card-body px-0 py-3 d-flex flex-column mb-2">
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2021년 11회 MOTOSTAR</small>
                         <h5 class="card-title fw-bolder text-black">
                             KSEF 내구페스티발 참가 신청서
                         </h5>
                         <div class="pt-3">
                             <div class="position-relative">
                                 <p class="card-text lh-large mb-0 text-black">
-                                    입금 후 엔트리가 확정되면<br />
-                                    신청서를 작성하실 수 있습니다.
+                                    <br />
+                                    <br />
                                 </p>
-                                <a href="registration/view/<%= context.types.find(element => element.type_keyword === 'ENDURANCE').type_id %>"
+                                <%
+                                    const { type_id } = context.types.find(
+                                        (element) => element.type_keyword === "ENDURANCE"
+                                    );
+                                    let participation_id = undefined;
+                                    if (context.registration) {
+                                        participation_id = context.registration.find(
+                                            (element) => element.type_keyword === "ENDURANCE"
+                                        ).participation_id;
+                                    }
+                                    let href = '';
+                                    if (participation_id) {
+                                        href = `registration/view/${type_id}`;
+                                    } else href = `registration/form/${type_id}`;
+
+                                %>
+                                <a href="<%= href %>"
                                     class="btn btn-primary position-absolute end-0 top-0 px-4 py-2 border-0 bg-info rounded-5"><span
-                                        class="d-flex py-1 fw-600">작성하기</span></a>
+                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a>
                             </div>
                         </div>
                     </div>
@@ -70,6 +121,9 @@
         </div>
     </main>
     <%- include("../partialView/javascripts") %>
+    <script>
+        history.pushState(null, null, location.href);
+    </script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const accountsControllers = require('../controllers/accountsControllers');
+const { checkLoggedIn } = require('../lib');
 
 // @RequestMapping(value="/accounts/login", method=RequestMethod.GET)
 router.get('/login', function (req, res, next) {
@@ -43,9 +44,17 @@ router.post('/find_password', function (req, res, next) {
 router.get('/logout', accountsControllers.requireLogout);
 
 // @RequestMapping(value="/accounts/register_team", method=RequestMethod.GET)
-router.get('/register_team', accountsControllers.requireTeamList);
+router.get(
+    '/register_team',
+    checkLoggedIn,
+    accountsControllers.requireTeamList
+);
 
 // @RequestMapping(value="/accounts/register_team", method=RequestMethod.POST)
-router.post('/register_team', accountsControllers.requireRegisterTeam);
+router.post(
+    '/register_team',
+    checkLoggedIn,
+    accountsControllers.requireRegisterTeam
+);
 
 module.exports = router;

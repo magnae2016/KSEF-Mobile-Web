@@ -161,6 +161,12 @@
         </div>
     </div><!-- /END .fixed-bottom -->
     <%- include("../../partialView/javascripts") %>
+    <script>
+        window.onpopstate = function(event) {
+            window.history.go(-2);
+        };
+        history.pushState(null, null, location.href);
+    </script>
 </body>
 
 </html>
