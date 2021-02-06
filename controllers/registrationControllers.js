@@ -1,6 +1,7 @@
 'use strict';
 
 const registrationServices = require('../services/registrationServices');
+const { maskingRRN } = require('../modules/util');
 require('dotenv').config();
 
 async function getTeamRegistration(params) {
@@ -79,11 +80,14 @@ exports.requireRegistrationContent = async function (req, res, next) {
     const { id: user_id } = req.user;
     const year = process.env.YEAR;
     const context = {
+        user: undefined,
         type_id: type_id,
         formdata: undefined,
         content_file: undefined,
         form_file: undefined,
     };
+
+    context.user = { ...req.user };
 
     if (!type_id) {
         return res.render('redirect', {
@@ -134,7 +138,7 @@ exports.requireRegistrationContent = async function (req, res, next) {
     const fileFolder = originalUrl.includes('view') ? 'contents' : 'forms';
     const fileName = originalUrl.includes('view') ? content_file : form_file;
     const view = `registration/${fileFolder}/${fileName}`;
-    res.render(view, { title: '참가접수', context });
+    res.render(view, { title: '참가접수', context, maskingRRN });
 };
 
 exports.requireUpdateRegistration = async function (req, res, next) {
