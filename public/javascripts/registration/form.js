@@ -23,6 +23,7 @@ function addKeyupEvent(element) {
             event = event || window.event;
             var _val = this.value.trim();
             this.value = insertDashes(_val);
+            this.dataset.rrn = this.value;
         };
     }
 }
@@ -129,11 +130,27 @@ $(function () {
         event.preventDefault();
 
         var $form = $(this),
-            term = $form.serialize(),
             url = '';
 
-        var posting = $.post(url, term);
+        var values = $form.serializeArray();
+        try {
+            values.forEach((element) => {
+                const id = element.name;
+                if (id.includes('_RRN')) {
+                    const RRN_input = document.getElementById(id);
+                    const { rrn } = RRN_input.dataset;
+                    if (rrn.length !== 14) {
+                        alert('주민번호를 정확하게 입력해주세요.');
+                        throw new Error();
+                    }
+                    element.value = rrn;
+                }
+            });
+        } catch (error) {
+            return;
+        }
 
+        var posting = $.post(url, $.param(values));
         posting.done(function (data) {
             window.history.go(-2);
         });
@@ -141,6 +158,8 @@ $(function () {
 
     [1, 2, 3, 4].forEach((element) => {
         const RRN_input = document.getElementById(`rider${element}_RRN`);
-        addKeyupEvent(RRN_input);
+        if (RRN_input && !RRN_input.readOnly) {
+            addKeyupEvent(RRN_input);
+        }
     });
 });
