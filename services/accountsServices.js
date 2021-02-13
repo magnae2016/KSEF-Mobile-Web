@@ -16,6 +16,21 @@ exports.findUserByEmail = async function (user_email) {
     }
 };
 
+exports.findUserByUUID = async function (user_uuid) {
+    let user = {};
+    try {
+        user = await Users.findOne({
+            where: {
+                user_uuid,
+                is_deleted: 0,
+            },
+        });
+        return user;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
 exports.createUser = async function (user) {
     try {
         await Users.create(user, { isNewRecord: true });

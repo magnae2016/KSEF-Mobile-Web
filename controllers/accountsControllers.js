@@ -4,6 +4,7 @@ const Joi = require('joi');
 require('dotenv').config();
 
 const accountsServices = require('../services/accountsServices');
+const { Sequelize } = require('../models');
 const { setPassword, generateToken } = require('../modules/util');
 
 exports.requireLogin = async function (req, res, next) {
@@ -71,7 +72,7 @@ exports.requireLogin = async function (req, res, next) {
                 });
 
                 res.status(200);
-                res.redirect('/');
+                res.redirect('redirect_account');
             } else {
                 // Password does not match
                 console.log('Invalid password');
@@ -122,6 +123,41 @@ exports.requireLogin = async function (req, res, next) {
             title: '로그인',
             invalid: false,
         });
+    }
+};
+
+exports.requireRedirect = async function (req, res, next) {
+    try {
+        res.render('accounts/redirect_account', {
+            title: '리다이렉트 페이지',
+            security: req.user || {},
+        });
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+};
+
+exports.requireSavingToken = async function (req, res, next) {
+    const { uuid: user_uuid, refresh_token: app_token } = req.body;
+
+    // Request Body 검증
+    if (!user_uuid) {
+        return res.sendStatus(400);
+    }
+    if (!app_token) {
+        return res.sendStatus(400);
+    }
+
+    try {
+        const user = await accountsServices.findUserByUUID(user_uuid);
+        user.set({ app_token, last_update_time: Sequelize.fn('NOW') });
+        user.save();
+
+        res.sendStatus(200);
+    } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
     }
 };
 
