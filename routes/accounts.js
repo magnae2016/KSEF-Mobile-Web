@@ -27,6 +27,11 @@ router.get('/create_account', function (req, res, next) {
     res.render('accounts/create_account', { title: '회원가입' });
 });
 
+// @RequestMapping(value="/accounts/privacy", method=RequestMethod.GET)
+router.get('/privacy', function (req, res, next) {
+    res.render('accounts/privacy', { title: '개인정보처리방침' });
+});
+
 // @RequestMapping(value="/accounts/create_account", method=RequestMethod.POST)
 router.post('/create_account', accountsControllers.requireRegister);
 
