@@ -59,4 +59,10 @@ router.post(
     manageControllers.requirePhotoUploader
 );
 
+// @RequestMapping(value="/manage/sheets/:type_keyword/:regist_year", method=RequestMethod.GET)
+router.get(
+    '/sheets/:type_keyword/:regist_year',
+    manageControllers.requireGeneratingSpreadsheet
+);
+
 module.exports = router;
