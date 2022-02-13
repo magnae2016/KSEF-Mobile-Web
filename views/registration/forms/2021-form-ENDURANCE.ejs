@@ -21,6 +21,7 @@
             }
         });
         riders = Array.from(new Set(riders)); // deduplication
+        const user_name = context.user.name;
     %>
     <!-- header -->
     <header id="mainHead">
@@ -239,6 +240,8 @@
                     <div id="Riders">
                         <% riders.forEach(element => { 
                             const id = element;
+                            const rider_name = formdata[`rider${id}_name`];
+                            const origin = formdata[`rider${id}_RRN`];
                         %>
                         <div class="Rider mb-3 position-relative" data-id="<%= id %>">
                             <h5 class="fs-6 mb-3 fw-600 pt-3 number">라이더 </h5>
@@ -277,6 +280,14 @@
                                     %>
                                 </div>
                             </div>
+                            <%
+                                let rider_RRN = origin;
+                                let is_right = true;
+                                if (user_name !== rider_name) {
+                                    rider_RRN = maskingRRN(origin);
+                                    is_right = false;
+                                }
+                            %>
                             <%- include("../../components/TextField", {
                                 _items: [
                                     {
@@ -286,7 +297,12 @@
                                         placeholder: "주민번호",
                                         label: "주민번호",
                                         isRequired: true,
-                                        value: formdata[`rider${id}_RRN`]
+                                        value: rider_RRN,
+                                        readonly: (is_right ? false : true),
+                                        dataset: [{
+                                            name: 'rrn',
+                                            value: origin
+                                        }]
                                     },
                                 ],
                             });

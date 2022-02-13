@@ -337,6 +337,12 @@ module.exports = {
                     team_name: '모토그레시브1',
                     team_entry: 55,
                 },
+                {
+                    team_uuid: v4(),
+                    team_year: process.env.YEAR,
+                    team_name: '와이드오픈스로틀2',
+                    team_entry: 56,
+                },
             ],
             {}
         );

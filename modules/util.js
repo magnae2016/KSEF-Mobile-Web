@@ -68,3 +68,10 @@ const simpleDateFormat = () => {
     return yyyyMMddHHmmss;
 };
 module.exports.simpleDateFormat = simpleDateFormat;
+
+const maskingRRN = (rrnStr) => {
+    return rrnStr
+        .toString()
+        .replace(/(-?)([1-4]{1})([0-9]{6})\b/gi, '$1$2******');
+};
+module.exports.maskingRRN = maskingRRN;

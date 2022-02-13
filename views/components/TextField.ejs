@@ -9,11 +9,21 @@
         });
     }
 %>
-<% _items.forEach(element => { %>
+<% _items.forEach(element => { 
+    let dataset = '';
+    if (element.dataset) {
+        let array = [];
+        element.dataset.forEach(d => {
+            array.push(`data-${d.name}=${d.value}`);
+        });
+        dataset = array.join(' ');
+    }
+%>
 <div class="form-floating pb-2 mb-1 <%= element.style && element.style %>">
-    <input id="<%= element.id && element.id %>" type="<%= element.mask %>" name="<%= element.name %>" value="<%= element.value && element.value %>"
+    <input id="<%= element.id && element.id %>" type="<%= element.mask %>" name="<%= element.name %>" value="<%= element.value && element.value %>" 
         class="form-control bg-transparent rounded-0 border-0 border-bottom border-1 px-0 h5 mb-0 border-gray-200 <%= error[element.name] ? "is-invalid" : "" %>"
-        placeholder="<%= element.placeholder %>" value="<%= locals._original && (error[element.name] ? "" : locals._original[element.name]) %>" autocomplete="off" <%= element.isRequired && (element.isRequired ? "required" : "") %> />
+        placeholder="<%= element.placeholder %>" value="<%= locals._original && (error[element.name] ? "" : locals._original[element.name]) %>" autocomplete="off" 
+        <%= element.isRequired && (element.isRequired ? "required" : "") %> <%= element.readonly ? "readonly" : "" %> <%= dataset %> />
     <label class="h5 px-0 pt-4 pb-2 mb-0 h-auto text-gray-300"><%= element.label %></label>
     <div class="invalid-feedback"><%= error && error[element.name] %></div>
 </div>

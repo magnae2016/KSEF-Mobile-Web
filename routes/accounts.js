@@ -12,9 +12,24 @@ router.get('/login', function (req, res, next) {
 // @RequestMapping(value="/accounts/login", method=RequestMethod.POST)
 router.post('/login', accountsControllers.requireLogin);
 
+// @RequestMapping(value="/accounts/redirect_account", method=RequestMethod.GET)
+router.get(
+    '/redirect_account',
+    checkLoggedIn,
+    accountsControllers.requireRedirect
+);
+
+// @RequestMapping(value="/accounts/token", method=RequestMethod.POST)
+router.post('/token', accountsControllers.requireSavingToken);
+
 // @RequestMapping(value="/accounts/create_account", method=RequestMethod.GET)
 router.get('/create_account', function (req, res, next) {
     res.render('accounts/create_account', { title: '회원가입' });
+});
+
+// @RequestMapping(value="/accounts/privacy", method=RequestMethod.GET)
+router.get('/privacy', function (req, res, next) {
+    res.render('accounts/privacy', { title: '개인정보처리방침' });
 });
 
 // @RequestMapping(value="/accounts/create_account", method=RequestMethod.POST)

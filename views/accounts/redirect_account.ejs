@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../partialView/head", { title }); %>
+    <%- include("../partialView/stylesheet") %>
+    <script>
+        (window.nmain = window.nmain || {}),
+            (window.nmain.gv = window.nmain.gv || {});
+        window.nmain.gv.id = '<%= locals.security && locals.security.id  %>';
+        window.nmain.gv.uuid = '<%= locals.security && locals.security.uuid  %>';
+        window.nmain.gv.email = '<%= locals.security && locals.security.email  %>';
+        window.nmain.gv.name = '<%= locals.security && locals.security.name  %>';
+        window.nmain.gv.alias = '<%= locals.security && locals.security.alias  %>';
+    </script>
+</head>
+
+<body id="mainBody" class="bg-gray-200">
+    <script src="/javascripts/accounts/redirect_account.js"></script>
+</body>
+
+</html>

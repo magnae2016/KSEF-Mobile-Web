@@ -10,6 +10,7 @@ const {
     Teams,
     Sequelize,
 } = require('../models');
+const Op = require('sequelize').Op;
 require('dotenv').config();
 
 exports.findParticipatingTeam = async function (user_id) {
@@ -88,6 +89,7 @@ exports.findCalendar = async function () {
             },
             where: {
                 cal_year: process.env.YEAR,
+                prog_id: { [Op.ne]: 4 },
             },
             includeIgnoreAttributes: false,
             include: {

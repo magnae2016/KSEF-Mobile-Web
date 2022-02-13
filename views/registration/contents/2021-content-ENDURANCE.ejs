@@ -104,9 +104,14 @@
                 </ul>
             </div>
         </div>
+        <%
+            const user_name = context.user.name;
+        %>
         <div class="row mt-5">
             <% riders.forEach(element => { 
                 const id = element;
+                const rider_name = formdata[`rider${id}_name`];
+                const origin = formdata[`rider${id}_RRN`];
             %>
             <div class="px-4 pt-2 mt-1">
                 <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
@@ -116,7 +121,7 @@
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">성명</span>
-                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata[`rider${id}_name`], placeholder: "미작성"}) %></span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: rider_name, placeholder: "미작성"}) %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
@@ -126,7 +131,13 @@
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
                         <span class="lh-xlarge text-gray-600 nowrap">주민번호</span>
-                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata[`rider${id}_RRN`], placeholder: "미작성"}) %></span>
+                        <%
+                            let rider_RRN = origin;
+                            if (user_name !== rider_name) {
+                                rider_RRN = maskingRRN(origin);
+                            }
+                        %>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: rider_RRN, placeholder: "미작성"}) %></span>
                     </li>
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">

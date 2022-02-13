@@ -163,3 +163,83 @@ exports.requirePhotoUploader = async function (req, res, next) {
         res.send(`NOTALLOW_${req.headers['file-name']}`);
     }
 };
+
+function makeEmptyRecord(params) {
+    return {
+        ...params,
+        formdata_values: JSON.stringify({}),
+        is_completed: 0,
+    };
+}
+
+exports.requireGeneratingSpreadsheet = async function (req, res, next) {
+    const { type_keyword, regist_year } = req.params;
+    const { mode = 'all' } = req.query; // [ all, incomplete, complete ]
+    const context = {
+        teamRegistration: undefined,
+        type_keyword,
+        regist_year,
+        mode,
+    };
+
+    try {
+        if (!type_keyword) return res.sendStatus(500);
+        if (!regist_year) return res.sendStatus(500);
+
+        const registrationType = await manageServices.findRegistrationType(
+            type_keyword
+        );
+        const registration = await registrationType.getRegistrations({
+            where: {
+                regist_year,
+            },
+            limit: 1,
+        });
+        const teams = await manageServices.findTeams(regist_year);
+        const { regist_id } = registration[0];
+        const teamRegistration = await manageServices.findTeamRegistration(
+            regist_id
+        );
+
+        // arrange Array
+        let j = 0;
+        let entry = 0;
+        const total = teamRegistration.length;
+        let result = [];
+
+        teams.forEach((element, index) => {
+            const x = element.team_entry;
+            const { team_name } = element;
+            if (j == total) {
+                result.push(makeEmptyRecord({ team_entry: x, team_name }));
+                return;
+            }
+
+            entry = teamRegistration[j].team_entry;
+
+            if (x > entry)
+                while (x > entry) entry = teamRegistration[++j].team_entry;
+
+            if (x === entry) result.push(teamRegistration[j++]);
+            else result.push(makeEmptyRecord({ team_entry: x, team_name }));
+        });
+
+        if (mode === 'all') context.teamRegistration = result;
+        else if (mode === 'incomplete')
+            context.teamRegistration = result.filter(
+                (element) => element.is_completed === 0
+            );
+        else if (mode === 'complete')
+            context.teamRegistration = result.filter(
+                (element) => element.is_completed === 1
+            );
+
+        res.render(`manage/sheets/${type_keyword}`, {
+            title: `${type_keyword}-${regist_year} 데이터 시트`,
+            context,
+        });
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        res.sendStatus(500);
+    }
+};
