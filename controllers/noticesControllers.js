@@ -55,6 +55,7 @@ exports.requireCategoryList = async function (req, res, next) {
 };
 
 exports.requireItemContents = async function (req, res, next) {
+    const { originalUrl } = req;
     const { notice_id = undefined } = req.params;
     const context = {
         notice: undefined,
@@ -73,7 +74,7 @@ exports.requireItemContents = async function (req, res, next) {
 
         context.template = template.get({ plain: true });
         context.category = category.get({ plain: true });
-
+        
         // add the number of views
         notice.notice_views = ++notice.notice_views;
         notice.save();
@@ -81,8 +82,14 @@ exports.requireItemContents = async function (req, res, next) {
         // post not exist
         return res.redirect('/notices/category');
     }
-
+    
+    const { template_og_image } = context.template;
     context.notice = notice.get({ plain: true });
 
-    res.render('notices/template', { title: '공지사항', context });
+    res.render('notices/template', {
+        title: '공지사항',
+        op: template_og_image,
+        originalUrl,
+        context,
+    });
 };
