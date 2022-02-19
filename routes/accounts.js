@@ -37,12 +37,7 @@ router.post('/create_account', accountsControllers.requireRegister);
 
 // @RequestMapping(value="/accounts/find_account", method=RequestMethod.GET)
 router.get('/find_account', function (req, res, next) {
-    res.send('respond with a resource');
-});
-
-// @RequestMapping(value="/accounts/find_account", method=RequestMethod.POST)
-router.post('/find_account', function (req, res, next) {
-    res.send('respond with a resource');
+    res.render('accounts/find_account', { title: '아이디 찾기' });
 });
 
 // @RequestMapping(value="/accounts/find_password", method=RequestMethod.GET)
