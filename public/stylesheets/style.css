@@ -521,6 +521,11 @@ input.form-control:focus {
     background-size: 187px 288px;
 }
 
+.form-select {
+    width: auto;
+    color: #939393;
+}
+
 .num0 {
     background-position: -195px 0px;
 }
