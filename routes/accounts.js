@@ -46,7 +46,10 @@ router.get('/find_password', function (req, res, next) {
 });
 
 // @RequestMapping(value="/accounts/reset_password", method=RequestMethod.GET)
-router.get('/reset_password/:user_uuid', accountsControllers.requireResetPassword);
+router.get('/reset_password/:user_uuid', accountsControllers.requireRedirectResetPassword);
+
+// @RequestMapping(value="/accounts/reset_password", method=RequestMethod.POST)
+router.post('/reset_password/:user_uuid', accountsControllers.requireResetPassword);
 
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)
 router.get('/logout', accountsControllers.requireLogout);
