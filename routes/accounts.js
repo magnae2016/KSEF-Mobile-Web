@@ -42,12 +42,7 @@ router.get('/find_account', function (req, res, next) {
 
 // @RequestMapping(value="/accounts/find_password", method=RequestMethod.GET)
 router.get('/find_password', function (req, res, next) {
-    res.send('respond with a resource');
-});
-
-// @RequestMapping(value="/accounts/find_password", method=RequestMethod.POST)
-router.post('/find_password', function (req, res, next) {
-    res.send('respond with a resource');
+    res.render('accounts/find_password', { title: '비밀번호 찾기' });
 });
 
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)

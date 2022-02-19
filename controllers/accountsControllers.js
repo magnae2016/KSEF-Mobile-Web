@@ -374,6 +374,64 @@ exports.requireFindAccount = async function (req, res, next) {
     }
 };
 
+exports.requireFindPassword = async function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    let hasError = false;
+    let status = 200;
+
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({
+                minDomainSegments: 2,
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
+            })
+            .required(),
+    });
+
+    try {
+        await schema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+    } catch (error) {
+        console.error(error);
+        hasError = true;
+        status = 400;
+
+        res.status(status);
+        return res.send({
+            invalid: true,
+            _original: error._original,
+            details: error.details,
+        });
+    }
+
+    const { email: user_email } = req.body;
+
+    try {
+        // check if the user exists
+        const exists = await accountsServices.findUserByEmail(user_email);
+        if (exists) {
+            // TODO: id가 존재할때 mail 보내기
+        }
+        else {
+            // ID가 존재하지 않는다고 error 보내기
+        }
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        hasError = true;
+        status = 500;
+
+        res.status(status);
+        return res.send({
+            invalid: false,
+        });
+    }
+};
+
 exports.requireLogout = function (req, res, next) {
     res.clearCookie('access_token');
     res.redirect('login');
