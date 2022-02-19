@@ -418,7 +418,7 @@ exports.requireFindPassword = async function (req, res, next) {
             // TODO: id가 존재할때 mail 보내기
         }
         else {
-            // ID가 존재하지 않는다고 error 보내기
+            // TODO: ID가 존재하지 않는다고 error 보내기
         }
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
@@ -428,6 +428,26 @@ exports.requireFindPassword = async function (req, res, next) {
         res.status(status);
         return res.send({
             invalid: false,
+        });
+    }
+};
+
+exports.requireResetPassword = async function (req, res, next) {
+    const { user_uuid } = req.params;
+
+    try {
+        const exists = await accountsServices.findUserByUUID(user_uuid);
+        if (exists) {
+            const { user_email } = exists;
+            return res.render('accounts/reset_password', { title: '비밀번호 재설정', user_uuid, user_email });
+        } else {
+            return res.render('redirect', {
+                message: '유효하지 않은 접근입니다.',
+            });
+        }
+    } catch (error) {
+        return res.render('redirect', {
+            message: '일시적인 오류(502). 이 오류는 곧 해결되므로 몇 분 후에 다시 시도해 보세요.',
         });
     }
 };

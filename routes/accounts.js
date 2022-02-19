@@ -42,8 +42,11 @@ router.get('/find_account', function (req, res, next) {
 
 // @RequestMapping(value="/accounts/find_password", method=RequestMethod.GET)
 router.get('/find_password', function (req, res, next) {
-    res.render('accounts/find_password', { title: '비밀번호 찾기' });
+    res.render('accounts/find_password', { title: '비밀번호 재설정' });
 });
+
+// @RequestMapping(value="/accounts/reset_password", method=RequestMethod.GET)
+router.get('/reset_password/:user_uuid', accountsControllers.requireResetPassword);
 
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)
 router.get('/logout', accountsControllers.requireLogout);
