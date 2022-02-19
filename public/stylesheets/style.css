@@ -157,6 +157,14 @@ input.form-control:focus {
     background-color: #ebebeb;
 }
 
+.bg-gray-400 {
+    background-color: #b6b6b6;
+}
+
+.bg-gray-800 {
+    background-color: #4a4a4a;
+}
+
 /* Utility */
 .opacity-0 {
     opacity: 0;
@@ -258,7 +266,17 @@ input.form-control:focus {
 .navbar-expand-lg .nav-pills .nav-link.active {
     color: #ffffff;
     background-color: #000000;
-} /* /END Navigation */
+} 
+
+.navbar-drop {
+    height: 30px;
+    bottom: -30px;
+}
+
+header.bg-gray-800 .navbar-nav .text-dark {
+    color: white !important;
+}
+/* /END Navigation */
 
 /* accounts/login Screen */
 .form-floating > label {
