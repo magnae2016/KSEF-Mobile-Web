@@ -26,6 +26,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true,
             },
+            template_og_image: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             has_shortcut: {
                 type: Sequelize.INTEGER,
                 allowNull: false,
