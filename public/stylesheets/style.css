@@ -336,6 +336,12 @@ input.form-control:focus {
 } /* create_account Screen */
 
 /* index Screen */
+.sponsored-ad-img {
+    max-width: 123px;
+    height: auto;
+    bottom: 12px;
+}
+
 .card.footer::before {
     content: '';
     position: absolute;
