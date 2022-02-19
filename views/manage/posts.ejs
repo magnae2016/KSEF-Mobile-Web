@@ -18,8 +18,8 @@
     <script type="text/javascript">
         var categories = [
             { id: 1, text: '공지' },
-            { id: 2, text: '접수' },
-            { id: 3, text: '이벤트' },
+            { id: 2, text: '정보' },
+            { id: 3, text: '결과' },
         ];
 
         $(function () {
@@ -67,13 +67,13 @@
                     },
                 ],
                 onAdd: function (event) {
-                    location.href="/manage/newpost";
+                    location.href = "/manage/newpost";
                 },
                 onEdit: function (event) {
-                    const {recid} = event;
+                    const { recid } = event;
                     const record = w2ui.grid.get(recid);
                     const { notice_id } = record;
-                    location.href=`/manage/newpost/${notice_id}`;
+                    location.href = `/manage/newpost/${notice_id}`;
                 },
                 onSave: function (event) {
                     let { changes } = event;
@@ -81,8 +81,8 @@
                     changes.forEach((element) => {
                         const { recid } = element;
                         let record = w2ui.grid.get(recid);
-                        const {notice_id} = record;
-                        
+                        const { notice_id } = record;
+
                         formData.push({
                             ...record,
                             ...element,

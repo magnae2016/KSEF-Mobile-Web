@@ -11,11 +11,11 @@ module.exports = {
                 },
                 {
                     category_id: 2,
-                    category_name: '접수',
+                    category_name: '정보',
                 },
                 {
                     category_id: 3,
-                    category_name: '이벤트',
+                    category_name: '결과',
                 },
             ],
             {}
