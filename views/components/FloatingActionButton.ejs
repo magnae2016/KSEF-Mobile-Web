@@ -1,0 +1,6 @@
+<!-- Floating Action Button -->
+<% 
+const checkLoggedIn = locals.title == "홈" && locals.security && locals.security.hasOwnProperty('uuid')
+%>
+<a class="btn-fab <%= checkLoggedIn ? "logged-in" : "" %>"></a>
+<!-- /END Floating Action Button -->
