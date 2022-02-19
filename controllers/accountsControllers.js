@@ -7,6 +7,7 @@ const accountsServices = require('../services/accountsServices');
 const { Sequelize } = require('../models');
 const { setPassword, generateToken } = require('../modules/util');
 const { hashPassword } = require('../modules/util');
+const postman = require('../modules/postman');
 
 exports.requireLogin = async function (req, res, next) {
     console.log(JSON.stringify(req.body));
@@ -403,7 +404,7 @@ exports.requireFindPassword = async function (req, res, next) {
         status = 400;
 
         res.status(status);
-        return res.send({
+        return res.json({
             invalid: true,
             _original: error._original,
             details: error.details,
@@ -416,10 +417,34 @@ exports.requireFindPassword = async function (req, res, next) {
         // check if the user exists
         const exists = await accountsServices.findUserByEmail(user_email);
         if (exists) {
-            // TODO: id가 존재할때 mail 보내기
-        }
-        else {
-            // TODO: ID가 존재하지 않는다고 error 보내기
+            const { user_uuid, user_alias } = exists;
+            postman.deliver({
+                envelope: {
+                    template: 'resetPassword',
+                    subject: '[KSEF] 비밀번호 재설정 안내 메일',
+                    to: user_email,
+                },
+                locals: {
+                    user_email,
+                    user_uuid,
+                    user_alias,
+                },
+            });
+            res.sendStatus(200);
+        } else {
+            status = 400;
+
+            res.status(status);
+            res.json({
+                invalid: true,
+                _original: { email: user_email },
+                details: [
+                    {
+                        message: '등록된 ID가 아닙니다.',
+                        path: ['email'],
+                    },
+                ],
+            });
         }
     } catch (error) {
         console.error('The server encountered an unexpected condition.', error);
@@ -427,7 +452,7 @@ exports.requireFindPassword = async function (req, res, next) {
         status = 500;
 
         res.status(status);
-        return res.send({
+        return res.json({
             invalid: false,
         });
     }
