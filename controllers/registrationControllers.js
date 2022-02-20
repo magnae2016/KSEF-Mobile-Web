@@ -166,9 +166,6 @@ exports.requireUpdateRegistration = async function (req, res, next) {
             year
         );
 
-        // is_zontes data correction
-        const { is_zontes = 'N' } = values;
-        values.is_zontes = is_zontes;
         // rider*_ data correction
         const keys = Object.keys(values);
         let riders = [];
