@@ -737,6 +737,10 @@ header.bg-gray-800 .navbar-nav .text-dark {
     .card-group {
         display: block;
     }
+
+    .bottomSheet.card {
+        width: 414px !important;
+    }
 }
 
 /* FloatingActionButton */
