@@ -14,10 +14,10 @@
 <meta content="yes" name="apple-touch-fullscreen" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta property="og:type" content="website">
-<meta property="og:url" content="http://210.114.19.192/">
+<meta property="og:url" content="http://210.114.19.192<%= locals.originalUrl || "/"%>">
 <meta property="og:title" content="<%= title %> · KSEF">
 <meta property="og:description" content="Passion & Energy KSEF">
-<meta property="og:image" content="http://210.114.19.192/images/op/og_ksef_20210107223902.jpg">
+<meta property="og:image" content="http://210.114.19.192<%= locals.op || "/images/op/og_ksef_20210107223902.jpg" %>">
 <title>
     <%= title %> · KSEF
 </title>

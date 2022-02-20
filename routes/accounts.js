@@ -37,23 +37,19 @@ router.post('/create_account', accountsControllers.requireRegister);
 
 // @RequestMapping(value="/accounts/find_account", method=RequestMethod.GET)
 router.get('/find_account', function (req, res, next) {
-    res.send('respond with a resource');
-});
-
-// @RequestMapping(value="/accounts/find_account", method=RequestMethod.POST)
-router.post('/find_account', function (req, res, next) {
-    res.send('respond with a resource');
+    res.render('accounts/find_account', { title: '아이디 찾기' });
 });
 
 // @RequestMapping(value="/accounts/find_password", method=RequestMethod.GET)
 router.get('/find_password', function (req, res, next) {
-    res.send('respond with a resource');
+    res.render('accounts/find_password', { title: '비밀번호 재설정' });
 });
 
-// @RequestMapping(value="/accounts/find_password", method=RequestMethod.POST)
-router.post('/find_password', function (req, res, next) {
-    res.send('respond with a resource');
-});
+// @RequestMapping(value="/accounts/reset_password", method=RequestMethod.GET)
+router.get('/reset_password/:user_uuid', accountsControllers.requireRedirectResetPassword);
+
+// @RequestMapping(value="/accounts/reset_password", method=RequestMethod.POST)
+router.post('/reset_password/:user_uuid', accountsControllers.requireResetPassword);
 
 // @RequestMapping(value="/accounts/logout", method=RequestMethod.GET)
 router.get('/logout', accountsControllers.requireLogout);

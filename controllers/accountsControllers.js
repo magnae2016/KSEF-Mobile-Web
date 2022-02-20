@@ -6,6 +6,8 @@ require('dotenv').config();
 const accountsServices = require('../services/accountsServices');
 const { Sequelize } = require('../models');
 const { setPassword, generateToken } = require('../modules/util');
+const { hashPassword } = require('../modules/util');
+const postman = require('../modules/postman');
 
 exports.requireLogin = async function (req, res, next) {
     console.log(JSON.stringify(req.body));
@@ -306,6 +308,270 @@ exports.requireRegister = async function (req, res, next) {
             title: '회원가입',
             _original: req.body,
             invalid: false,
+        });
+    }
+};
+
+exports.requireFindAccount = async function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    let hasError = false;
+    let status = 200;
+
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({
+                minDomainSegments: 2,
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
+            })
+            .required(),
+    });
+
+    try {
+        await schema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+    } catch (error) {
+        console.error(error);
+        hasError = true;
+        status = 400;
+
+        res.status(status);
+        return res.send({
+            invalid: true,
+            _original: error._original,
+            details: error.details,
+        });
+    }
+
+    const { email: user_email } = req.body;
+
+    try {
+        // check if the user exists
+        const exists = await accountsServices.findUserByEmail(user_email);
+        if (exists) {
+            return res.send({
+                invalid: false,
+                isExists: true
+            })
+        }
+        else {
+            return res.send({
+                invalid: false,    
+                isExists: false
+            })
+        }
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        hasError = true;
+        status = 500;
+
+        res.status(status);
+        return res.send({
+            invalid: false,
+        });
+    }
+};
+
+exports.requireFindPassword = async function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    let hasError = false;
+    let status = 200;
+
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({
+                minDomainSegments: 2,
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
+            })
+            .required(),
+    });
+
+    try {
+        await schema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+    } catch (error) {
+        console.error(error);
+        hasError = true;
+        status = 400;
+
+        res.status(status);
+        return res.json({
+            invalid: true,
+            _original: error._original,
+            details: error.details,
+        });
+    }
+
+    const { email: user_email } = req.body;
+
+    try {
+        // check if the user exists
+        const exists = await accountsServices.findUserByEmail(user_email);
+        if (exists) {
+            const { user_uuid, user_alias } = exists;
+            postman.deliver({
+                envelope: {
+                    template: 'resetPassword',
+                    subject: '[KSEF] 비밀번호 재설정 안내 메일',
+                    to: user_email,
+                },
+                locals: {
+                    user_email,
+                    user_uuid,
+                    user_alias,
+                },
+            });
+            res.sendStatus(200);
+        } else {
+            status = 400;
+
+            res.status(status);
+            res.json({
+                invalid: true,
+                _original: { email: user_email },
+                details: [
+                    {
+                        message: '등록된 ID가 아닙니다.',
+                        path: ['email'],
+                    },
+                ],
+            });
+        }
+    } catch (error) {
+        console.error('The server encountered an unexpected condition.', error);
+        hasError = true;
+        status = 500;
+
+        res.status(status);
+        return res.json({
+            invalid: false,
+        });
+    }
+};
+
+exports.requireRedirectResetPassword = async function (req, res, next) {
+    const { user_uuid } = req.params;
+
+    try {
+        const exists = await accountsServices.findUserByUUID(user_uuid);
+        if (exists) {
+            const { user_email } = exists;
+            return res.render('accounts/reset_password', { title: '비밀번호 재설정', user_uuid, user_email });
+        } else {
+            return res.render('redirect', {
+                message: '유효하지 않은 접근입니다.',
+            });
+        }
+    } catch (error) {
+        return res.render('redirect', {
+            message: '일시적인 오류(502). 이 오류는 곧 해결되므로 몇 분 후에 다시 시도해 보세요.',
+        });
+    }
+};
+
+exports.requireResetPassword = async function (req, res, next) {
+    console.log(JSON.stringify(req.body));
+    let hasError = false;
+    let status = 200;
+
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({
+                minDomainSegments: 2,
+            })
+            .messages({
+                'string.email': '올바르지 않은 이메일 형식입니다.',
+                'string.empty': '이메일을 입력해주세요.',
+                'any.required': '이메일을 입력해주세요.',
+            })
+            .required(),
+        password: Joi.string()
+            .pattern(new RegExp('^[a-zA-Z0-9!@#$%^&*]{3,30}$'))
+            .messages({
+                'string.pattern.base':
+                    '비밀번호를 입력해주세요.(영문자/숫자/특수문자)',
+                'string.empty': '비밀번호를 입력해주세요.',
+                'any.required': '비밀번호를 입력해주세요.',
+            })
+            .required(),
+        repeat_password: Joi.string()
+            .valid(Joi.ref('password'))
+            .messages({
+                'any.only':
+                    '입력한 비밀번호와 재입력한 비밀번호가 일치하지 않습니다. 다시 확인해 주세요.',
+            })
+            .required(),
+    }).with('password', 'repeat_password');
+
+    // validates Request Body using Joi
+    try {
+        await schema.validateAsync(req.body, {
+            abortEarly: false,
+        });
+    } catch (error) {
+        console.log('error', error);
+
+        hasError = true;
+        status = 400;
+
+        res.status(status);
+        return res.render('accounts/reset_password', {
+            title: '비밀번호 재설정',
+            invalid: true,
+            _original: error._original,
+            details: error.details,
+        });
+    }
+
+    const { email: user_email, password: user_password } = req.body;
+
+    try {
+        // check if user exists
+        const exists = await accountsServices.findUserByEmail(user_email);
+        if (exists) {
+            exists.user_password = user_password;
+            const hashedPassword = await hashPassword(exists);
+            if (hashedPassword) {
+                exists.save();
+            }
+
+            res.redirect('/accounts/login');
+        } else {
+            console.log('A user already exists with that email');
+            hasError = true;
+            status = 409;
+
+            res.status(status);
+            return res.render('accounts/reset_password', {
+                title: '비밀번호 재설정',
+                invalid: true,
+                _original: req.body,
+                details: [
+                    {
+                        message: '이미 사용중이거나 탈퇴한 아이디입니다.',
+                        path: ['email'],
+                    },
+                ],
+            });
+        }
+    } catch (error) {
+        console.log('The server encountered an unexpected condition.', error);
+        hasError = true;
+        status = 500;
+
+        res.status(status);
+        return res.render('redirect', {
+            message:
+                '일시적인 오류(502). 이 오류는 곧 해결되므로 몇 분 후에 다시 시도해 보세요.',
         });
     }
 };

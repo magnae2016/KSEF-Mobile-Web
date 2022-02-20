@@ -1,0 +1,86 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="height:100%;font-family:'roboto','NotoSansKR','Helvetica Neue',Helvetica,Arial,malgun gothic,Dotum,sans-serif;word-break:break-word;margin:0;padding:0"
+        bgcolor="white">
+        <table border="0" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse!important">
+            <tbody>
+                <tr>
+                    <td valign="top">
+                        <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td valign="top" align="center">
+                                        <div style="max-width:480px;padding:40px 16px 0" align="left">
+                                            <img src="http://ksef.co.kr/images/static/logo.png" width="auto" height="40"
+                                                style="width:auto;height:40px" data-image-whitelisted="">
+                                            <h3
+                                                style="word-break:keep-all;font-weight:700;font-size:1.5rem;line-height:2rem;padding-top:64px;margin:0">
+                                                <span class="il">비밀번호</span> 재설정 안내
+                                            </h3>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" align="center">
+                                        <div style="max-width:480px;padding:16px" align="left">
+                                            <p style="font-size:16px;line-height:26px;margin:0;padding:0.25rem 0">
+                                                안녕하세요. <%= user_alias %> 님<br> 본 메일은 <span class="il">비밀번호</span> 재설정을
+                                                    위해
+                                                    KSEF에서 발송하는 메일입니다. 본인이 요청한 메일이 아니라면 개인정보 보호를 위해 <span
+                                                        class="il">비밀번호</span>를
+                                                    재설정해주세요. <span class="il">비밀번호</span>를 다시 설정하려면 '<span
+                                                        class="il">비밀번호</span> 재설정' 링크를 클릭해주세요.
+                                            </p>
+                                            <br><br>
+                                            <a href="http://ksef.co.kr/accounts/reset_password/<%= user_uuid %>"
+                                                style="color:white;text-decoration:none;font-size:14px;border-radius:3px;background-color:#48a0b4;padding:10px 14px;border:none"
+                                                target="_blank"><span class="il">비밀번호</span> 재설정</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" align="center">
+                                        <div style="max-width:480px;padding:40px 16px 0">
+                                            <h6 style="word-break:keep-all;font-weight:500;font-size:12px;line-height:20px;color:#b2c0cc;margin:0"
+                                                align="left">
+                                                버튼이 동작하지 않나요? 아래의 링크를 웹브라우저에 붙여넣으세요.<br>
+                                                <a href="http://ksef.co.kr/accounts/reset_password/<%= user_uuid %>"
+                                                    target="_blank">http://ksef.co.kr/accounts/reset_password/<%=
+                                                        user_uuid %></a>
+                                            </h6>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" align="center">
+                        <div style="max-width:480px;padding:40px 16px 0">
+                            <h6 style="word-break:keep-all;font-weight:500;font-size:12px;line-height:20px;color:#b2c0cc;margin:0"
+                                align="left">
+                                <a href="http://ksef.co.kr" style="color:#98a8b9;text-decoration:none"
+                                    target="_blank">2022
+                                    KSEF</a>
+                            </h6>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="80"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

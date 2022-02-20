@@ -1,4 +1,5 @@
-const { Categories, Notices, Templates } = require('../models');
+const { Categories, Notices, Templates, sequelize } = require('../models');
+const Op = require('sequelize').Op;
 
 exports.findCategories = async function () {
     try {
@@ -10,10 +11,29 @@ exports.findCategories = async function () {
     }
 };
 
-exports.findAllNotices = async function () {
+exports.findYears = async function () {
+    try {
+        const SQL = `
+            SELECT DISTINCT
+                LEFT(notice_created_at, 4) AS year
+            FROM
+                ksef_db.NOTICES
+            ORDER BY year DESC;`;
+        const [results, metadata] = await sequelize.query(SQL);
+        return results;
+    } catch (error) {
+        throw new Error(error);
+    }
+};
+
+exports.findAllNotices = async function (params) {
+    const { year } = params;
     try {
         const notices = await Notices.findAll({
             where: {
+                notice_created_at: {
+                    [Op.startsWith]: year,
+                },
                 is_published: 1,
                 is_deleted: 0,
             },

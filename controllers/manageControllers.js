@@ -70,6 +70,7 @@ exports.requireAddNewPost = async function (req, res, next) {
     const {
         color: template_brand_color,
         thumbnail: template_brand_thumbnail,
+        ogImage: template_og_image,
         ir1: data,
     } = req.body;
 
@@ -96,12 +97,14 @@ exports.requireAddNewPost = async function (req, res, next) {
             template = await manageServices.createTemplate({
                 template_brand_color,
                 template_brand_thumbnail,
+                template_og_image
             });
         } else {
             template = await manageServices.updateTemplate(
                 {
                     template_brand_color,
                     template_brand_thumbnail,
+                    template_og_image
                 },
                 {
                     template_id: Number(req.body.template_id),

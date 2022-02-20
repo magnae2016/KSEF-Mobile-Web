@@ -7,5 +7,11 @@
             </li>
             <% }) %>
         </ul>
+        <select id="NoticeYearFiltering" class="form-select" aria-label="연도 선택">
+            <% years.forEach(element=> { %>
+                <option value="<%= element %>" <%=element==selectedYear ? "selected" : "" %>><%= element %>
+                </option>
+                <% }) %>
+        </select>
     </div>
 </nav>

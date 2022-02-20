@@ -157,6 +157,14 @@ input.form-control:focus {
     background-color: #ebebeb;
 }
 
+.bg-gray-400 {
+    background-color: #b6b6b6;
+}
+
+.bg-gray-800 {
+    background-color: #4a4a4a;
+}
+
 /* Utility */
 .opacity-0 {
     opacity: 0;
@@ -258,7 +266,17 @@ input.form-control:focus {
 .navbar-expand-lg .nav-pills .nav-link.active {
     color: #ffffff;
     background-color: #000000;
-} /* /END Navigation */
+} 
+
+.navbar-drop {
+    height: 30px;
+    bottom: -30px;
+}
+
+header.bg-gray-800 .navbar-nav .text-dark {
+    color: white !important;
+}
+/* /END Navigation */
 
 /* accounts/login Screen */
 .form-floating > label {
@@ -336,6 +354,12 @@ input.form-control:focus {
 } /* create_account Screen */
 
 /* index Screen */
+.sponsored-ad-img {
+    max-width: 123px;
+    height: auto;
+    bottom: 12px;
+}
+
 .card.footer::before {
     content: '';
     position: absolute;
@@ -465,6 +489,11 @@ input.form-control:focus {
     color: #ffffff;
 }
 
+.sponsor-2022 {
+    background-color: #C93200;
+    color: #ffffff;
+}
+
 .horizontal-scroll::-webkit-scrollbar {
     width: 0px;
     height: 0px;
@@ -519,6 +548,11 @@ input.form-control:focus {
     height: 20px;
     background-image: url(/images/static/170628.png);
     background-size: 187px 288px;
+}
+
+.form-select {
+    width: auto;
+    color: #939393;
 }
 
 .num0 {
@@ -703,4 +737,27 @@ input.form-control:focus {
     .card-group {
         display: block;
     }
+
+    .bottomSheet.card {
+        width: 414px !important;
+    }
 }
+
+/* FloatingActionButton */
+.btn-fab {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: url(/images/static/meta_kakao_talk_channel_symbol.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+    z-index: 10000;
+}
+
+.btn-fab.logged-in {
+    bottom: calc(108px + 1rem);
+}
+/* FloatingActionButton */
