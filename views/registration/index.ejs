@@ -19,9 +19,10 @@
     <main id="mainContent" class="container">
         <div class="row">
             <div class="col px-4">
-                <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0">
+                <!-- 3/25 오픈 예정 -->
+                <!-- <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
-                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 MOTOSTAR</small>
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 GGR</small>
                         <h5 class="card-title fw-bolder text-black mb-0">
                             KSEF 내구페스티발 2차 접수
                         </h5>
@@ -49,10 +50,11 @@
                             2차 이후 참가접수비는 상향됩니다.
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <!-- /END 3/25 오픈 예정 -->
                 <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
-                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 MOTOSTAR</small>
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 GGR</small>
                         <h5 class="card-title fw-bolder text-black mb-0">
                             KSEF 내구페스티발 1차 접수
                         </h5>
@@ -70,9 +72,13 @@
                                     </span>
                                     <span class="h5 ps-1 lh-1">만원</span>
                                 </p>
-                                <a href="/entry"
+                                <a href="#"
+                                    class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-200 rounded-5"><span
+                                        class="d-flex py-1 fw-600">접수 예정</span></a>
+                                <!-- 2/25일에 활성화 -->
+                                <!-- <a href="/entry"
                                     class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
-                                        class="d-flex py-1 fw-600">엔트리 확인</span></a>
+                                        class="d-flex py-1 fw-600">엔트리 확인</span></a> -->
                             </div>
                         </div>
                         <div class="alert alert-secondary px-4 py-2 lh-xlarge small ls-xs border-transparent bg-gray-100 text-dark fw-normal mb-0"
@@ -83,7 +89,7 @@
                 </div>
                 <div class="card bg-transparent border-0 border-bottom border-1 border-gray-200 rounded-0 mt-3 pt-1">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
-                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 MOTOSTAR</small>
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 GGR</small>
                         <h5 class="card-title fw-bolder text-black mb-0">
                             KSEF 내구페스티발 참가 팀 선택
                         </h5>
@@ -105,9 +111,13 @@
                                         class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-100 rounded-5"><span
                                             class="d-flex py-1 fw-600 text-secondary">선택 완료</span></a>
                                 <% } else { %>
-                                    <a href="/accounts/register_team"
+                                    <a href="#"
+                                        class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-200 rounded-5"><span
+                                        class="d-flex py-1 fw-600">팀 선택</span></a>
+                                    <!-- 2/25일에 활성화 -->
+                                    <!-- <a href="/accounts/register_team"
                                         class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
-                                            class="d-flex py-1 fw-600">팀 선택</span></a>
+                                            class="d-flex py-1 fw-600">팀 선택</span></a> -->
                                 <% } %>
                             </div>
                         </div>
@@ -115,7 +125,7 @@
                 </div>
                 <div class="card bg-transparent border-0 rounded-0 mt-3 pt-1">
                     <div class="card-body px-0 py-3 d-flex flex-column mb-2">
-                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 MOTOSTAR</small>
+                        <small class="card-text fs-7 fw-normal lh-1 mb-2 text-secondary">2022년 12회 GGR</small>
                         <h5 class="card-title fw-bolder text-black">
                             KSEF 내구페스티발 참가 신청서
                         </h5>
@@ -141,9 +151,13 @@
                                     } else href = `registration/form/${type_id}`;
 
                                 %>
-                                <a href="<%= href %>"
+                                <a href="#"
+                                    class="btn position-absolute end-0 top-0 px-4 py-2 border-0 bg-gray-200 rounded-5"><span
+                                        class="d-flex py-1 fw-600">작성하기</span></a>
+                                <!-- 2/25일에 활성화 -->
+                                <!-- <a href="<%= href %>"
                                     class="btn btn-primary position-absolute end-0 top-0 px-4 py-2 border-0 bg-info rounded-5"><span
-                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a>
+                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a> -->
                             </div>
                         </div>
                     </div>

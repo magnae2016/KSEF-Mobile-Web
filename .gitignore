@@ -66,3 +66,5 @@ typings/
 config/config.json
 config/jsonwebtoken.json
 !config/.gitkeep
+public/images/upload/*
+views/notices/templates/*.ejs
