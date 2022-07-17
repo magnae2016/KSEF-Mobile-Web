@@ -74,7 +74,18 @@
         </div><!-- /END .fixed-bottom -->
         <% } %>
         <%- include("../partialView/javascripts") %>
+        <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
         <script>
+            // pan and zoom DOM 
+            var element = document.querySelector('#postContent');
+            panzoom(element, {
+                minZoom: 1,
+                beforeWheel: function(e) {
+                    var shouldIgnore = !e.altKey;
+                    return shouldIgnore;
+                }
+            });
+            
             // img margin adjustment
             const img = mainContent.getElementsByTagName("img");
             for (let item of img) {
