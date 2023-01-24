@@ -8,7 +8,7 @@ module.exports = {
             'FORMS',
             [
                 {
-                    form_id: 2,
+                    form_id: 3,
                     form_uuid: v4(),
                     form_name: 'KSEF 내구페스티발 참가 신청서',
                     form_file: `${process.env.YEAR}-form-ENDURANCE`,
