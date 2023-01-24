@@ -111,13 +111,13 @@
                                         class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-100 rounded-5"><span
                                             class="d-flex py-1 fw-600 text-secondary">선택 완료</span></a>
                                 <% } else { %>
-                                    <a href="#"
+                                    <!-- <a href="#"
                                         class="btn position-absolute end-0 top-2 px-4 py-2 border-0 bg-gray-200 rounded-5"><span
-                                        class="d-flex py-1 fw-600">팀 선택</span></a>
+                                        class="d-flex py-1 fw-600">팀 선택</span></a> -->
                                     <!-- 1/27일에 활성화 -->
-                                    <!-- <a href="/accounts/register_team"
+                                    <a href="/accounts/register_team"
                                         class="btn btn-primary position-absolute end-0 top-2 px-4 py-2 border-0 bg-info rounded-5"><span
-                                            class="d-flex py-1 fw-600">팀 선택</span></a> -->
+                                            class="d-flex py-1 fw-600">팀 선택</span></a>
                                 <% } %>
                             </div>
                         </div>
@@ -151,13 +151,13 @@
                                     } else href = `registration/form/${type_id}`;
 
                                 %>
-                                <a href="#"
+                                <!-- <a href="#"
                                     class="btn position-absolute end-0 top-0 px-4 py-2 border-0 bg-gray-200 rounded-5"><span
-                                        class="d-flex py-1 fw-600">작성하기</span></a>
+                                        class="d-flex py-1 fw-600">작성하기</span></a> -->
                                 <!-- 1/27일에 활성화 -->
-                                <!-- <a href="<%= href %>"
+                                <a href="<%= href %>"
                                     class="btn btn-primary position-absolute end-0 top-0 px-4 py-2 border-0 bg-info rounded-5"><span
-                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a> -->
+                                        class="d-flex py-1 fw-600"><%= participation_id ? "보기 / 수정" : "작성하기" %></span></a>
                             </div>
                         </div>
                     </div>
