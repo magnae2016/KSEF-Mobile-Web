@@ -34,7 +34,8 @@ exports.requireHome = async function (req, res, next) {
         }
         if (notices) context.notices = notices;
 
-        if (alert) context.alert = alert;
+        // 2023/01/24 업데이트 = 홈 화면 - 알람 숨김
+        // if (alert) context.alert = alert;
 
         if (calendar) context.calendar = calendar;
 

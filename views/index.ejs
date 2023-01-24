@@ -26,94 +26,90 @@
                                 알림
                             </h5>
                             <div class="d-flex flex-row">
-                                <p class="card-text lh-medium ls-xs mb-0 text-secondary fw-normal"><%- context.alert.alert_message %></p>
+                                <p class="card-text lh-medium ls-xs mb-0 text-secondary fw-normal"><%-
+                                            context.alert.alert_message %></p>
                             </div>
                         </div>
                     </a><!-- /END Alert -->
                     <% } %>
-                    <!-- Sponsored ad -->
-                    <div class="px-4 pt-2 pb-3 mb-2 position-relative">
-                        <div class="pt-4">
-                            <h6 class="fw-bold ls-sm mb-0">
-                                2022년 12회 내구페스티발
-                            </h6>
-                            <small class="fw-600 ls-xs">고구려모터스와 함께합니다.</small>
-                        </div>
-                        <img src="/images/static/ggr.png"
-                            class="position-absolute end-0 sponsored-ad-img" />
-                    </div><!-- /END Sponsored ad -->
                     <!-- Fixed post -->
-                    <% context.notices.forEach((element, index) => { %>
+                    <% context.notices.forEach((element, index)=> { %>
                     <div class="card p-4 border-0 pt-3 rounded-lg shadow 
-                        <%= (index !== 0) ? "mt-4" : "" %> 
-                        <%= (index + 1 === context.notices.length ? "mb-2" : "") %>" 
-                        onclick="location.href=`/notices/<%= element.notice_id %>`">
+                        <%= (index !== 0) ? " mt-4" : "" %>
+                                    <%= (index + 1===context.notices.length ? "mb-2" : "" ) %>" onclick="location.href=`/notices/<%= element.notice_id %>`">
                         <div class="card-body p-0 pt-1 position-relative">
                             <small class="card-subtitle mb-2 text-secondary fw-600">
-                                <%= element.notice_subtitle %></small>
+                                <%= element.notice_subtitle %>
+                            </small>
                             <h5 class="card-title fw-bold lh-medium ls-xs pt-1 mb-0">
-                                <%= element.notice_title %></h5>
+                                <%= element.notice_title %>
+                            </h5>
                             <small class="fs-7 fw-normal text-secondary">
-                                <%= element.notice_created_at %></small>
-                            <h1 class="fs-7">&nbsp;</h1>
+                                <%= element.notice_created_at %>
+                            </small>
                             <% if (element.template_brand_thumbnail) { %>
-                            <span role="image" aria-label="<%= element.template_brand_thumbnail %>" class="display-lg position-absolute bottom-0 end-0"
-                                style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', NotoColorEmoji, 'Noto Color Emoji', 'Segoe UI Symbol', 'Android Emoji', EmojiSymbols; line-height: 1em;"><%= element.template_brand_thumbnail %></span>
+                            <span role="image" aria-label="<%= element.template_brand_thumbnail %>" class="display-lg position-absolute bottom-0 end-0" style="font-family: 'Apple Color Emoji', 'Segoe UI Emoji', NotoColorEmoji, 'Noto Color Emoji', 'Segoe UI Symbol', 'Android Emoji', EmojiSymbols; line-height: 1em;">
+                                <%= element.template_brand_thumbnail %>
+                            </span>
                             <% } %>
                         </div>
                     </div>
                     <% }); %>
                     <!-- /END Fixed post -->
+                    <!-- Sponsored ad -->
+                    <div class="px-4 pt-2 pb-3 mb-2 position-relative">
+                        <div class="pt-4">
+                            <h6 class="fw-bold ls-sm mb-0">
+                                2023년 13회 내구페스티발
+                            </h6>
+                            <small class="fw-600 ls-xs">모토스타와 함께합니다.</small>
+                        </div>
+                        <img src="/images/static/ggr.png" class="position-absolute end-0 sponsored-ad-img" />
+                    </div><!-- /END Sponsored ad -->
                 </div>
             </div>
         </div><!-- /END Notification, Ad, post -->
+        <!-- Main Poster -->
+        <div class="container">
+            <div class="row">
+                <div class="col px-0">
+                    <img src="/images/static/2023_main_poster.png" alt="" class="w-100">
+                </div>
+            </div>
+        </div>
+        <!-- /END Main Poster -->
         <!-- calendar -->
-        <%
-            function getStyleClass(prog_id) {
-                let styleClass = [];
-                switch (prog_id) {
-                    case 1:
-                        styleClass.push("bg-gray-200");
-                        styleClass.push("text-dark");
-                        break;
-                    case 2:
-                        styleClass.push("bg-info");
-                        styleClass.push("text-white");
-                        break;
-                    case 3:
-                        styleClass.push("bg-secondary");
-                        styleClass.push("text-white");
-                        break;
-                }
-
-                return styleClass.join(" ");
+        <% function getStyleClass(prog_id) { let styleClass=[]; switch (prog_id) { case 1:
+            styleClass.push("bg-gray-200"); styleClass.push("text-dark"); break; case 2: styleClass.push("bg-info");
+            styleClass.push("text-white"); break; case 3: styleClass.push("bg-secondary");
+            styleClass.push("text-white"); break; } return styleClass.join(" ");
             };
         %>
-        <div class="container pt-4">
+        <div class=" container pt-4">
             <div class="row">
                 <div class="col mx-1 px-3 pt-3">
                     <h2 class="ls-sm fw-bold lh-sm">
-                        2022년 고구려모터스 12회<br />KSEF 내구페스티발 일정
+                        2023년 모토스타 13회<br />KSEF 내구페스티발 일정
                     </h2>
                     <p class="pt-2 pb-1 mb-3 text-black">
-                        고구려모터스 함께<br />뜨거운 여름을 준비하고 있습니다!
+                        모토스타 함께<br />뜨거운 여름을 준비하고 있습니다!
                     </p>
                     <div class="d-flex flex-column-reverse position-relative">
                         <input type="checkbox" class="btn-check btn-link" id="btncheck1" autocomplete="off" />
-                        <label class="btn mt-3 lh-1 h6 py-3 fw-normal text-decoration-underline text-secondary"
-                            for="btncheck1"></label>
-                        <%
-                            const show = context.calendar.slice(1);
-                            const hide = context.calendar.slice(0, 1);
-                        %>
+                        <label class="btn mt-3 lh-1 h6 py-3 fw-normal text-decoration-underline text-secondary" for="btncheck1"></label>
+                        <% const show=context.calendar.slice(1); const hide=context.calendar.slice(0, 1); %>
                         <div class="list-group flex-column-reverse rounded-0" style="display: none">
-                            <% hide.forEach((element) => { %>
+                            <% hide.forEach((element)=> { %>
                             <div class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
                                 <span class="badge <%= getStyleClass(element.prog_id) %>">
-                                    <small class="lh-1 py-1"><%= element.prog_name %></small>
+                                    <small class="lh-1 py-1">
+                                        <%= element.prog_name %>
+                                    </small>
                                 </span>
                                 <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600"><%= element.cal_name %></h6>
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        <%= element.cal_name %>
+                                    </h6>
                                     <small class="lh-1 float-start text-secondary">
                                         <%= element.cal_date %>
                                     </small>
@@ -122,13 +118,18 @@
                             <% }); %>
                         </div>
                         <div class="list-group flex-column-reverse rounded-0">
-                            <% show.forEach((element) => { %>
-                            <div
-                                class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
-                                <span class="badge <%= getStyleClass(element.prog_id) %>"><small class="lh-1 py-1"><%= element.prog_name %></small></span>
+                            <% show.forEach((element)=> { %>
+                            <div class="list-group-item d-flex flex-row px-3 py-2 align-items-center rounded-5 border-0 bg-white mb-1 shadow-sm">
+                                <span class="badge <%= getStyleClass(element.prog_id) %>"><small class="lh-1 py-1">
+                                        <%= element.prog_name %>
+                                    </small></span>
                                 <div class="py-1 d-flex flex-column px-1 mx-2">
-                                    <h6 class="mb-2 lh-1 fw-600"><%= element.cal_name %></h6>
-                                    <small class="lh-1 float-start text-secondary"><%= element.cal_date %></small>
+                                    <h6 class="mb-2 lh-1 fw-600">
+                                        <%= element.cal_name %>
+                                    </h6>
+                                    <small class="lh-1 float-start text-secondary">
+                                        <%= element.cal_date %>
+                                    </small>
                                 </div>
                             </div>
                             <% }); %>
@@ -138,353 +139,395 @@
             </div>
         </div><!-- /END calendar -->
         <!-- Timeline -->
-        <div class="container">
-            <div class="row">
-                <div class="col px-0 pt-3 pb-4 mb-2 text-center">
-                    <h5 class="lh-medium ls-xs fw-bold pt-4 pb-3 mt-1 mb-1">
-                        Passion & Energy<br />2022 KSEF 12년간의 히스토리
-                    </h5>
-                    <div class="horizontal-scroll overflow-scroll nowrap">
-                        <div style="
+        <%# <div class="container">
+                <div class="row">
+                    <div class="col px-0 pt-3 pb-4 mb-2 text-center">
+                        <h5 class="lh-medium ls-xs fw-bold pt-4 pb-3 mt-1 mb-1">
+                            Passion & Energy<br />2023 KSEF 13년간의 히스토리
+                        </h5>
+                        <div class="horizontal-scroll overflow-scroll nowrap">
+                            <div style="
                                                             width: 100000px;
                                                             transform: translateX(0px);
                                                             animation: 15.5s linear 0s infinite normal none
                                                                 running marqueeAnimation;
                                                         ">
-                            <div class="ms-0 float-start">
-                                <div class="fs-0">
-                                    <div class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                <div class="ms-0 float-start">
+                                    <div class="fs-0">
+                                        <div
+                                            class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/pspark.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/pspark.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ksef-light.png"
-                                                        class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ksef-light.png"
+                                                            class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/R1GP.png"
-                                                        class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/R1GP.png"
+                                                            class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/sym.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/sym.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2016 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2016 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor d-inline-block rounded-circle position-relative" style="
+                                        <div class="sponsor d-inline-block rounded-circle position-relative" style="
                                                                         width: 5.125rem;
                                                                         background-color: #4D4D4C;
                                                                     "></div>
-                                </div>
-                                <div class="fs-0">
-                                    <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
-                                        style="
+                                    </div>
+                                    <div class="fs-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
+                                            style="
                                                                         width: 2.563rem;
                                                                         background-color: #5d2f87;
                                                                     "></div>
-                                    <div class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/gears-racing.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/gears-racing.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/tic-corp.png"
-                                                        class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/tic-corp.png"
+                                                            class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/motostar.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/motostar.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/motostar-light.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/motostar-light.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2022 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2022 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ggr.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ggr.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2022</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2022</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
-                                        style="
+                                        <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
+                                            style="
                                                                         width: 2.563rem;
                                                                         background-color: #5d2f87;
                                                                     "></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="ms-0 float-start">
-                                <div class="fs-0">
-                                    <div class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                <div class="ms-0 float-start">
+                                    <div class="fs-0">
+                                        <div
+                                            class="sponsor sponsor-2011 ms-1 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/pspark.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/pspark.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2011</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2012 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ksef-light.png"
-                                                        class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ksef-light.png"
+                                                            class="w-60 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2012</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/R1GP.png"
-                                                        class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/R1GP.png"
+                                                            class="w-75 h-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2013</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2014 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/sym.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/sym.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2014</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2015 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2015</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2016 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2016 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2016</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor d-inline-block rounded-circle position-relative" style="
+                                        <div class="sponsor d-inline-block rounded-circle position-relative" style="
                                                                         width: 5.125rem;
                                                                         background-color: #4D4D4C;
                                                                     "></div>
-                                </div>
-                                <div class="fs-0">
-                                    <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
-                                        style="
+                                    </div>
+                                    <div class="fs-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-top-right-circle rounded-bottom-right-circle position-relative"
+                                            style="
                                                                         width: 2.563rem;
                                                                         background-color: #5d2f87;
                                                                     "></div>
-                                    <div class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2017 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ohlins.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ohlins.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2017</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2018 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/gears-racing.png"
-                                                        class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/gears-racing.png"
+                                                            class="w-75 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2018</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/tic-corp.png"
-                                                        class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/tic-corp.png"
+                                                            class="w-50 h-auto m-auto position-absolute bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2019</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div class="sponsor me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/motostar.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/motostar.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2020</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2021 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/motostar-light.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/motostar-light.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2021</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor sponsor-2022 me-2 d-inline-block rounded-circle position-relative">
-                                        <div class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                        <div
+                                            class="sponsor sponsor-2022 me-2 d-inline-block rounded-circle position-relative">
                                             <div
-                                                class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
-                                                <div class="w-100 h-40 position-relative lh-1">
-                                                    <img src="./images/sponsors/ggr.png"
-                                                        class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                class="fs-6 text-center position-absolute start-0 end-0 top-0 bottom-0">
+                                                <div
+                                                    class="d-flex flex-column justify-content-center text-center position-relative w-100 h-100">
+                                                    <div class="w-100 h-40 position-relative lh-1">
+                                                        <img src="./images/sponsors/ggr.png"
+                                                            class="h-100 w-auto m-auto position-absolute top-0 bottom-0 start-0 end-0">
+                                                    </div>
+                                                    <small class="d-block lh-1 fw-600 ls-sm pt-1">2022</small>
                                                 </div>
-                                                <small class="d-block lh-1 fw-600 ls-sm pt-1">2022</small>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
-                                        style="
+                                        <div class="sponsor d-inline-block rounded-top-left-circle rounded-bottom-left-circle position-relative"
+                                            style="
                                                                         width: 2.563rem;
                                                                         background-color: #5d2f87;
                                                                     "></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- /END Timeline -->
-        <h1 class="display-1">&nbsp;</h1>
+                </div><!-- /END Timeline -->
+                %>
         <!-- blockquote -->
         <div class="container">
             <div class="row">
@@ -523,8 +566,7 @@
                             <h1 class="display-1">&nbsp;</h1>
                             <h1 class="display-1">&nbsp;</h1>
                         </div>
-                        <img src="./images/static/1529373251.png" width="100"
-                            class="position-absolute bottom-0 end-0 pe-3 w-auto h-50 opacity-35" />
+                        <img src="./images/static/1529373251.png" width="100" class="position-absolute bottom-0 end-0 pe-3 w-auto h-50 opacity-35" />
                     </div>
                 </div>
             </div>
@@ -535,19 +577,20 @@
         <h1 class="display-1">&nbsp;</h1>
         <h1 class="display-1">&nbsp;</h1>
         <!-- User information -->
-        <div
-            class="bottomSheet card position-fixed bottom-0 w-100 border-0 bg-white rounded-0 rounded-top-left-xxl rounded-top-right-xxl shadow-xxl">
+        <div class="bottomSheet card position-fixed bottom-0 w-100 border-0 bg-white rounded-0 rounded-top-left-xxl rounded-top-right-xxl shadow-xxl">
             <div class="card-header py-3 px-4 border-0 rounded-0 bg-transparent">
                 <div class="pt-2 pb-1">
                     <%# nicknames for users %>
-                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex"><%= security.alias %></h4>
+                    <h4 class="pb-2 mb-1 lh-1 fw-bold fs-5 ls-xs d-inline-flex">
+                        <%= security.alias %>
+                    </h4>
                     <%# roles only if you are in team %>
                     <% if (context.team) { %>
-                    <span class="badge rounded-pill bg-dark d-inline-block align-text-bottom"><small
-                            class="lh-1 py-1"><%= context.team.role_name %></small></span>
+                    <span class="badge rounded-pill bg-dark d-inline-block align-text-bottom"><small class="lh-1 py-1">
+                            <%= context.team.role_name %>
+                        </small></span>
                     <% } %>
-                    <a href="/accounts/logout" class="badge rounded-pill bg-gray-200 text-dark d-inline-block align-text-bottom text-decoration-none"><small
-                            class="lh-1 py-1">로그아웃</small></a>
+                    <a href="/accounts/logout" class="badge rounded-pill bg-gray-200 text-dark d-inline-block align-text-bottom text-decoration-none"><small class="lh-1 py-1">로그아웃</small></a>
                     <%# not on the team %>
                     <% if (!context.team) { %>
                     <a href="/accounts/register_team" class="h1 d-block mb-1 lh-1 ls-sm text-black fw-bold text-decoration-underline">
