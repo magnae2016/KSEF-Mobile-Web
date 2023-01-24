@@ -36,6 +36,7 @@
 
             #postContent > p:first-child {
                 padding-top: 1.5rem;
+                background-color: #FFFFFF;
             }
         </style>
     </head>
@@ -77,14 +78,14 @@
         <script src='https://unpkg.com/panzoom@9.4.0/dist/panzoom.min.js'></script>
         <script>
             // pan and zoom DOM 
-            var element = document.querySelector('#postContent');
-            panzoom(element, {
-                minZoom: 1,
-                beforeWheel: function(e) {
-                    var shouldIgnore = !e.altKey;
-                    return shouldIgnore;
-                }
-            });
+            // var element = document.querySelector('#postContent');
+            // panzoom(element, {
+            //     minZoom: 1,
+            //     beforeWheel: function(e) {
+            //         var shouldIgnore = !e.altKey;
+            //         return shouldIgnore;
+            //     }
+            // });
             
             // img margin adjustment
             const img = mainContent.getElementsByTagName("img");
