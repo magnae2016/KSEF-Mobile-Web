@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <%- include("../../partialView/head", { title }); %>
+    <%- include("../../partialView/stylesheet") %>
+</head>
+
+<body id="mainBody" class="position-relative">
+    <%
+        const formdata = locals.context.formdata || {};
+        const keys = Object.keys(formdata);
+        let riders = [];
+        keys.forEach((element) => {
+            const rider = element.split('_')[0].includes('rider');
+            if (rider) {
+                const id = element.substring(5, 6);
+                riders.push(Number(id));
+            }
+        });
+        riders = Array.from(new Set(riders)); // deduplication
+    %>
+    <!-- header -->
+    <header id="mainHead">
+        <%- include("../../navigation/createStackNavigator", { headerTitle: title }) %>
+    </header><!-- /END header -->
+    <!-- main -->
+    <main id="mainContent" class="container">
+        <div class="row">
+            <div class="col px-4 pt-2 mt-1">
+                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                    <span>참가 정보</span>
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600">참가 기종</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.model_name, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600">정규 클래스</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.participation_class, placeholder: "미선택"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600">이벤트 클래스</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.event_class, placeholder: "미선택"}) %></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col px-4 pt-2 mt-1">
+                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                    <span>팀 정보</span>
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">소속팀명</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.team_name, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">팀 대표 성명</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.team_leader_name, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">팀 대표 연락처</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.team_leader_contact, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap pe-3">택배수령 주소</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.delivery_address, placeholder: "미작성"}) %></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col px-4 pt-2 mt-1">
+                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                    <span>환불 정보 입력</span>
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">은행명</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.refund_bank, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">예금주</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.refund_holder, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">계좌번호</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.refund_account, placeholder: "미작성"}) %></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <%
+            const user_name = context.user.name;
+        %>
+        <div class="row mt-5">
+            <% riders.forEach(element => { 
+                const id = element;
+                const rider_name = formdata[`rider${id}_name`];
+                const origin = formdata[`rider${id}_RRN`];
+            %>
+            <div class="px-4 pt-2 mt-1">
+                <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
+                    <span>라이더<%= id %> 정보</span>
+                </p>
+                <ul class="list-group list-group-flush">
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">성명</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: rider_name, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">연락처</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata[`rider${id}_phone`], placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">주민번호</span>
+                        <%
+                            let rider_RRN = origin;
+                            if (user_name !== rider_name) {
+                                rider_RRN = maskingRRN(origin);
+                            }
+                        %>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: rider_RRN, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">KIC 라이선스 유무</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: (formdata[`rider${id}_has_KIC`] === "Y") ? "소지 함" : "미소지", placeholder: "미선택"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600 nowrap">경기이력과 순위</span>
+                        <pre class="fs-6 text-dark text-keep text-end border-0 mb-0 ls-sm"><%- include("../components/placeholder", {_item: formdata[`rider${id}_history`], placeholder: "미작성"}) %></pre>
+                    </li>
+                </ul>
+            </div>
+            <% }); %>
+        </div>
+        <h1 class="display-1">&nbsp;</h1>
+        <h1 class="display-1">&nbsp;</h1>
+    </main><!-- /END main -->
+    <!-- .fixed-bottom -->
+    <div class="position-fixed fixed-bottom" style="
+                    background-image: linear-gradient(
+                        0deg,
+                        rgba(255, 255, 255, 1) 0%,
+                        rgba(255, 255, 255, 1) 80%,
+                        rgba(255, 255, 255, 0) 100%
+                    );
+                ">
+        <div class="d-grid p-3">
+            <a href="/registration/form/<%= locals.context.type_id %>" class="btn btn-dark py-2 border-0 rounded-5">
+                <span class="d-flex py-2 justify-content-center fw-600">변경</span>
+            </a>
+        </div>
+    </div><!-- /END .fixed-bottom -->
+    <%- include("../../partialView/javascripts") %>
+    <script>
+        window.onpopstate = function(event) {
+            window.history.go(-2);
+        };
+        history.pushState(null, null, location.href);
+    </script>
+</body>
+
+</html>
