@@ -37,9 +37,13 @@
                     <p class="fw-bold fs-6 mb-2 py-2 lh-sm ls-medium">
                         <span class="mark position-relative">참가 정보</span>
                     </p>
-                    <!-- 참가 기종 -->
+                    <!-- 참가 기종(제조사) -->
+                    <%- include("../../components/TextField", { _items: [ { mask: "text" , name: "manufacturer" ,
+                        placeholder: "참가기종" , label: "참가기종 - 제조사" , isRequired: true, value: formdata.manufacturer &&
+                        formdata.manufacturer }, ], }); %>
+                    <!-- 참가 기종(모델명) -->
                     <%- include("../../components/TextField", { _items: [ { mask: "text" , name: "model_name" ,
-                        placeholder: "참가기종" , label: "참가기종(모델명)" , isRequired: true, value: formdata.model_name &&
+                        placeholder: "참가기종" , label: "참가기종 - 모델명" , isRequired: true, value: formdata.model_name &&
                         formdata.model_name }, ], }); %>
                         <!-- /END 참가 기종 -->
                         <!-- 클래스 선택 -->

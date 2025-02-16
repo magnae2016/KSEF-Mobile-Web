@@ -35,7 +35,12 @@
                 <ul class="list-group list-group-flush">
                     <li
                         class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
-                        <span class="lh-xlarge text-gray-600">참가 기종</span>
+                        <span class="lh-xlarge text-gray-600">참가 기종 - 제조사</span>
+                        <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.manufacturer, placeholder: "미작성"}) %></span>
+                    </li>
+                    <li
+                        class="list-group-item bg-transparent border-gray-100 fs-7 py-2 px-0 d-flex justify-content-between align-items-center">
+                        <span class="lh-xlarge text-gray-600">참가 기종 - 모델명</span>
                         <span class="fs-6 text-dark text-keep text-end"><%- include("../components/placeholder", {_item: formdata.model_name, placeholder: "미작성"}) %></span>
                     </li>
                     <li
