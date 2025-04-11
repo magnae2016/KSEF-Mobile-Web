@@ -357,7 +357,7 @@ header.bg-gray-800 .navbar-nav .text-dark {
 .sponsored-ad-img {
     max-width: 123px;
     height: auto;
-    bottom: 12px;
+    bottom: 16px;
 }
 
 .card.footer::before {
